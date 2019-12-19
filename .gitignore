@@ -1,0 +1,16 @@
+*.audit
+*.bnd
+*.csv
+*.dxf
+*.eio
+*.end
+*.err
+*.eso
+*.mdd
+*.mtd
+*.rdd
+*.rvaudit
+*.shd
+*.idf
+*.epJSON
+
