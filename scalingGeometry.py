@@ -80,11 +80,22 @@ def scaling(scalex=2, scaley=2,scalez=2, ref=False, window_scale=True,
 
     ## BuildingSurface:Detailed
 
+    # dictionary to define how windows change size
+    walls_vertices = {}
+
     # will be used to define building ratio
     x_max = 0
     y_max = 0
 
     for i in list(content["BuildingSurface:Detailed"].keys()):
+
+        wall_x_min = 10**10  # just a really high number
+        wall_y_min = 10**10  # ||
+        wall_z_min = 10**10  # ||
+        wall_x_max = 0
+        wall_y_max = 0
+        wall_z_max = 0
+
         for j,k in enumerate(content["BuildingSurface:Detailed"][i]["vertices"]):
 
             # scales the vertices of surfaces
@@ -92,11 +103,32 @@ def scaling(scalex=2, scaley=2,scalez=2, ref=False, window_scale=True,
             content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_y_coordinate"] = content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_y_coordinate"]*scaley
             content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_z_coordinate"] = content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_z_coordinate"]*scalez
 
-            # will be used to define building ratio
-            if content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_x_coordinate"] > x_max:
-                x_max = content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_x_coordinate"]
-            if content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_y_coordinate"] > y_max:
-                y_max = content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_y_coordinate"]
+            if content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_x_coordinate"] < wall_x_min:
+                wall_x_min = content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_x_coordinate"]
+            if content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_y_coordinate"] < wall_y_min:
+                wall_y_min = content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_y_coordinate"]
+            if content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_z_coordinate"] < wall_z_min:
+                wall_z_min = content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_z_coordinate"]
+            if content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_x_coordinate"] > wall_x_max:
+                wall_x_max = content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_x_coordinate"]
+            if content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_y_coordinate"] > wall_y_max:
+                wall_y_max = content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_y_coordinate"]
+            if content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_z_coordinate"] > wall_z_max:
+                wall_z_max = content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_z_coordinate"]
+
+        walls_vertices[i] = {}
+        walls_vertices[i]['wall_x_min'] = wall_x_min
+        walls_vertices[i]['wall_y_min'] = wall_y_min
+        walls_vertices[i]['wall_z_min'] = wall_z_min
+        walls_vertices[i]['wall_x_max'] = wall_x_max
+        walls_vertices[i]['wall_y_max'] = wall_y_max
+        walls_vertices[i]['wall_z_max'] = wall_z_max
+
+        # will be used to define building ratio
+        if wall_x_max > x_max:
+            x_max = wall_x_max
+        if wall_y_max > y_max:
+            y_max = wall_y_max
 
     ## AirflowNetwork:SimulationControl
     ratio_of_building_afn = min(x_max,y_max)/max(x_max,y_max)
