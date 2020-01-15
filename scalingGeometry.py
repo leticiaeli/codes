@@ -1,6 +1,7 @@
 
 import json
 import os
+import numpy as np
 
 # Window to Floor Ratio of the reference
 REF_WINDOW_TO_FLOOR_RATIO = .17
@@ -42,11 +43,10 @@ def ref_vertex(vertex, vertex_list, scale,ref_scale):
 
     return(new_vertex)
 
-def scaling(scalex=2, scaley=2,scalez=2, ref=False, window_scale=True,
-    shading_scale=True, input_file='model.epJSON',output_name='scaled_model.epJSON'):
+def scaling(scalex=2, scaley=2,scalez=2, ref=False, window_scale=True, shading_scale=True, input_file='model.epJSON',output_name='scaled_model.epJSON'):
+
     # This function multiplies the vertices of the EnergyPlus model by a
     # determined value, and returns the scaled model (.idf and .epJSON)
-    
     # scalex - Scale factor to be multiplied by the x vertices.
     # scaley - Scale factor to be multiplied by the y vertices.
     # scalez - Scale factor to be multiplied by the z vertices.
@@ -59,51 +59,70 @@ def scaling(scalex=2, scaley=2,scalez=2, ref=False, window_scale=True,
     # output_name - The name of the output file to be created.
     
     print(output_name)
-
+    
     # converts idf to epJSON, if needed
     if input_file[-3:] == 'idf':
         os.system('energyplus -x -c '+input_file)
         input_file = input_file[:-3]+'epJSON'
-    
-    # reading epJSON file
+		
+	# reading epJSON file
     file = open(input_file, "r")
     content = json.load(file)
     file.close()
-
+    
     #### Changing epJSON fields ####
-            
+    
+    
+    for i in list(content['BuildingSurface:Detailed'].keys()):
+        
+        for j,k in enumerate(content['BuildingSurface:Detailed'][i]['vertices']):
+
+	
     ## Zone
     for i in list(content["Zone"].keys()):
-        content["Zone"][i]["x_origin"] = content["Zone"][i]["x_origin"]*scalex
-        content["Zone"][i]["y_origin"] = content["Zone"][i]["y_origin"]*scaley
-        content["Zone"][i]["z_origin"] = content["Zone"][i]["z_origin"]*scalez
+		content["Zone"][i]["x_origin"] = content["Zone"][i]["x_origin"]*scalex
+		content["Zone"][i]["y_origin"] = content["Zone"][i]["y_origin"]*scaley
+		content["Zone"][i]["z_origin"] = content["Zone"][i]["z_origin"]*scalez
 
     ## BuildingSurface:Detailed
-
-    # will be used to define building ratio
+    
+    ##### RV - starts
+		# fixes the variable 'ratio_of_building_afn'
+    
+    # will be used to define building ratio and shading
+    x_min = 0
     x_max = 0
+    y_min = 0
     y_max = 0
-
     for i in list(content["BuildingSurface:Detailed"].keys()):
-        for j,k in enumerate(content["BuildingSurface:Detailed"][i]["vertices"]):
+		zone_name = content['BuildingSurface:Detailed'][i]['zone_name']
+        x_zone = content['Zone'][zone_name]['x_origin']
+        y_zone = content['Zone'][zone_name]['y_origin']
+		for j,k in enumerate(content["BuildingSurface:Detailed"][i]["vertices"]):
+			# scales the vertices of surfaces
+			content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_x_coordinate"] = content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_x_coordinate"]*scalex
+			content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_y_coordinate"] = content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_y_coordinate"]*scaley
+			content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_z_coordinate"] = content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_z_coordinate"]*scalez
 
-            # scales the vertices of surfaces
-            content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_x_coordinate"] = content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_x_coordinate"]*scalex
-            content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_y_coordinate"] = content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_y_coordinate"]*scaley
-            content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_z_coordinate"] = content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_z_coordinate"]*scalez
-
-            # will be used to define building ratio
-            if content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_x_coordinate"] > x_max:
-                x_max = content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_x_coordinate"]
-            if content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_y_coordinate"] > y_max:
-                y_max = content["BuildingSurface:Detailed"][i]["vertices"][j]["vertex_y_coordinate"]
+            if (x_zone + content['BuildingSurface:Detailed'][i]['vertices'][j]['vertex_x_coordinate']) < x_min:
+                x_min = x_zone + content['BuildingSurface:Detailed'][i]['vertices'][j]['vertex_x_coordinate']
+            if (x_zone + content['BuildingSurface:Detailed'][i]['vertices'][j]['vertex_x_coordinate']) > x_max:
+                x_max = x_zone + content['BuildingSurface:Detailed'][i]['vertices'][j]['vertex_x_coordinate']
+            if (y_zone + content['BuildingSurface:Detailed'][i]['vertices'][j]['vertex_y_coordinate']) < y_min:
+                y_min = y_zone + content['BuildingSurface:Detailed'][i]['vertices'][j]['vertex_x_coordinate']
+            if (y_zone + content['BuildingSurface:Detailed'][i]['vertices'][j]['vertex_y_coordinate']) > y_max:
+                y_max = y_zone + content['BuildingSurface:Detailed'][i]['vertices'][j]['vertex_y_coordinate']
 
     ## AirflowNetwork:SimulationControl
-    ratio_of_building_afn = min(x_max,y_max)/max(x_max,y_max)
-
-    if "AirflowNetwork:SimulationControl" in list(content.keys()):
-        for i in list(content["AirflowNetwork:SimulationControl"].keys()):
-            content["AirflowNetwork:SimulationControl"][i]["ratio_of_building_width_along_short_axis_to_width_along_long_axis"] =  ratio_of_building_afn
+    dif_x = (x_max - x_min)*scalex
+    dif_y = (y_max - y_min)*scaley
+    ratio_of_building_afn = min(dif_x, dif_y)/max(dif_x, dif_y)
+	
+	##### RV - ends
+	
+    if 'AirflowNetwork:SimulationControl' in list(content.keys()):
+		for i in list(content['AirflowNetwork:SimulationControl'].keys()):
+			content['AirflowNetwork:SimulationControl'][i]['ratio_of_building_width_along_short_axis_to_width_along_long_axis'] =  ratio_of_building_afn
 
     # Defines opening areas according to reference
     if ref:
@@ -302,15 +321,56 @@ def scaling(scalex=2, scaley=2,scalez=2, ref=False, window_scale=True,
                 content["FenestrationSurface:Detailed"][i]["vertex_4_y_coordinate"] = constant_vertex(content["FenestrationSurface:Detailed"][i]["vertex_4_y_coordinate"],y_vertex,scaley)
 
     ## Shading:Building:Detailed
+    
+    ##### RV - starts
+		# fixes partially the shading scaling using 'Shading:Building:Detailed' objects
+    
     if not ref:
+        verts = np.empty([4])
+        vert_max = 0
+        vert_min = 0
         # erase shading devices
         if 'Shading:Building:Detailed' in list(content.keys()):
             if shading_scale:  # at the moment, code does not work for "shading_scale = False"
-                for i in list(content["Shading:Building:Detailed"].keys()):
-                    for j,k in enumerate(content["Shading:Building:Detailed"][i]["vertices"]):
-                        content["Shading:Building:Detailed"][i]["vertices"][j]["vertex_x_coordinate"] = content["Shading:Building:Detailed"][i]["vertices"][j]["vertex_x_coordinate"]*scalex
-                        content["Shading:Building:Detailed"][i]["vertices"][j]["vertex_y_coordinate"] = content["Shading:Building:Detailed"][i]["vertices"][j]["vertex_y_coordinate"]*scaley
-                        content["Shading:Building:Detailed"][i]["vertices"][j]["vertex_z_coordinate"] = content["Shading:Building:Detailed"][i]["vertices"][j]["vertex_z_coordinate"]*scalez
+                for i in list(content['Shading:Building:Detailed'].keys()):
+                    print i
+                    for j,k in enumerate(content['Shading:Building:Detailed'][i]['vertices']):
+                        content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_z_coordinate'] = content["Shading:Building:Detailed"][i]["vertices"][j]["vertex_z_coordinate"]*scalez
+                        print content['Shading:Building:Detailed'][i]['vertices'][j]
+                        if ('_1' in i) or ('_3' in i):
+                            verts[j] = content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate']
+                        if ('_2' in i) or ('_4' in i):
+                            verts[j] = content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate']
+                        vert_max = max(verts)
+                        vert_min = min(verts)
+                    print vert_min, vert_max
+                    for j,k in enumerate(content['Shading:Building:Detailed'][i]['vertices']):
+                        if ('_1' in i) or ('_3' in i):
+                            content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] = content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate']*scalex
+                            if '_1' in i:
+                                if content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] == vert_max:
+                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] = vert_max*scaley
+                                else:
+                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] = vert_max*scaley - (vert_max - vert_min)
+                            else:
+                                if content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] == vert_min:
+                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] = vert_min*scaley
+                                else:
+                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] = vert_min*scaley + (vert_max - vert_min)
+                        else:
+                            content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] = content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate']*scaley
+                            if '_2' in i:
+                                if content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] == vert_min:
+                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] = vert_min*scalex
+                                else:
+                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] = vert_min*scalex + (vert_max - vert_min)
+                            else:
+                                if content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] == vert_max:
+                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] = vert_max*scalex
+                                else:
+                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] = vert_max*scalex - (vert_max - vert_min)
+
+	##### RV - ends
 
     # writing  epJSON file
     file = open(output_name, "w")
@@ -319,7 +379,13 @@ def scaling(scalex=2, scaley=2,scalez=2, ref=False, window_scale=True,
     file.close()
 
     os.system('energyplus -x -c '+output_name)
-    os.system('rm eplusout.*')
+    
+    ##### RV - starts
+		# also removes the 'sqlite.err' file
+    
+    os.system('rm eplusout.* & rm sqlite.err')
+    
+    ##### RV - ends
 
 ######## Test function changing values on the following lines ########
 
@@ -342,14 +408,16 @@ def scaling(scalex=2, scaley=2,scalez=2, ref=False, window_scale=True,
 #     window_scale=False, shading_scale=True,
 #     input_file= FILE_NAME, output_name='teste4b.epJSON')
 
-
+scaling(scalex = 2, scaley = 2, scalez = 1, ref = False, 
+		window_scale = False, shading_scale = True,
+		input_file = 'vn_caso2_rv.idf', output_name = 'vn_caso2_rv_new.epJSON')
 
 '''
 O que pode ser melhorado:
 - Janelas:
-    *conferir se W (ou H) não passa da aresta da Wall
-    *conferir se a janela não se sobrepoem com a porta
-    **definir se vai consertar autmaticamente, ou só avisar
+    *conferir se W (ou H) nao passa da aresta da Wall
+    *conferir se a janela nao se sobrepoem com a porta
+    **definir se vai consertar autmaticamente, ou so avisar
 - Shading:
-    Encontrar uma forma de acompanhar a geometria, sem mudar o ângulo de sombreamento
+    Encontrar uma forma de acompanhar a geometria, sem mudar o angulo de sombreamento
 '''
