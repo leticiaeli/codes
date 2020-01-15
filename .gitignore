@@ -16,4 +16,4 @@
 __pycache__/
 *.zip
 simulations_ref/
-
+*.epw
