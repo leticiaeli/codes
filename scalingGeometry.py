@@ -381,7 +381,7 @@ def scaling(scalex=2, scaley=2,scalez=2, ref=False, window_scale=True, shading_s
     os.system('energyplus -x -c '+output_name)
     
     ##### RV - starts
-		# also removes the 'sqlite.err' file
+		# also removes the 'sqlite.err' file after simulation
     
     os.system('rm eplusout.* & rm sqlite.err')
     
