@@ -222,7 +222,8 @@ def scaling(scales={'scalex':2, 'scaley':2,'scalez':2}, ref=False, refscale=.17,
                 real_window_area += zones[zone]['fenestrations'][fenestration]
 
             zones[zone]['real_window_area'] = real_window_area
-            zones[zone]['ref_real_ratio'] = zones[zone]['ref_window_area']/zones[zone]['real_window_area']
+            if real_window_area > 0:
+                zones[zone]['ref_real_ratio'] = zones[zone]['ref_window_area']/zones[zone]['real_window_area']
 
         # changes values of windows' vertices
         for i in list(content["FenestrationSurface:Detailed"].keys()):
@@ -489,40 +490,34 @@ def scaling(scales={'scalex':2, 'scaley':2,'scalez':2}, ref=False, refscale=.17,
                         content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_z_coordinate'] = content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_z_coordinate']*scalez
 
     # writing  epJSON file
-    file = open(output_name, "w")
+    file = open(output_name+'.epJSON', "w")
     content = json.dumps(content)
     file.write(content)
     file.close()
 
-    os.system('energyplus -x -c '+output_name)
-    
-    ##### RV - starts
-        # also removes the 'sqlite.err' file after simulation
-    
+    os.system('energyplus -x -c '+output_name+'.epJSON')
     os.system('rm eplusout.* & rm sqlite.err')
-    
-    ##### RV - ends
 
 ######## Test function changing values on the following lines ########
 
-# Window to Floor Ratio of the reference
-REF_WINDOW_TO_FLOOR_RATIO = .17
+# # Window to Floor Ratio of the reference
+# REF_WINDOW_TO_FLOOR_RATIO = .17
 
-# Define the name of the input file here
-FILE_NAME = 'vn_Caso2.idf'
-scales={'scalex':4, 'scaley':4,'scalez':1}
+# # Define the name of the input file here
+# FILE_NAME = 'vn_Caso2.idf'
+# scales={'scalex':4, 'scaley':4,'scalez':1}
 
-scaling(scales, ref=True, refscale=REF_WINDOW_TO_FLOOR_RATIO,
-    window_scale=False, shading_scale=False,
-    input_file= FILE_NAME, output_name='teste_newref4.epJSON')
+# scaling(scales, ref=True, refscale=REF_WINDOW_TO_FLOOR_RATIO,
+#     window_scale=False, shading_scale=False,
+#     input_file= FILE_NAME, output_name='teste_newref4.epJSON')
 
-scaling(scales, ref=True, refscale=.3,
-    window_scale=False, shading_scale=False,
-    input_file= FILE_NAME, output_name='teste_newref5.epJSON')
+# scaling(scales, ref=True, refscale=.3,
+#     window_scale=False, shading_scale=False,
+#     input_file= FILE_NAME, output_name='teste_newref5.epJSON')
 
-scaling(scales, ref=True, refscale=.8,
-    window_scale=False, shading_scale=False,
-    input_file= FILE_NAME, output_name='teste_newref6.epJSON')
+# scaling(scales, ref=True, refscale=.8,
+#     window_scale=False, shading_scale=False,
+#     input_file= FILE_NAME, output_name='teste_newref6.epJSON')
 
 # scaling(scalex=2, scaley=2,scalez=2, ref=False, 
     # window_scale=True, shading_scale=False,
