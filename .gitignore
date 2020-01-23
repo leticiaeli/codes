@@ -13,4 +13,7 @@
 *.shd
 *.idf
 *.epJSON
-
+__pycache__/
+*.zip
+simulations_ref/
+*.epw
