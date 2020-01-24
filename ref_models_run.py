@@ -3,11 +3,14 @@ from multiprocessing import Pool  # possibilita processos multithread
 import os
 
 def run_ep(epw,caso,file):
+    os.chdir(epw.split('_')[1])
+    print(epw.split('_')[1])
     if 'vn' in file:
         mode = 'vn'
     else:
         mode = 'ac'
-    os.system('energyplus -x -w epws/'+epw+' -p '+epw.split('_')[1]+'/ref_'+caso+'_'+mode+'_'+epw.split('_')[1]+' -r '+file.split('.')[0]+'_'+caso+'.idf')
+    os.system('energyplus -x -w ../epws/'+epw+' -p ref_'+caso+'_'+mode+'_'+epw.split('_')[1]+' -r ../'+file.split('.')[0]+'_'+caso+'.idf')
+    os.chdir('..')
 
 zb1a6 = ['BRA_GO_Itumbiara.867740_INMET.epw','BRA_MG_Uberlandia.867760_INMET.epw','BRA_PR_Curitiba.838420_INMET.epw',
 'BRA_RJ_Duque.de.Caxias-Xerem.868770_INMET.epw','BRA_RS_Santa.Maria.839360_INMET.epw','BRA_SC_Florianopolis.838970_INMET.epw']

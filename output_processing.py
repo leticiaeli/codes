@@ -8,15 +8,19 @@ import os  # possibilita comandos no sistema operacional
 import pandas as pd  # facilita trabalhar com dataframes
 # from dict_update import update  # atualiza dicionários
 
-OCCUP = ':People Occupant Count [](Hourly)'  # 'SCH_OCUPACAO:Schedule Value [](Hourly)'
+OCCUP = ':Schedule Value [](Hourly)'  # ':People Occupant Count [](Hourly)'  #
 ZONES = ['SALA','DORM1','DORM2']
 INF_LIM = 18
 
-def name_file(pattern,mode,epw):
+def schedule_name(zone, occup):
+    return(zone+occup)
+ # 'SCH_OCUPACAO:Schedule Value [](Hourly)'
+
+def name_file(case,pattern,mode,epw):
     # Define o nome do arquivo.
 
-    # file_name =  pattern+'_'+mode+'_'+epw+'out.csv'
-    file_name =  mode+'_'+epw+'.csv'
+    file_name =  pattern+'_'+case+'_'+mode+'_'+epw+'out.csv'
+    # file_name =  mode+'_'+epw+'.csv'
     return(file_name)
 
 
@@ -51,10 +55,8 @@ def process_outputs(line, sup_lim):
     print(line['case'],' ',line['folder'])  # , end='\r')
     
     # define o nome do output do energyplus a partir do nome do idf
-    vn_csv_file = name_file(line['file_pattern'],'vn',line['epw'])
-    ac_csv_file = name_file(line['file_pattern'],'ac',line['epw'])
-    print(vn_csv_file)
-    print(ac_csv_file)
+    vn_csv_file = name_file('{:03.0f}'.format(line['case']),line['file_pattern'],'vn',line['epw'])
+    ac_csv_file = name_file('{:03.0f}'.format(line['case']),line['file_pattern'],'ac',line['epw'])
     
     # le o output como um dataframe, utilizando o pandas
     df_vn = pd.read_csv(line['folder']+'/'+vn_csv_file)
@@ -62,23 +64,28 @@ def process_outputs(line, sup_lim):
             
     for zn in ZONES:
 
+        if 'SALA' in zn:
+            zn_occup = schedule_name('SALA',OCCUP)
+        elif 'DORM' in zn:
+            zn_occup = schedule_name('DORM',OCCUP)
+
         # df_temp['folder'].append(line['folder'])
         df_temp['case'].append(line['case'])
         # df_temp['floor'].append(line['floor'])
         df_temp['zone'].append(zn) 
         df_temp['epw'].append(line['epw'])
 
-        df_temp['t_min'].append((df_vn[zn+':Zone Operative Temperature [C](Hourly)'][df_vn[zn+OCCUP] > 0]).min())
-        df_temp['t_max'].append((df_vn[zn+':Zone Operative Temperature [C](Hourly)'][df_vn[zn+OCCUP] > 0]).max())
+        df_temp['t_min'].append((df_vn[zn+':Zone Operative Temperature [C](Hourly)'][df_vn[zn_occup] > 0]).min())
+        df_temp['t_max'].append((df_vn[zn+':Zone Operative Temperature [C](Hourly)'][df_vn[zn_occup] > 0]).max())
 
         df_vn['inf_lim'] = 0
         df_vn.loc[df_vn[zn+':Zone Operative Temperature [C](Hourly)'] < INF_LIM, 'inf_lim'] = 1
-        df_temp['ph_inf'].append(df_vn['inf_lim'][df_vn[zn+OCCUP] > 0].mean())
+        df_temp['ph_inf'].append(df_vn['inf_lim'][df_vn[zn_occup] > 0].mean())
 
         df_vn['sup_lim'] = 0
         df_vn.loc[df_vn[zn+':Zone Operative Temperature [C](Hourly)'] >= sup_lim, 'sup_lim'] = 1
-        df_temp['ph_sup'].append(df_vn['sup_lim'][df_vn[zn+OCCUP] > 0].mean())
-        print(sum(df_vn['sup_lim'][df_vn[zn+OCCUP] > 0]))
+        df_temp['ph_sup'].append(df_vn['sup_lim'][df_vn[zn_occup] > 0].mean())
+        print(sum(df_vn['sup_lim'][df_vn[zn_occup] > 0]))
 
         df_temp['phft'].append(1 - df_temp['ph_inf'][-1] - df_temp['ph_sup'][-1])
 
@@ -142,12 +149,12 @@ def main(df_base, sup_limits, output_name):
     df_output.to_csv(output_name+'.csv', index=False)
     print('\tDone processing!')
 
+df_base = pd.read_csv('df_base.csv')
+main(df_base, 'sup_limits.csv', 'multi_outputs')
 '''
 phft = np.mean((l <26)*l/l)
 
 Teste da funcao sem depender de outros codigos:
 
 os.chdir('teste_outputprocess')
-df_base = pd.read_csv('lista.csv')
-main(df_base, 'sup_limits.csv', 'teste')
 '''

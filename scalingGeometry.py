@@ -131,8 +131,8 @@ def scaling(scales={'scalex':2, 'scaley':2,'scalez':2}, ref=False, refscale=.17,
     y_max = max(y_global)
 
     ## AirflowNetwork:SimulationControl
-    dif_x = (x_max - x_min)*scalex
-    dif_y = (y_max - y_min)*scaley
+    dif_x = (x_max - x_min)*scales['scalex']
+    dif_y = (y_max - y_min)*scales['scaley']
     ratio_of_building_afn = min(dif_x, dif_y)/max(dif_x, dif_y)
     
     if 'AirflowNetwork:SimulationControl' in list(content.keys()):
@@ -398,9 +398,6 @@ def scaling(scales={'scalex':2, 'scaley':2,'scalez':2}, ref=False, refscale=.17,
                 content["FenestrationSurface:Detailed"][i]["vertex_4_y_coordinate"] = constant_vertex(content["FenestrationSurface:Detailed"][i]["vertex_4_y_coordinate"],y_vertex,scales['scaley'])
 
     ## Shading:Building:Detailed
-    
-    ##### RV - starts
-        # fixes scaling shading
 
     if not ref:
         if shading_scale == False:
@@ -409,7 +406,7 @@ def scaling(scales={'scalex':2, 'scaley':2,'scalez':2}, ref=False, refscale=.17,
                     verts_x = np.empty([4])
                     verts_y = np.empty([4])
                     for j,k in enumerate(content['Shading:Building:Detailed'][i]['vertices']):
-                        content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_z_coordinate'] = content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_z_coordinate']*scalez
+                        content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_z_coordinate'] = content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_z_coordinate']*scales['scalez']
                         verts_x[j] = content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate']
                         verts_y[j] = content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate']
                     vert_min_x = min(verts_x)
@@ -420,74 +417,74 @@ def scaling(scales={'scalex':2, 'scaley':2,'scalez':2}, ref=False, refscale=.17,
                         if ('_i' in i):
                             if ('_c' in i):
                                 if content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] == vert_min_x:
-                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] = vert_min_x*scalex
+                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] = vert_min_x*scales['scalex']
                                 else:
-                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] = vert_min_x*scalex + (vert_max_x - vert_min_x)
+                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] = vert_min_x*scales['scalex'] + (vert_max_x - vert_min_x)
                                 if content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] == vert_min_y:
-                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] = vert_max_y*scaley - (vert_max_y - vert_min_y)
+                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] = vert_max_y*scales['scaley'] - (vert_max_y - vert_min_y)
                                 else:
-                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] = vert_max_y*scaley
+                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] = vert_max_y*scales['scaley']
                             else:
-                                content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] = content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate']*scalex
+                                content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] = content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate']*scales['scalex']
                                 if content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] == vert_max_y:
-                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] = vert_max_y*scaley
+                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] = vert_max_y*scales['scaley']
                                 else:
-                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] = vert_max_y*scaley - (vert_max_y - vert_min_y)
+                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] = vert_max_y*scales['scaley'] - (vert_max_y - vert_min_y)
                         if ('_d' in i):
                             if ('_c' in i):
                                 if content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] == vert_min_x:
-                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] = vert_min_x*scalex
+                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] = vert_min_x*scales['scalex']
                                 else:
-                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] = vert_min_x*scalex + (vert_max_x - vert_min_x)
+                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] = vert_min_x*scales['scalex'] + (vert_max_x - vert_min_x)
                                 if content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] == vert_min_y:
-                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] = vert_min_y*scaley
+                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] = vert_min_y*scales['scaley']
                                 else:
-                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] = vert_min_y*scaley + (vert_max_y - vert_min_y)
+                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] = vert_min_y*scales['scaley'] + (vert_max_y - vert_min_y)
                             else:
-                                content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] = content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate']*scaley
+                                content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] = content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate']*scales['scaley']
                                 if content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] == vert_min_x:
-                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] = vert_min_x*scalex
+                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] = vert_min_x*scales['scalex']
                                 else:
-                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] = vert_min_x*scalex + (vert_max_x - vert_min_x)
+                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] = vert_min_x*scales['scalex'] + (vert_max_x - vert_min_x)
                         if ('_s' in i):
                             if ('_c' in i):
                                 if content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] == vert_min_x:
-                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] = vert_max_x*scalex - (vert_max_x - vert_min_x)
+                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] = vert_max_x*scales['scalex'] - (vert_max_x - vert_min_x)
                                 else:
-                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] = vert_max_x*scalex
+                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] = vert_max_x*scales['scalex']
                                 if content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] == vert_min_y:
-                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] = vert_min_y*scaley
+                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] = vert_min_y*scales['scaley']
                                 else:
-                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] = vert_min_y*scaley + (vert_max_y - vert_min_y)
+                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] = vert_min_y*scales['scaley'] + (vert_max_y - vert_min_y)
                             else:
-                                content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] = content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate']*scalex
+                                content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] = content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate']*scales['scalex']
                                 if content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] == vert_min_y:
-                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] = vert_min_y*scaley
+                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] = vert_min_y*scales['scaley']
                                 else:
-                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] = vert_min_y*scaley + (vert_max_y - vert_min_y)
+                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] = vert_min_y*scales['scaley'] + (vert_max_y - vert_min_y)
                         if ('_e' in i):
                             if ('_c' in i):
                                 if content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] == vert_min_x:
-                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] = vert_max_x*scalex
+                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] = vert_max_x*scales['scalex']
                                 else:
-                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] = vert_max_x*scalex - (vert_max_x - vert_min_x)
+                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] = vert_max_x*scales['scalex'] - (vert_max_x - vert_min_x)
                                 if content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] == vert_min_y:
-                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] = vert_max_y*scaley - (vert_max_y - vert_min_y)
+                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] = vert_max_y*scales['scaley'] - (vert_max_y - vert_min_y)
                                 else:
-                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] = vert_max_y*scaley
+                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] = vert_max_y*scales['scaley']
                             else:
-                                content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] = content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate']*scaley
+                                content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] = content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate']*scales['scaley']
                                 if content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] == vert_max_x:
-                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] = vert_max_x*scalex
+                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] = vert_max_x*scales['scalex']
                                 else:
-                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] = vert_max_x*scalex - (vert_max_x - vert_min_x)
+                                    content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] = vert_max_x*scales['scalex'] - (vert_max_x - vert_min_x)
         else:
             for i in list(content['Shading:Building:Detailed'].keys()):
                 for i in list(content['Shading:Building:Detailed'].keys()):
                     for j,k in enumerate(content['Shading:Building:Detailed'][i]['vertices']):
-                        content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] = content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate']*scalex
-                        content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] = content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate']*scaley
-                        content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_z_coordinate'] = content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_z_coordinate']*scalez
+                        content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate'] = content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_x_coordinate']*scales['scalex']
+                        content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate'] = content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_y_coordinate']*scales['scaley']
+                        content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_z_coordinate'] = content['Shading:Building:Detailed'][i]['vertices'][j]['vertex_z_coordinate']*scales['scalez']
 
     # writing  epJSON file
     file = open(output_name+'.epJSON', "w")
