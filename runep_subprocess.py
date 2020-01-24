@@ -37,12 +37,12 @@ def simulate(epjson_name, cluster, extension='epJSON', version_EnergyPlus='energ
     name_length_cluster = '{:0'+str(len(str(num_clusters)))+'.0f}'
     folder_name = 'cluster'+name_length_cluster.format(cluster)
     
-    stringcluster = version_EnergyPlus + ' -w ' + epw_name + ' -p ' + epjson_name.split('.'+extension)[0] + ' -r ' + epjson_name
+    stringcluster = version_EnergyPlus + ' -w ' + epw_name + ' -p ' + folder_name+'/'+epjson_name.split('.'+extension)[0] + ' -r ' + epjson_name
     # print(stringcluster)
 
-    os.chdir(folder_name)
+    # os.chdir(folder_name)
     processing = subprocess.Popen(stringcluster, stdout = open(os.devnull, 'w'), stderr = subprocess.STDOUT, shell=True)
-    os.chdir('..')
+    # os.chdir('..')
 
     return [processing, cluster, epjson_name]
 

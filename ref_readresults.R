@@ -92,7 +92,7 @@ df_test = read.csv('output_ref_01-21.csv')
 
 
 out = read.csv('multi/teste_schout.csv')
-# out = read.csv('MA/ref_000_vn_MAout.csv')
+# out = read.csv('MA/ref_000_vn_MAout.csv') 
 out = data.frame('dorm'=out$SCH_OCUP_DORM.Schedule.Value....Hourly.,'sala'=out$SCH_OCUP_SALA.Schedule.Value....Hourly.)
 
 lim_sup = 28
