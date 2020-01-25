@@ -1,0 +1,406 @@
+
+
+
+!-   ===========  ALL OBJECTS IN CLASS: VERSION ===========
+
+Version,
+    9.0;                     !- Version Identifier
+
+
+!-   ===========  ALL OBJECTS IN CLASS: SIMULATIONCONTROL ===========
+
+SimulationControl,
+    No,                      !- Do Zone Sizing Calculation
+    No,                      !- Do System Sizing Calculation
+    No,                      !- Do Plant Sizing Calculation
+    No,                      !- Run Simulation for Sizing Periods
+    Yes;                     !- Run Simulation for Weather File Run Periods
+
+
+!-   ===========  ALL OBJECTS IN CLASS: TIMESTEP ===========
+
+Timestep,
+    6;                       !- Number of Timesteps per Hour
+
+
+!-   ===========  ALL OBJECTS IN CLASS: RUNPERIOD ===========
+
+RunPeriod,
+    ano,                     !- Name
+    1,                       !- Begin Month
+    1,                       !- Begin Day of Month
+    ,                        !- Begin Year
+    12,                      !- End Month
+    31,                      !- End Day of Month
+    ,                        !- End Year
+    Monday,                  !- Day of Week for Start Day
+    No,                      !- Use Weather File Holidays and Special Days
+    No,                      !- Use Weather File Daylight Saving Period
+    No,                      !- Apply Weekend Holiday Rule
+    No,                      !- Use Weather File Rain Indicators
+    No;                      !- Use Weather File Snow Indicators
+
+
+!-   ===========  ALL OBJECTS IN CLASS: SITE:GROUNDTEMPERATURE:UNDISTURBED:FINITEDIFFERENCE ===========
+
+Site:GroundTemperature:Undisturbed:FiniteDifference,
+    groundtemp_finitediff,   !- Name
+    1.5,                     !- Soil Thermal Conductivity {W/m-K}
+    1250,                    !- Soil Density {kg/m3}
+    1500,                    !- Soil Specific Heat {J/kg-K}
+    30,                      !- Soil Moisture Content Volume Fraction {percent}
+    50,                      !- Soil Moisture Content Volume Fraction at Saturation {percent}
+    0.4;                     !- Evapotranspiration Ground Cover Parameter {dimensionless}
+
+
+!-   ===========  ALL OBJECTS IN CLASS: SITE:GROUNDDOMAIN:SLAB ===========
+
+Site:GroundDomain:Slab,
+    grounddomain_slab,       !- Name
+    10,                      !- Ground Domain Depth {m}
+    1,                       !- Aspect Ratio
+    5,                       !- Perimeter Offset {m}
+    1.5,                     !- Soil Thermal Conductivity {W/m-K}
+    1250,                    !- Soil Density {kg/m3}
+    1500,                    !- Soil Specific Heat {J/kg-K}
+    30,                      !- Soil Moisture Content Volume Fraction {percent}
+    50,                      !- Soil Moisture Content Volume Fraction at Saturation {percent}
+    Site:GroundTemperature:Undisturbed:FiniteDifference,  !- Undisturbed Ground Temperature Model Type
+    groundtemp_finitediff,   !- Undisturbed Ground Temperature Model Name
+    0.4,                     !- Evapotranspiration Ground Cover Parameter
+    ground_coupled_oscm,     !- Slab Boundary Condition Model Name
+    OnGrade,                 !- Slab Location
+    ,                        !- Slab Material Name
+    No,                      !- Horizontal Insulation
+    ,                        !- Horizontal Insulation Material Name
+    Full,                    !- Horizontal Insulation Extents
+    ,                        !- Perimeter Insulation Width {m}
+    No,                      !- Vertical Insulation
+    ,                        !- Vertical Insulation Material Name
+    ,                        !- Vertical Insulation Depth {m}
+    Timestep,                !- Simulation Timestep
+    1.6,                     !- Geometric Mesh Coefficient
+    6;                       !- Mesh Density Parameter
+
+
+!-   ===========  ALL OBJECTS IN CLASS: SURFACEPROPERTY:OTHERSIDECONDITIONSMODEL ===========
+
+SurfaceProperty:OtherSideConditionsModel,
+    ground_coupled_oscm,     !- Name
+    GroundCoupledSurface;    !- Type of Modeling
+
+
+
+!-   ===========  ALL OBJECTS IN CLASS: SCHEDULETYPELIMITS ===========
+
+ScheduleTypeLimits,
+    on_off,                  !- Name
+    0,                       !- Lower Limit Value
+    1,                       !- Upper Limit Value
+    Discrete,                !- Numeric Type
+    Control;                 !- Unit Type
+
+ScheduleTypeLimits,
+    ocupacao,                !- Name
+    0,                       !- Lower Limit Value
+    1,                       !- Upper Limit Value
+    Continuous,              !- Numeric Type
+    Percent;                 !- Unit Type
+
+ScheduleTypeLimits,
+    atividade,               !- Name
+    0,                       !- Lower Limit Value
+    1000,                    !- Upper Limit Value
+    Continuous,              !- Numeric Type
+    ActivityLevel;           !- Unit Type
+
+ScheduleTypeLimits,
+    anynumber_hvac;          !- Name
+
+ScheduleTypeLimits,
+    faixa_temp,              !- Name
+    0,                       !- Lower Limit Value
+    50,                      !- Upper Limit Value
+    Continuous,              !- Numeric Type
+    Temperature;             !- Unit Type
+
+
+!-   ===========  ALL OBJECTS IN CLASS: SCHEDULE:COMPACT ===========
+
+Schedule:Compact,
+    sch_ilum_sala,           !- Name
+    on_off,                  !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 16:00,            !- Field 3
+    0,                       !- Field 4
+    Until: 22:00,            !- Field 5
+    1,                       !- Field 6
+    Until: 24:00,            !- Field 7
+    0;                       !- Field 8
+
+Schedule:Compact,
+    sch_ilum_dorm,           !- Name
+    on_off,                  !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 06:00,            !- Field 3
+    0,                       !- Field 4
+    Until: 08:00,            !- Field 5
+    1,                       !- Field 6
+    Until: 22:00,            !- Field 7
+    0,                       !- Field 8
+    Until: 24:00,            !- Field 9
+    1;                       !- Field 10
+
+Schedule:Compact,
+    sch_ativ_sala,           !- Name
+    atividade,               !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For:AllDays,             !- Field 2
+    Until: 24:00,            !- Field 3
+    108;                     !- Field 4
+
+Schedule:Compact,
+    sch_ativ_dorm,           !- Name
+    atividade,               !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For:AllDays,             !- Field 2
+    Until: 24:00,            !- Field 3
+    81;                      !- Field 4
+
+Schedule:Compact,
+    sch_ocup_sala,           !- Name
+    ocupacao,                !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 14:00,            !- Field 3
+    0,                       !- Field 4
+    Until: 18:00,            !- Field 5
+    0.5,                     !- Field 6
+    Until: 22:00,            !- Field 7
+    1,                       !- Field 8
+    Until: 24:00,            !- Field 9
+    0;                       !- Field 10
+
+Schedule:Compact,
+    sch_ocup_dorm,           !- Name
+    ocupacao,                !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 08:00,            !- Field 3
+    1,                       !- Field 4
+    Until: 22:00,            !- Field 5
+    0,                       !- Field 6
+    Until 24:00,             !- Field 7
+    1;                       !- Field 8
+
+Schedule:Compact,
+    sch_equip_sala,          !- Name
+    on_off,                  !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For:AllDays,             !- Field 2
+    Until: 14:00,            !- Field 3
+    0,                       !- Field 4
+    Until: 22:00,            !- Field 5
+    1,                       !- Field 6
+    Until: 24:00,            !- Field 7
+    0;                       !- Field 8
+
+Schedule:Compact,
+    sch_hvac_sala,           !- Name
+    on_off,                  !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 14:00,            !- Field 3
+    0,                       !- Field 4
+    Until: 22:00,            !- Field 5
+    1,                       !- Field 6
+    Until: 24:00,            !- Field 7
+    0;                       !- Field 8
+
+Schedule:Compact,
+    sch_hvac_dorm,           !- Name
+    on_off,                  !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 08:00,            !- Field 3
+    1,                       !- Field 4
+    Until: 22:00,            !- Field 5
+    0,                       !- Field 6
+    Until 24:00,             !- Field 7
+    1;                       !- Field 8
+
+Schedule:Compact,
+    sch_hvac_blank,          !- Name
+    anynumber_hvac,          !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 24:00;            !- Field 3
+
+Schedule:Compact,
+    sch_hvac_setpoint_ref,   !- Name
+    anynumber_hvac,          !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 24:00,            !- Field 3
+    23;                      !- Field 4
+
+Schedule:Compact,
+    sch_hvac_setpoint_aquec, !- Name
+    anynumber_hvac,          !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 24:00,            !- Field 3
+    21;                      !- Field 4
+
+Schedule:Compact,
+    sch_hvac_4,              !- Name
+    anynumber_hvac,          !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 24:00,            !- Field 3
+    4;                       !- Field 4
+
+Schedule:Compact,
+    sch_vn_tempcontrole_janela,  !- Name
+    faixa_temp,              !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 24:00,            !- Field 3
+    19;                      !- Field 4
+
+Schedule:Compact,
+    sch_vn_sala,             !- Name
+    on_off,                  !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 14:00,            !- Field 3
+    0,                       !- Field 4
+    Until: 22:00,            !- Field 5
+    1,                       !- Field 6
+    Until: 24:00,            !- Field 7
+    0;                       !- Field 8
+
+Schedule:Compact,
+    sch_vn_dorm,             !- Name
+    on_off,                  !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until:  8:00,            !- Field 3
+    1,                       !- Field 4
+    Until: 22:00,            !- Field 5
+    0,                       !- Field 6
+    Until: 24:00,            !- Field 7
+    1;                       !- Field 8
+
+
+
+!-   ===========  ALL OBJECTS IN CLASS: PEOPLE ===========
+
+People,
+    people_sala,             !- Name
+    salas,                   !- Zone or ZoneList Name
+    sch_ocup_sala,           !- Number of People Schedule Name
+    People,                  !- Number of People Calculation Method
+    4,                       !- Number of People
+    ,                        !- People per Zone Floor Area {person/m2}
+    ,                        !- Zone Floor Area per Person {m2/person}
+    0.3,                     !- Fraction Radiant
+    ,                        !- Sensible Heat Fraction
+    sch_ativ_sala;           !- Activity Level Schedule Name
+
+People,
+    people_dorm,             !- Name
+    dorms,                   !- Zone or ZoneList Name
+    sch_ocup_dorm,           !- Number of People Schedule Name
+    People,                  !- Number of People Calculation Method
+    2,                       !- Number of People
+    ,                        !- People per Zone Floor Area {person/m2}
+    ,                        !- Zone Floor Area per Person {m2/person}
+    0.3,                     !- Fraction Radiant
+    ,                        !- Sensible Heat Fraction
+    sch_ativ_dorm;           !- Activity Level Schedule Name
+
+
+!-   ===========  ALL OBJECTS IN CLASS: LIGHTS ===========
+
+Lights,
+    lights_sala,             !- Name
+    salas,                   !- Zone or ZoneList Name
+    sch_ilum_sala,           !- Schedule Name
+    Watts/Area,              !- Design Level Calculation Method
+    ,                        !- Lighting Level {W}
+    5,                       !- Watts per Zone Floor Area {W/m2}
+    ,                        !- Watts per Person {W/person}
+    0,                       !- Return Air Fraction
+    0.32,                    !- Fraction Radiant
+    0.23,                    !- Fraction Visible
+    0,                       !- Fraction Replaceable
+    GeneralLights;           !- End-Use Subcategory
+
+Lights,
+    lights_dorm,             !- Name
+    dorms,                   !- Zone or ZoneList Name
+    sch_ilum_dorm,           !- Schedule Name
+    Watts/Area,              !- Design Level Calculation Method
+    ,                        !- Lighting Level {W}
+    5,                       !- Watts per Zone Floor Area {W/m2}
+    ,                        !- Watts per Person {W/person}
+    0,                       !- Return Air Fraction
+    0.32,                    !- Fraction Radiant
+    0.23,                    !- Fraction Visible
+    0,                       !- Fraction Replaceable
+    GeneralLights;           !- End-Use Subcategory
+
+
+!-   ===========  ALL OBJECTS IN CLASS: ELECTRICEQUIPMENT ===========
+
+ElectricEquipment,
+    equip_sala,              !- Name
+    salas,                   !- Zone or ZoneList Name
+    sch_equip_sala,          !- Schedule Name
+    EquipmentLevel,          !- Design Level Calculation Method
+    120,                     !- Design Level {W}
+    ,                        !- Watts per Zone Floor Area {W/m2}
+    ,                        !- Watts per Person {W/person}
+    0,                       !- Fraction Latent
+    0.3,                     !- Fraction Radiant
+    0,                       !- Fraction Lost
+    General;                 !- End-Use Subcategory
+
+
+!-   ===========  ALL OBJECTS IN CLASS: OUTPUT:VARIABLEDICTIONARY ===========
+
+Output:VariableDictionary,
+    IDF;                     !- Key Field
+
+Output:VariableDictionary,
+    regular;                 !- Key Field
+
+
+!-   ===========  ALL OBJECTS IN CLASS: OUTPUT:SURFACES:DRAWING ===========
+
+Output:Surfaces:Drawing,
+    DXF,                     !- Report Type
+    ThickPolyline;           !- Report Specifications 1
+
+
+!-   ===========  ALL OBJECTS IN CLASS: OUTPUT:TABLE:SUMMARYREPORTS ===========
+
+Output:Table:SummaryReports,
+    AllSummary;              !- Report 1 Name
+
+
+!-   ===========  ALL OBJECTS IN CLASS: OUTPUTCONTROL:TABLE:STYLE ===========
+
+OutputControl:Table:Style,
+    HTML,                    !- Column Separator
+    JtoKWH;                  !- Unit Conversion
+
+
+!-   ===========  ALL OBJECTS IN CLASS: OUTPUT:DIAGNOSTICS ===========
+
+Output:Diagnostics,
+    DisplayAllWarnings,      !- Key 1
+    DisplayExtraWarnings;    !- Key 2

@@ -1,0 +1,72 @@
+!-   ===========  ALL OBJECTS IN CLASS: MATERIAL ===========
+
+! PAREDES
+
+Material,
+    concreto_10cm,           !- Name
+    Rough,                   !- Roughness
+    0.1,                     !- Thickness {m}
+    1.75,                    !- Conductivity {W/m-K}
+    2200,                    !- Density {kg/m3}
+    1000,                    !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.8,                     !- Solar Absorptance
+    0.8;                     !- Visible Absorptance
+
+Material,
+    placa_cimenticia, !- Name
+    MediumSmooth,            !- Roughness
+    0.01,                    !- Thickness {m}
+    1.15,                    !- Conductivity {W/m-K}
+    2000,                    !- Density {kg/m3}
+    1000,                    !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.8,                     !- Solar Absorptance
+    0.8;                     !- Visible Absorptance
+
+Material,
+    argamassa,        !- Name
+    MediumRough,             !- Roughness
+    0.025,                   !- Thickness {m}
+    1.15,                    !- Conductivity {W/m-K}
+    2000,                    !- Density {kg/m3}
+    1000,                    !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.8,                     !- Solar Absorptance
+    0.8;                     !- Visible Absorptance
+
+Material,
+    tijolo_macico_10cm,  !- Name
+    Rough,                   !- Roughness
+    0.1,                     !- Thickness {m}
+    1.05,                    !- Conductivity {W/m-K}
+    1800,                    !- Density {kg/m3}
+    920,                     !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.8,                     !- Solar Absorptance
+    0.8;                     !- Visible Absorptance
+
+Material,
+    tijolo_macico_20cm,  !- Name
+    Rough,                   !- Roughness
+    0.2,                     !- Thickness {m}
+    1.05,                    !- Conductivity {W/m-K}
+    1800.0,                  !- Density {kg/m3}
+    920.0,                   !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.8,                     !- Solar Absorptance
+    0.8;                     !- Visible Absorptance
+
+
+! COBERTURA
+
+Material,
+    fibro_telha,      !- Name
+    MediumRough,             !- Roughness
+    0.008,                   !- Thickness {m}
+    0.65,                    !- Conductivity {W/m-K}
+    1700,                    !- Density {kg/m3}
+    840,                     !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.8,                     !- Solar Absorptance
+    0.8;                     !- Visible Absorptance

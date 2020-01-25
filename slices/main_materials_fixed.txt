@@ -1,0 +1,156 @@
+!-   ===========  ALL OBJECTS IN CLASS: MATERIAL ===========
+
+Material,
+    impermeabilizacao_piso,  !- Name
+    Smooth,                  !- Roughness
+    0.0001,                  !- Thickness {m}
+    0.23,                    !- Conductivity {W/m-K}
+    1000,                    !- Density {kg/m3}
+    920,                     !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.7,                     !- Solar Absorptance
+    0.7;                     !- Visible Absorptance
+
+Material,
+    contrapiso,              !- Name
+    MediumRough,             !- Roughness
+    0.02,                    !- Thickness {m}
+    1.15,                    !- Conductivity {W/m-K}
+    2000,                    !- Density {kg/m3}
+    1000,                    !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.7,                     !- Solar Absorptance
+    0.7;                     !- Visible Absorptance
+
+Material,
+    piso_ceramico_abs0.7,    !- Name
+    Smooth,                  !- Roughness
+    0.0075,                  !- Thickness {m}
+    1.05,                    !- Conductivity {W/m-K}
+    2000,                    !- Density {kg/m3}
+    920,                     !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.7,                     !- Solar Absorptance
+    0.7;                     !- Visible Absorptance
+
+Material,
+    concreto_10cm_abs0.5,    !- Name
+    Rough,                   !- Roughness
+    0.1,                     !- Thickness {m}
+    1.75,                    !- Conductivity {W/m-K}
+    2200,                    !- Density {kg/m3}
+    1000,                    !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.5,                     !- Solar Absorptance
+    0.5;                     !- Visible Absorptance
+
+Material,
+    concreto_5cm_abs0.7,     !- Name
+    MediumRough,             !- Roughness
+    0.05,                    !- Thickness {m}
+    1.75,                    !- Conductivity {W/m-K}
+    2200,                    !- Density {kg/m3}
+    1000,                    !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.7,                     !- Solar Absorptance
+    0.7;                     !- Visible Absorptance
+
+Material,
+    argamassa_abs0.5,        !- Name
+    MediumRough,             !- Roughness
+    0.025,                   !- Thickness {m}
+    1.15,                    !- Conductivity {W/m-K}
+    2000,                    !- Density {kg/m3}
+    1000,                    !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.5,                     !- Solar Absorptance
+    0.5;                     !- Visible Absorptance
+
+Material,
+    placa_gesso_abs0.5,      !- Name
+    Smooth,                  !- Roughness
+    0.0125,                  !- Thickness {m}
+    0.35,                    !- Conductivity {W/m-K}
+    900,                     !- Density {kg/m3}
+    870,                     !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.5,                     !- Solar Absorptance
+    0.5;                     !- Visible Absorptance
+
+
+Material,
+    tijolo_9x19x19_abs0.7,   !- Name
+    Rough,                   !- Roughness
+    0.013,                   !- Thickness {m}
+    0.9,                     !- Conductivity {W/m-K}
+    1600,                    !- Density {kg/m3}
+    920,                     !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.7,                     !- Solar Absorptance
+    0.7;                     !- Visible Absorptance
+
+Material,
+    tijolo_macico_10cm_abs0.5,  !- Name
+    Rough,                   !- Roughness
+    0.1,                     !- Thickness {m}
+    1.05,                    !- Conductivity {W/m-K}
+    1800,                    !- Density {kg/m3}
+    920,                     !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.5,                     !- Solar Absorptance
+    0.5;                     !- Visible Absorptance
+
+Material,
+    forro_madeira_1cm_abs0.5,!- Name
+    Smooth,                  !- Roughness
+    0.01,                    !- Thickness {m}
+    0.1,                     !- Conductivity {W/m-K}
+    400,                     !- Density {kg/m3}
+    2300,                    !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.5,                     !- Solar Absorptance
+    0.5;                     !- Visible Absorptance
+
+Material,
+    aluminio_barreira_radiante,  !- Name
+    MediumSmooth,            !- Roughness
+    0.000006,                !- Thickness {m}
+    230,                     !- Conductivity {W/m-K}
+    2700,                    !- Density {kg/m3}
+    880,                     !- Specific Heat {J/kg-K}
+    0.2,                     !- Thermal Absorptance
+    0.4,                     !- Solar Absorptance
+    0.4;                     !- Visible Absorptance
+
+Material,
+    porta_mad_3cm_abs0.5,    !- Name
+    MediumSmooth,            !- Roughness
+    0.03,                    !- Thickness {m}
+    0.15,                    !- Conductivity {W/m-K}
+    650,                     !- Density {kg/m3}
+    2300,                    !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.5,                     !- Solar Absorptance
+    0.5;                     !- Visible Absorptance
+
+
+!-   ===========  ALL OBJECTS IN CLASS: MATERIAL:NOMASS ===========
+
+Material:NoMass,
+    la_vidro_5cm,            !- Name
+    Smooth,                  !- Roughness
+    1.25,                    !- Thermal Resistance {m2-K/W}
+    0.9,                     !- Thermal Absorptance
+    0.7,                     !- Solar Absorptance
+    0.7;                     !- Visible Absorptance
+
+
+!-   ===========  ALL OBJECTS IN CLASS: MATERIAL:AIRGAP ===========
+
+Material:AirGap,
+    camara_cobertura,        !- Name
+    0.21;                    !- Thermal Resistance {m2-K/W}
+
+Material:AirGap,
+    camara_parede,           !- Name
+    0.17;                    !- Thermal Resistance {m2-K/W}

@@ -1,0 +1,380 @@
+!-   ===========  ALL OBJECTS IN CLASS: AIRFLOWNETWORK:SIMULATIONCONTROL ===========
+
+AirflowNetwork:SimulationControl,
+    vn_controle,             !- Name
+    MultizoneWithoutDistribution,  !- AirflowNetwork Control
+    SurfaceAverageCalculation,  !- Wind Pressure Coefficient Type
+    OpeningHeight,           !- Height Selection for Local Wind Pressure Calculation
+    LowRise,                 !- Building Type
+    500,                     !- Maximum Number of Iterations {dimensionless}
+    LinearInitializationMethod,  !- Initialization Type
+    0.0001,                  !- Relative Airflow Convergence Tolerance {dimensionless}
+    0.000001,                !- Absolute Airflow Convergence Tolerance {kg/s}
+    -.5,                     !- Convergence Acceleration Limit {dimensionless}
+    0,                       !- Azimuth Angle of Long Axis of Building {deg}
+    0.85;                    !- Ratio of Building Width Along Short Axis to Width Along Long Axis
+
+
+!-   ===========  ALL OBJECTS IN CLASS: AIRFLOWNETWORK:MULTIZONE:ZONE ===========
+
+AirflowNetwork:MultiZone:Zone,
+    sala,                    !- Zone Name
+    ,                        !- Ventilation Control Mode
+    ,                        !- Ventilation Control Zone Temperature Setpoint Schedule Name
+    ,                        !- Minimum Venting Open Factor {dimensionless}
+    ,                        !- Indoor and Outdoor Temperature Difference Lower Limit For Maximum Venting Open Factor {deltaC}
+    ,                        !- Indoor and Outdoor Temperature Difference Upper Limit for Minimum Venting Open Factor {deltaC}
+    ,                        !- Indoor and Outdoor Enthalpy Difference Lower Limit For Maximum Venting Open Factor {deltaJ/kg}
+    ;                        !- Indoor and Outdoor Enthalpy Difference Upper Limit for Minimum Venting Open Factor {deltaJ/kg}
+
+AirflowNetwork:MultiZone:Zone,
+    dorm1,                   !- Zone Name
+    ,                        !- Ventilation Control Mode
+    ,                        !- Ventilation Control Zone Temperature Setpoint Schedule Name
+    ,                        !- Minimum Venting Open Factor {dimensionless}
+    ,                        !- Indoor and Outdoor Temperature Difference Lower Limit For Maximum Venting Open Factor {deltaC}
+    ,                        !- Indoor and Outdoor Temperature Difference Upper Limit for Minimum Venting Open Factor {deltaC}
+    ,                        !- Indoor and Outdoor Enthalpy Difference Lower Limit For Maximum Venting Open Factor {deltaJ/kg}
+    ;                        !- Indoor and Outdoor Enthalpy Difference Upper Limit for Minimum Venting Open Factor {deltaJ/kg}
+
+AirflowNetwork:MultiZone:Zone,
+    bwc,                     !- Zone Name
+    ,                        !- Ventilation Control Mode
+    ,                        !- Ventilation Control Zone Temperature Setpoint Schedule Name
+    ,                        !- Minimum Venting Open Factor {dimensionless}
+    ,                        !- Indoor and Outdoor Temperature Difference Lower Limit For Maximum Venting Open Factor {deltaC}
+    ,                        !- Indoor and Outdoor Temperature Difference Upper Limit for Minimum Venting Open Factor {deltaC}
+    ,                        !- Indoor and Outdoor Enthalpy Difference Lower Limit For Maximum Venting Open Factor {deltaJ/kg}
+    ;                        !- Indoor and Outdoor Enthalpy Difference Upper Limit for Minimum Venting Open Factor {deltaJ/kg}
+
+AirflowNetwork:MultiZone:Zone,
+    dorm2,                   !- Zone Name
+    ,                        !- Ventilation Control Mode
+    ,                        !- Ventilation Control Zone Temperature Setpoint Schedule Name
+    ,                        !- Minimum Venting Open Factor {dimensionless}
+    ,                        !- Indoor and Outdoor Temperature Difference Lower Limit For Maximum Venting Open Factor {deltaC}
+    ,                        !- Indoor and Outdoor Temperature Difference Upper Limit for Minimum Venting Open Factor {deltaC}
+    ,                        !- Indoor and Outdoor Enthalpy Difference Lower Limit For Maximum Venting Open Factor {deltaJ/kg}
+    ;                        !- Indoor and Outdoor Enthalpy Difference Upper Limit for Minimum Venting Open Factor {deltaJ/kg}
+
+
+!-   ===========  ALL OBJECTS IN CLASS: AIRFLOWNETWORK:MULTIZONE:SURFACE ===========
+
+AirflowNetwork:MultiZone:Surface,
+    sala_jan_0_01e,          !- Surface Name
+    abertura_janela,         !- Leakage Component Name
+    ,                        !- External Node Name
+    1,                       !- Window/Door Opening Factor, or Crack Factor {dimensionless}
+    NoVent,                  !- Ventilation Control Mode
+    ,                        !- Ventilation Control Zone Temperature Setpoint Schedule Name
+    0;                       !- Minimum Venting Open Factor {dimensionless}
+
+AirflowNetwork:MultiZone:Surface,
+    sala_portaex_0_00d,      !- Surface Name
+    abertura_porta,          !- Leakage Component Name
+    ,                        !- External Node Name
+    1,                       !- Window/Door Opening Factor, or Crack Factor {dimensionless}
+    NoVent,                  !- Ventilation Control Mode
+    ,                        !- Ventilation Control Zone Temperature Setpoint Schedule Name
+    0;                       !- Minimum Venting Open Factor {dimensionless}
+
+AirflowNetwork:MultiZone:Surface,
+    sala_jan_0_00i,          !- Surface Name
+    abertura_janela,         !- Leakage Component Name
+    ,                        !- External Node Name
+    1,                       !- Window/Door Opening Factor, or Crack Factor {dimensionless}
+    NoVent,                  !- Ventilation Control Mode
+    ,                        !- Ventilation Control Zone Temperature Setpoint Schedule Name
+    0;                       !- Minimum Venting Open Factor {dimensionless}
+
+AirflowNetwork:MultiZone:Surface,
+    dorm1_jan_0_00i,         !- Surface Name
+    abertura_janela,         !- Leakage Component Name
+    ,                        !- External Node Name
+    1,                       !- Window/Door Opening Factor, or Crack Factor {dimensionless}
+    NoVent,                  !- Ventilation Control Mode
+    ,                        !- Ventilation Control Zone Temperature Setpoint Schedule Name
+    0;                       !- Minimum Venting Open Factor {dimensionless}
+
+AirflowNetwork:MultiZone:Surface,
+    dorm2_jan_0_00d,         !- Surface Name
+    abertura_janela,         !- Leakage Component Name
+    ,                        !- External Node Name
+    1,                       !- Window/Door Opening Factor, or Crack Factor {dimensionless}
+    NoVent,                  !- Ventilation Control Mode
+    ,                        !- Ventilation Control Zone Temperature Setpoint Schedule Name
+    0;                       !- Minimum Venting Open Factor {dimensionless}
+
+AirflowNetwork:MultiZone:Surface,
+    bwc_jan_0_00e,           !- Surface Name
+    abertura_janela,         !- Leakage Component Name
+    ,                        !- External Node Name
+    1,                       !- Window/Door Opening Factor, or Crack Factor {dimensionless}
+    Constant,                !- Ventilation Control Mode
+    ,                        !- Ventilation Control Zone Temperature Setpoint Schedule Name
+    0;                       !- Minimum Venting Open Factor {dimensionless}
+
+AirflowNetwork:MultiZone:Surface,
+    sala_portaex_0_00s,      !- Surface Name
+    abertura_porta,          !- Leakage Component Name
+    ,                        !- External Node Name
+    1,                       !- Window/Door Opening Factor, or Crack Factor {dimensionless}
+    NoVent,                  !- Ventilation Control Mode
+    ,                        !- Ventilation Control Zone Temperature Setpoint Schedule Name
+    0;                       !- Minimum Venting Open Factor {dimensionless}
+
+AirflowNetwork:MultiZone:Surface,
+    bwc_portain_0_00d,       !- Surface Name
+    abertura_porta,          !- Leakage Component Name
+    ,                        !- External Node Name
+    1,                       !- Window/Door Opening Factor, or Crack Factor {dimensionless}
+    NoVent,                  !- Ventilation Control Mode
+    ,                        !- Ventilation Control Zone Temperature Setpoint Schedule Name
+    0;                       !- Minimum Venting Open Factor {dimensionless}
+
+AirflowNetwork:MultiZone:Surface,
+    dorm1_portain_0_00e,     !- Surface Name
+    abertura_porta,          !- Leakage Component Name
+    ,                        !- External Node Name
+    1,                       !- Window/Door Opening Factor, or Crack Factor {dimensionless}
+    NoVent,                  !- Ventilation Control Mode
+    ,                        !- Ventilation Control Zone Temperature Setpoint Schedule Name
+    0;                       !- Minimum Venting Open Factor {dimensionless}
+
+AirflowNetwork:MultiZone:Surface,
+    dorm2_portain_0_01e,     !- Surface Name
+    abertura_porta,          !- Leakage Component Name
+    ,                        !- External Node Name
+    1,                       !- Window/Door Opening Factor, or Crack Factor {dimensionless}
+    NoVent,                  !- Ventilation Control Mode
+    ,                        !- Ventilation Control Zone Temperature Setpoint Schedule Name
+    0;                       !- Minimum Venting Open Factor {dimensionless}
+
+
+!-   ===========  ALL OBJECTS IN CLASS: AIRFLOWNETWORK:MULTIZONE:COMPONENT:DETAILEDOPENING ===========
+
+AirflowNetwork:MultiZone:Component:DetailedOpening,
+    abertura_porta,          !- Name
+    0.0024,                  !- Air Mass Flow Coefficient When Opening is Closed {kg/s-m}
+    0.59,                    !- Air Mass Flow Exponent When Opening is Closed {dimensionless}
+    NonPivoted,              !- Type of Rectangular Large Vertical Opening (LVO)
+    0,                       !- Extra Crack Length or Height of Pivoting Axis {m}
+    2,                       !- Number of Sets of Opening Factor Data
+    0,                       !- Opening Factor 1 {dimensionless}
+    0.001,                   !- Discharge Coefficient for Opening Factor 1 {dimensionless}
+    0,                       !- Width Factor for Opening Factor 1 {dimensionless}
+    1,                       !- Height Factor for Opening Factor 1 {dimensionless}
+    0,                       !- Start Height Factor for Opening Factor 1 {dimensionless}
+    1,                       !- Opening Factor 2 {dimensionless}
+    0.65,                    !- Discharge Coefficient for Opening Factor 2 {dimensionless}
+    1,                       !- Width Factor for Opening Factor 2 {dimensionless}
+    1,                       !- Height Factor for Opening Factor 2 {dimensionless}
+    0;                       !- Start Height Factor for Opening Factor 2 {dimensionless}
+
+AirflowNetwork:MultiZone:Component:DetailedOpening,
+    abertura_janela,         !- Name
+    0.00028,                 !- Air Mass Flow Coefficient When Opening is Closed {kg/s-m}
+    0.63,                    !- Air Mass Flow Exponent When Opening is Closed {dimensionless}
+    NonPivoted,              !- Type of Rectangular Large Vertical Opening (LVO)
+    0,                       !- Extra Crack Length or Height of Pivoting Axis {m}
+    2,                       !- Number of Sets of Opening Factor Data
+    0.0,                     !- Opening Factor 1 {dimensionless}
+    0.001,                   !- Discharge Coefficient for Opening Factor 1 {dimensionless}
+    0.0,                     !- Width Factor for Opening Factor 1 {dimensionless}
+    1.0,                     !- Height Factor for Opening Factor 1 {dimensionless}
+    0.0,                     !- Start Height Factor for Opening Factor 1 {dimensionless}
+    1,                       !- Opening Factor 2 {dimensionless}
+    0.65,                    !- Discharge Coefficient for Opening Factor 2 {dimensionless}
+    0.45,                    !- Width Factor for Opening Factor 2 {dimensionless}
+    1.0,                     !- Height Factor for Opening Factor 2 {dimensionless}
+    0;                       !- Start Height Factor for Opening Factor 2 {dimensionless}
+
+
+!-   ===========  ALL OBJECTS IN CLASS: ZONECONTROL:THERMOSTAT ===========
+
+ZoneControl:Thermostat,
+    dorm1 Thermostat,        !- Name
+    dorm1,                   !- Zone or ZoneList Name
+    sch_hvac_4,              !- Control Type Schedule Name
+    ThermostatSetpoint:DualSetpoint,  !- Control 1 Object Type
+    Termostato Dual SP Control;  !- Control 1 Name
+
+ZoneControl:Thermostat,
+    dorm2 Thermostat,        !- Name
+    dorm2,                   !- Zone or ZoneList Name
+    sch_hvac_4,              !- Control Type Schedule Name
+    ThermostatSetpoint:DualSetpoint,  !- Control 1 Object Type
+    Termostato Dual SP Control;  !- Control 1 Name
+
+ZoneControl:Thermostat,
+    sala Thermostat,         !- Name
+    sala,                    !- Zone or ZoneList Name
+    sch_hvac_4,              !- Control Type Schedule Name
+    ThermostatSetpoint:DualSetpoint,  !- Control 1 Object Type
+    Termostato Dual SP Control;  !- Control 1 Name
+
+
+!-   ===========  ALL OBJECTS IN CLASS: THERMOSTATSETPOINT:DUALSETPOINT ===========
+
+ThermostatSetpoint:DualSetpoint,
+    Termostato Dual SP Control,  !- Name
+    sch_hvac_setpoint_aquec, !- Heating Setpoint Temperature Schedule Name
+    sch_hvac_setpoint_ref;   !- Cooling Setpoint Temperature Schedule Name
+
+
+!-   ===========  ALL OBJECTS IN CLASS: ZONEHVAC:IDEALLOADSAIRSYSTEM ===========
+
+ZoneHVAC:IdealLoadsAirSystem,
+    dorm1 Ideal Loads Air System,  !- Name
+    sch_hvac_dorm,           !- Availability Schedule Name
+    dorm1 Ideal Loads Supply Inlet,  !- Zone Supply Air Node Name
+    ,                        !- Zone Exhaust Air Node Name
+    ,                        !- System Inlet Air Node Name
+    50,                      !- Maximum Heating Supply Air Temperature {C}
+    13,                      !- Minimum Cooling Supply Air Temperature {C}
+    0.0156,                  !- Maximum Heating Supply Air Humidity Ratio {kgWater/kgDryAir}
+    0.0077,                  !- Minimum Cooling Supply Air Humidity Ratio {kgWater/kgDryAir}
+    NoLimit,                 !- Heating Limit
+    ,                        !- Maximum Heating Air Flow Rate {m3/s}
+    ,                        !- Maximum Sensible Heating Capacity {W}
+    NoLimit,                 !- Cooling Limit
+    ,                        !- Maximum Cooling Air Flow Rate {m3/s}
+    ,                        !- Maximum Total Cooling Capacity {W}
+    ,                        !- Heating Availability Schedule Name
+    ,                        !- Cooling Availability Schedule Name
+    None,                    !- Dehumidification Control Type
+    0.7,                     !- Cooling Sensible Heat Ratio {dimensionless}
+    None,                    !- Humidification Control Type
+    ,                        !- Design Specification Outdoor Air Object Name
+    ,                        !- Outdoor Air Inlet Node Name
+    None,                    !- Demand Controlled Ventilation Type
+    NoEconomizer,            !- Outdoor Air Economizer Type
+    None,                    !- Heat Recovery Type
+    0.7,                     !- Sensible Heat Recovery Effectiveness {dimensionless}
+    0.65;                    !- Latent Heat Recovery Effectiveness {dimensionless}
+
+ZoneHVAC:IdealLoadsAirSystem,
+    dorm2 Ideal Loads Air System,  !- Name
+    sch_hvac_dorm,           !- Availability Schedule Name
+    dorm2 Ideal Loads Supply Inlet,  !- Zone Supply Air Node Name
+    ,                        !- Zone Exhaust Air Node Name
+    ,                        !- System Inlet Air Node Name
+    50,                      !- Maximum Heating Supply Air Temperature {C}
+    13,                      !- Minimum Cooling Supply Air Temperature {C}
+    0.0156,                  !- Maximum Heating Supply Air Humidity Ratio {kgWater/kgDryAir}
+    0.0077,                  !- Minimum Cooling Supply Air Humidity Ratio {kgWater/kgDryAir}
+    NoLimit,                 !- Heating Limit
+    ,                        !- Maximum Heating Air Flow Rate {m3/s}
+    ,                        !- Maximum Sensible Heating Capacity {W}
+    NoLimit,                 !- Cooling Limit
+    ,                        !- Maximum Cooling Air Flow Rate {m3/s}
+    ,                        !- Maximum Total Cooling Capacity {W}
+    ,                        !- Heating Availability Schedule Name
+    ,                        !- Cooling Availability Schedule Name
+    None,                    !- Dehumidification Control Type
+    0.7,                     !- Cooling Sensible Heat Ratio {dimensionless}
+    None,                    !- Humidification Control Type
+    ,                        !- Design Specification Outdoor Air Object Name
+    ,                        !- Outdoor Air Inlet Node Name
+    None,                    !- Demand Controlled Ventilation Type
+    NoEconomizer,            !- Outdoor Air Economizer Type
+    None,                    !- Heat Recovery Type
+    0.7,                     !- Sensible Heat Recovery Effectiveness {dimensionless}
+    0.65;                    !- Latent Heat Recovery Effectiveness {dimensionless}
+
+ZoneHVAC:IdealLoadsAirSystem,
+    sala Ideal Loads Air System,  !- Name
+    sch_hvac_sala,           !- Availability Schedule Name
+    sala Ideal Loads Supply Inlet,  !- Zone Supply Air Node Name
+    ,                        !- Zone Exhaust Air Node Name
+    ,                        !- System Inlet Air Node Name
+    50,                      !- Maximum Heating Supply Air Temperature {C}
+    13,                      !- Minimum Cooling Supply Air Temperature {C}
+    0.0156,                  !- Maximum Heating Supply Air Humidity Ratio {kgWater/kgDryAir}
+    0.0077,                  !- Minimum Cooling Supply Air Humidity Ratio {kgWater/kgDryAir}
+    NoLimit,                 !- Heating Limit
+    ,                        !- Maximum Heating Air Flow Rate {m3/s}
+    ,                        !- Maximum Sensible Heating Capacity {W}
+    NoLimit,                 !- Cooling Limit
+    ,                        !- Maximum Cooling Air Flow Rate {m3/s}
+    ,                        !- Maximum Total Cooling Capacity {W}
+    ,                        !- Heating Availability Schedule Name
+    ,                        !- Cooling Availability Schedule Name
+    None,                    !- Dehumidification Control Type
+    0.7,                     !- Cooling Sensible Heat Ratio {dimensionless}
+    None,                    !- Humidification Control Type
+    ,                        !- Design Specification Outdoor Air Object Name
+    ,                        !- Outdoor Air Inlet Node Name
+    None,                    !- Demand Controlled Ventilation Type
+    NoEconomizer,            !- Outdoor Air Economizer Type
+    None,                    !- Heat Recovery Type
+    0.7,                     !- Sensible Heat Recovery Effectiveness {dimensionless}
+    0.65;                    !- Latent Heat Recovery Effectiveness {dimensionless}
+
+
+!-   ===========  ALL OBJECTS IN CLASS: ZONEHVAC:EQUIPMENTLIST ===========
+
+ZoneHVAC:EquipmentList,
+    dorm1 Equipment,         !- Name
+    SequentialLoad,          !- Load Distribution Scheme
+    ZoneHVAC:IdealLoadsAirSystem,  !- Zone Equipment 1 Object Type
+    dorm1 Ideal Loads Air System,  !- Zone Equipment 1 Name
+    1,                       !- Zone Equipment 1 Cooling Sequence
+    1;                       !- Zone Equipment 1 Heating or No-Load Sequence
+
+ZoneHVAC:EquipmentList,
+    dorm2 Equipment,         !- Name
+    SequentialLoad,          !- Load Distribution Scheme
+    ZoneHVAC:IdealLoadsAirSystem,  !- Zone Equipment 1 Object Type
+    dorm2 Ideal Loads Air System,  !- Zone Equipment 1 Name
+    1,                       !- Zone Equipment 1 Cooling Sequence
+    1;                       !- Zone Equipment 1 Heating or No-Load Sequence
+
+ZoneHVAC:EquipmentList,
+    sala Equipment,          !- Name
+    SequentialLoad,          !- Load Distribution Scheme
+    ZoneHVAC:IdealLoadsAirSystem,  !- Zone Equipment 1 Object Type
+    sala Ideal Loads Air System,  !- Zone Equipment 1 Name
+    1,                       !- Zone Equipment 1 Cooling Sequence
+    1;                       !- Zone Equipment 1 Heating or No-Load Sequence
+
+
+!-   ===========  ALL OBJECTS IN CLASS: ZONEHVAC:EQUIPMENTCONNECTIONS ===========
+
+ZoneHVAC:EquipmentConnections,
+    dorm1,                   !- Zone Name
+    dorm1 Equipment,         !- Zone Conditioning Equipment List Name
+    dorm1 Ideal Loads Supply Inlet,  !- Zone Air Inlet Node or NodeList Name
+    ,                        !- Zone Air Exhaust Node or NodeList Name
+    dorm1 Zone Air Node,     !- Zone Air Node Name
+    dorm1 Return Outlet;     !- Zone Return Air Node or NodeList Name
+
+ZoneHVAC:EquipmentConnections,
+    dorm2,                   !- Zone Name
+    dorm2 Equipment,         !- Zone Conditioning Equipment List Name
+    dorm2 Ideal Loads Supply Inlet,  !- Zone Air Inlet Node or NodeList Name
+    ,                        !- Zone Air Exhaust Node or NodeList Name
+    dorm2 Zone Air Node,     !- Zone Air Node Name
+    dorm2 Return Outlet;     !- Zone Return Air Node or NodeList Name
+
+ZoneHVAC:EquipmentConnections,
+    sala,                    !- Zone Name
+    sala Equipment,          !- Zone Conditioning Equipment List Name
+    sala Ideal Loads Supply Inlet,  !- Zone Air Inlet Node or NodeList Name
+    ,                        !- Zone Air Exhaust Node or NodeList Name
+    sala Zone Air Node,      !- Zone Air Node Name
+    sala Return Outlet;      !- Zone Return Air Node or NodeList Name
+
+
+!-   ===========  ALL OBJECTS IN CLASS: OUTPUT:VARIABLE ===========
+
+Output:Variable,
+    *,                       !- Key Value
+    Zone Ideal Loads Zone Total Heating Energy,  !- Variable Name
+    Hourly;                  !- Reporting Frequency
+
+Output:Variable,
+    *,                       !- Key Value
+    Zone Ideal Loads Zone Total Cooling Energy,  !- Variable Name
+    Hourly;                  !- Reporting Frequency
+

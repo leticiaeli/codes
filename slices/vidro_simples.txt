@@ -1,0 +1,6 @@
+!-   ===========  ALL OBJECTS IN CLASS: WINDOWMATERIAL:SIMPLEGLAZINGSYSTEM ===========
+
+WindowMaterial:SimpleGlazingSystem,
+    vid,                !- Name
+    5.7,                     !- U-Factor {W/m2-K}
+    0.87;                    !- Solar Heat Gain Coefficient
