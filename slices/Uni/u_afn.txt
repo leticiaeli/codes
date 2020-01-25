@@ -191,24 +191,6 @@ AirflowNetwork:MultiZone:Component:DetailedOpening,
     1,                       !- Height Factor for Opening Factor 2 {dimensionless}
     0;                       !- Start Height Factor for Opening Factor 2 {dimensionless}
 
-AirflowNetwork:MultiZone:Component:DetailedOpening,
-    abertura_janela,         !- Name
-    0.00028,                 !- Air Mass Flow Coefficient When Opening is Closed {kg/s-m}
-    0.63,                    !- Air Mass Flow Exponent When Opening is Closed {dimensionless}
-    NonPivoted,              !- Type of Rectangular Large Vertical Opening (LVO)
-    0,                       !- Extra Crack Length or Height of Pivoting Axis {m}
-    2,                       !- Number of Sets of Opening Factor Data
-    0.0,                     !- Opening Factor 1 {dimensionless}
-    0.001,                   !- Discharge Coefficient for Opening Factor 1 {dimensionless}
-    0.0,                     !- Width Factor for Opening Factor 1 {dimensionless}
-    1.0,                     !- Height Factor for Opening Factor 1 {dimensionless}
-    0.0,                     !- Start Height Factor for Opening Factor 1 {dimensionless}
-    1,                       !- Opening Factor 2 {dimensionless}
-    0.65,                    !- Discharge Coefficient for Opening Factor 2 {dimensionless}
-    0.45,                    !- Width Factor for Opening Factor 2 {dimensionless}
-    1.0,                     !- Height Factor for Opening Factor 2 {dimensionless}
-    0;                       !- Start Height Factor for Opening Factor 2 {dimensionless}
-
 
 !-   ===========  ALL OBJECTS IN CLASS: OUTPUT:VARIABLE ===========
 

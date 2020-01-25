@@ -1,0 +1,413 @@
+!-   ===========  ALL OBJECTS IN CLASS: SHADING:BUILDING:DETAILED ===========
+
+!Pvto terreo
+Shading:Building:Detailed,
+    te_shade_i00,              !- Name
+    ,                        !- Transmittance Schedule Name
+    4,                       !- Number of Vertices
+    0,                       !- Vertex 1 X-coordinate {m}
+    0,                       !- Vertex 1 Y-coordinate {m}
+    2.7,                     !- Vertex 1 Z-coordinate {m}
+    0,                       !- Vertex 2 X-coordinate {m}
+    -1.2,                    !- Vertex 2 Y-coordinate {m}
+    2.7,                     !- Vertex 2 Z-coordinate {m}
+    11.55,                   !- Vertex 3 X-coordinate {m}
+    -1.2,                    !- Vertex 3 Y-coordinate {m}
+    2.7,                     !- Vertex 3 Z-coordinate {m}
+    11.55,                   !- Vertex 4 X-coordinate {m}
+    0,                       !- Vertex 4 Y-coordinate {m}
+    2.7;                     !- Vertex 4 Z-coordinate {m}
+
+Shading:Building:Detailed,
+    te_shade_i01,              !- Name
+    ,                        !- Transmittance Schedule Name
+    4,                       !- Number of Vertices
+    11.55,                   !- Vertex 1 X-coordinate {m}
+    -1.2,                    !- Vertex 1 Y-coordinate {m}
+    2.7,                     !- Vertex 1 Z-coordinate {m}
+    11.55,                   !- Vertex 2 X-coordinate {m}
+    -2.4,                    !- Vertex 2 Y-coordinate {m}
+    2.7,                     !- Vertex 2 Z-coordinate {m}
+    22.83,                   !- Vertex 3 X-coordinate {m}
+    -2.4,                    !- Vertex 3 Y-coordinate {m}
+    2.7,                     !- Vertex 3 Z-coordinate {m}
+    22.83,                   !- Vertex 4 X-coordinate {m}
+    -1.2,                    !- Vertex 4 Y-coordinate {m}
+    2.7;                     !- Vertex 4 Z-coordinate {m}
+
+Shading:Building:Detailed,
+    te_shade_i02,              !- Name
+    ,                        !- Transmittance Schedule Name
+    4,                       !- Number of Vertices
+    22.83,                   !- Vertex 1 X-coordinate {m}
+    0,                       !- Vertex 1 Y-coordinate {m}
+    2.7,                     !- Vertex 1 Z-coordinate {m}
+    22.83,                   !- Vertex 2 X-coordinate {m}
+    -1.2,                    !- Vertex 2 Y-coordinate {m}
+    2.7,                     !- Vertex 2 Z-coordinate {m}
+    34.38,                   !- Vertex 3 X-coordinate {m}
+    -1.2,                    !- Vertex 3 Y-coordinate {m}
+    2.7,                     !- Vertex 3 Z-coordinate {m}
+    34.38,                   !- Vertex 4 X-coordinate {m}
+    0,                       !- Vertex 4 Y-coordinate {m}
+    2.7;                     !- Vertex 4 Z-coordinate {m}
+
+Shading:Building:Detailed,
+    te_shade_s00,            !- Name
+    ,                        !- Transmittance Schedule Name
+    4,                       !- Number of Vertices
+    22.83,                   !- Vertex 1 X-coordinate {m}
+    12.08,                   !- Vertex 1 Y-coordinate {m}
+    2.7,                     !- Vertex 1 Z-coordinate {m}
+    22.83,                   !- Vertex 2 X-coordinate {m}
+    10.88,                   !- Vertex 2 Y-coordinate {m}
+    2.7,                     !- Vertex 2 Z-coordinate {m}
+    34.38,                   !- Vertex 3 X-coordinate {m}
+    10.88,                   !- Vertex 3 Y-coordinate {m}
+    2.7,                     !- Vertex 3 Z-coordinate {m}
+    34.38,                   !- Vertex 4 X-coordinate {m}
+    12.08,                   !- Vertex 4 Y-coordinate {m}
+    2.7;                     !- Vertex 4 Z-coordinate {m}
+
+Shading:Building:Detailed,
+    te_shade_s01,            !- Name
+    ,                        !- Transmittance Schedule Name
+    4,                       !- Number of Vertices
+    11.55,                   !- Vertex 1 X-coordinate {m}
+    13.28,                   !- Vertex 1 Y-coordinate {m}
+    2.7,                     !- Vertex 1 Z-coordinate {m}
+    11.55,                   !- Vertex 2 X-coordinate {m}
+    12.08,                   !- Vertex 2 Y-coordinate {m}
+    2.7,                     !- Vertex 2 Z-coordinate {m}
+    22.83,                   !- Vertex 3 X-coordinate {m}
+    12.08,                   !- Vertex 3 Y-coordinate {m}
+    2.7,                     !- Vertex 3 Z-coordinate {m}
+    22.83,                   !- Vertex 4 X-coordinate {m}
+    13.28,                   !- Vertex 4 Y-coordinate {m}
+    2.7;                     !- Vertex 4 Z-coordinate {m}
+
+Shading:Building:Detailed,
+    te_shade_s02,            !- Name
+    ,                        !- Transmittance Schedule Name
+    4,                       !- Number of Vertices
+    0,                       !- Vertex 1 X-coordinate {m}
+    12.08,                   !- Vertex 1 Y-coordinate {m}
+    2.7,                     !- Vertex 1 Z-coordinate {m}
+    0,                       !- Vertex 2 X-coordinate {m}
+    10.88,                   !- Vertex 2 Y-coordinate {m}
+    2.7,                     !- Vertex 2 Z-coordinate {m}
+    11.55,                   !- Vertex 3 X-coordinate {m}
+    10.88,                   !- Vertex 3 Y-coordinate {m}
+    2.7,                     !- Vertex 3 Z-coordinate {m}
+    11.55,                   !- Vertex 4 X-coordinate {m}
+    12.08,                   !- Vertex 4 Y-coordinate {m}
+    2.7;                     !- Vertex 4 Z-coordinate {m}
+
+Shading:Building:Detailed,
+    te_shade_e00,             !- Name
+    ,                        !- Transmittance Schedule Name
+    4,                       !- Number of Vertices
+    -1.2,                    !- Vertex 1 X-coordinate {m}
+    7.97,                    !- Vertex 1 Y-coordinate {m}
+    2.7,                     !- Vertex 1 Z-coordinate {m}
+    -1.2,                    !- Vertex 2 X-coordinate {m}
+    2.91,                    !- Vertex 2 Y-coordinate {m}
+    2.7,                     !- Vertex 2 Z-coordinate {m}
+    0,                       !- Vertex 3 X-coordinate {m}
+    2.91,                    !- Vertex 3 Y-coordinate {m}
+    2.7,                     !- Vertex 3 Z-coordinate {m}
+    0,                       !- Vertex 4 X-coordinate {m}
+    7.97,                    !- Vertex 4 Y-coordinate {m}
+    2.7;                     !- Vertex 4 Z-coordinate {m}
+
+Shading:Building:Detailed,
+    te_shade_d00,             !- Name
+    ,                        !- Transmittance Schedule Name
+    4,                       !- Number of Vertices
+    34.38,                   !- Vertex 1 X-coordinate {m}
+    7.97,                    !- Vertex 1 Y-coordinate {m}
+    2.7,                     !- Vertex 1 Z-coordinate {m}
+    34.38,                   !- Vertex 2 X-coordinate {m}
+    2.91,                    !- Vertex 2 Y-coordinate {m}
+    2.7,                     !- Vertex 2 Z-coordinate {m}
+    35.58,                   !- Vertex 3 X-coordinate {m}
+    2.91,                    !- Vertex 3 Y-coordinate {m}
+    2.7,                     !- Vertex 3 Z-coordinate {m}
+    35.58,                   !- Vertex 4 X-coordinate {m}
+    7.97,                    !- Vertex 4 Y-coordinate {m}
+    2.7;                     !- Vertex 4 Z-coordinate {m}
+
+
+!Pvto tipo 0
+Shading:Building:Detailed,
+    tp0_shade_i00,              !- Name
+    ,                        !- Transmittance Schedule Name
+    4,                       !- Number of Vertices
+    0,                       !- Vertex 1 X-coordinate {m}
+    0,                       !- Vertex 1 Y-coordinate {m}
+    5.5,                     !- Vertex 1 Z-coordinate {m}
+    0,                       !- Vertex 2 X-coordinate {m}
+    -1.2,                    !- Vertex 2 Y-coordinate {m}
+    5.5,                     !- Vertex 2 Z-coordinate {m}
+    11.55,                   !- Vertex 3 X-coordinate {m}
+    -1.2,                    !- Vertex 3 Y-coordinate {m}
+    5.5,                     !- Vertex 3 Z-coordinate {m}
+    11.55,                   !- Vertex 4 X-coordinate {m}
+    0,                       !- Vertex 4 Y-coordinate {m}
+    5.5;                     !- Vertex 4 Z-coordinate {m}
+
+Shading:Building:Detailed,
+    tp0_shade_i01,              !- Name
+    ,                        !- Transmittance Schedule Name
+    4,                       !- Number of Vertices
+    11.55,                   !- Vertex 1 X-coordinate {m}
+    -1.2,                    !- Vertex 1 Y-coordinate {m}
+    5.5,                     !- Vertex 1 Z-coordinate {m}
+    11.55,                   !- Vertex 2 X-coordinate {m}
+    -2.4,                    !- Vertex 2 Y-coordinate {m}
+    5.5,                     !- Vertex 2 Z-coordinate {m}
+    22.83,                   !- Vertex 3 X-coordinate {m}
+    -2.4,                    !- Vertex 3 Y-coordinate {m}
+    5.5,                     !- Vertex 3 Z-coordinate {m}
+    22.83,                   !- Vertex 4 X-coordinate {m}
+    -1.2,                    !- Vertex 4 Y-coordinate {m}
+    5.5;                     !- Vertex 4 Z-coordinate {m}
+
+Shading:Building:Detailed,
+    tp0_shade_i02,              !- Name
+    ,                        !- Transmittance Schedule Name
+    4,                       !- Number of Vertices
+    22.83,                   !- Vertex 1 X-coordinate {m}
+    0,                       !- Vertex 1 Y-coordinate {m}
+    5.5,                     !- Vertex 1 Z-coordinate {m}
+    22.83,                   !- Vertex 2 X-coordinate {m}
+    -1.2,                    !- Vertex 2 Y-coordinate {m}
+    5.5,                     !- Vertex 2 Z-coordinate {m}
+    34.38,                   !- Vertex 3 X-coordinate {m}
+    -1.2,                    !- Vertex 3 Y-coordinate {m}
+    5.5,                     !- Vertex 3 Z-coordinate {m}
+    34.38,                   !- Vertex 4 X-coordinate {m}
+    0,                       !- Vertex 4 Y-coordinate {m}
+    5.5;                     !- Vertex 4 Z-coordinate {m}
+
+Shading:Building:Detailed,
+    tp0_shade_s00,            !- Name
+    ,                        !- Transmittance Schedule Name
+    4,                       !- Number of Vertices
+    22.83,                   !- Vertex 1 X-coordinate {m}
+    12.08,                   !- Vertex 1 Y-coordinate {m}
+    5.5,                     !- Vertex 1 Z-coordinate {m}
+    22.83,                   !- Vertex 2 X-coordinate {m}
+    10.88,                   !- Vertex 2 Y-coordinate {m}
+    5.5,                     !- Vertex 2 Z-coordinate {m}
+    34.38,                   !- Vertex 3 X-coordinate {m}
+    10.88,                   !- Vertex 3 Y-coordinate {m}
+    5.5,                     !- Vertex 3 Z-coordinate {m}
+    34.38,                   !- Vertex 4 X-coordinate {m}
+    12.08,                   !- Vertex 4 Y-coordinate {m}
+    5.5;                     !- Vertex 4 Z-coordinate {m}
+
+Shading:Building:Detailed,
+    tp0_shade_s01,            !- Name
+    ,                        !- Transmittance Schedule Name
+    4,                       !- Number of Vertices
+    11.55,                   !- Vertex 1 X-coordinate {m}
+    13.28,                   !- Vertex 1 Y-coordinate {m}
+    5.5,                     !- Vertex 1 Z-coordinate {m}
+    11.55,                   !- Vertex 2 X-coordinate {m}
+    12.08,                   !- Vertex 2 Y-coordinate {m}
+    5.5,                     !- Vertex 2 Z-coordinate {m}
+    22.83,                   !- Vertex 3 X-coordinate {m}
+    12.08,                   !- Vertex 3 Y-coordinate {m}
+    5.5,                     !- Vertex 3 Z-coordinate {m}
+    22.83,                   !- Vertex 4 X-coordinate {m}
+    13.28,                   !- Vertex 4 Y-coordinate {m}
+    5.5;                     !- Vertex 4 Z-coordinate {m}
+
+Shading:Building:Detailed,
+    tp0_shade_s02,            !- Name
+    ,                        !- Transmittance Schedule Name
+    4,                       !- Number of Vertices
+    0,                       !- Vertex 1 X-coordinate {m}
+    12.08,                   !- Vertex 1 Y-coordinate {m}
+    5.5,                     !- Vertex 1 Z-coordinate {m}
+    0,                       !- Vertex 2 X-coordinate {m}
+    10.88,                   !- Vertex 2 Y-coordinate {m}
+    5.5,                     !- Vertex 2 Z-coordinate {m}
+    11.55,                   !- Vertex 3 X-coordinate {m}
+    10.88,                   !- Vertex 3 Y-coordinate {m}
+    5.5,                     !- Vertex 3 Z-coordinate {m}
+    11.55,                   !- Vertex 4 X-coordinate {m}
+    12.08,                   !- Vertex 4 Y-coordinate {m}
+    5.5;                     !- Vertex 4 Z-coordinate {m}
+
+Shading:Building:Detailed,
+    tp0_shade_e00,             !- Name
+    ,                        !- Transmittance Schedule Name
+    4,                       !- Number of Vertices
+    -1.2,                    !- Vertex 1 X-coordinate {m}
+    7.97,                    !- Vertex 1 Y-coordinate {m}
+    5.5,                     !- Vertex 1 Z-coordinate {m}
+    -1.2,                    !- Vertex 2 X-coordinate {m}
+    2.91,                    !- Vertex 2 Y-coordinate {m}
+    5.5,                     !- Vertex 2 Z-coordinate {m}
+    0,                       !- Vertex 3 X-coordinate {m}
+    2.91,                    !- Vertex 3 Y-coordinate {m}
+    5.5,                     !- Vertex 3 Z-coordinate {m}
+    0,                       !- Vertex 4 X-coordinate {m}
+    7.97,                    !- Vertex 4 Y-coordinate {m}
+    5.5;                     !- Vertex 4 Z-coordinate {m}
+
+Shading:Building:Detailed,
+    tp0_shade_d00,             !- Name
+    ,                        !- Transmittance Schedule Name
+    4,                       !- Number of Vertices
+    34.38,                   !- Vertex 1 X-coordinate {m}
+    7.97,                    !- Vertex 1 Y-coordinate {m}
+    5.5,                     !- Vertex 1 Z-coordinate {m}
+    34.38,                   !- Vertex 2 X-coordinate {m}
+    2.91,                    !- Vertex 2 Y-coordinate {m}
+    5.5,                     !- Vertex 2 Z-coordinate {m}
+    35.58,                   !- Vertex 3 X-coordinate {m}
+    2.91,                    !- Vertex 3 Y-coordinate {m}
+    5.5,                     !- Vertex 3 Z-coordinate {m}
+    35.58,                   !- Vertex 4 X-coordinate {m}
+    7.97,                    !- Vertex 4 Y-coordinate {m}
+    5.5;                     !- Vertex 4 Z-coordinate {m}
+
+!Pvto cobertura
+Shading:Building:Detailed,
+    co_shade_i00,              !- Name
+    ,                        !- Transmittance Schedule Name
+    4,                       !- Number of Vertices
+    0,                       !- Vertex 1 X-coordinate {m}
+    0,                       !- Vertex 1 Y-coordinate {m}
+    8.3,                     !- Vertex 1 Z-coordinate {m}
+    0,                       !- Vertex 2 X-coordinate {m}
+    -1.2,                    !- Vertex 2 Y-coordinate {m}
+    8.3,                     !- Vertex 2 Z-coordinate {m}
+    11.55,                   !- Vertex 3 X-coordinate {m}
+    -1.2,                    !- Vertex 3 Y-coordinate {m}
+    8.3,                     !- Vertex 3 Z-coordinate {m}
+    11.55,                   !- Vertex 4 X-coordinate {m}
+    0,                       !- Vertex 4 Y-coordinate {m}
+    8.3;                     !- Vertex 4 Z-coordinate {m}
+
+Shading:Building:Detailed,
+    co_shade_i01,              !- Name
+    ,                        !- Transmittance Schedule Name
+    4,                       !- Number of Vertices
+    11.55,                   !- Vertex 1 X-coordinate {m}
+    -1.2,                    !- Vertex 1 Y-coordinate {m}
+    8.3,                     !- Vertex 1 Z-coordinate {m}
+    11.55,                   !- Vertex 2 X-coordinate {m}
+    -2.4,                    !- Vertex 2 Y-coordinate {m}
+    8.3,                     !- Vertex 2 Z-coordinate {m}
+    22.83,                   !- Vertex 3 X-coordinate {m}
+    -2.4,                    !- Vertex 3 Y-coordinate {m}
+    8.3,                     !- Vertex 3 Z-coordinate {m}
+    22.83,                   !- Vertex 4 X-coordinate {m}
+    -1.2,                    !- Vertex 4 Y-coordinate {m}
+    8.3;                     !- Vertex 4 Z-coordinate {m}
+
+Shading:Building:Detailed,
+    co_shade_i02,              !- Name
+    ,                        !- Transmittance Schedule Name
+    4,                       !- Number of Vertices
+    22.83,                   !- Vertex 1 X-coordinate {m}
+    0,                       !- Vertex 1 Y-coordinate {m}
+    8.3,                     !- Vertex 1 Z-coordinate {m}
+    22.83,                   !- Vertex 2 X-coordinate {m}
+    -1.2,                    !- Vertex 2 Y-coordinate {m}
+    8.3,                     !- Vertex 2 Z-coordinate {m}
+    34.38,                   !- Vertex 3 X-coordinate {m}
+    -1.2,                    !- Vertex 3 Y-coordinate {m}
+    8.3,                     !- Vertex 3 Z-coordinate {m}
+    34.38,                   !- Vertex 4 X-coordinate {m}
+    0,                       !- Vertex 4 Y-coordinate {m}
+    8.3;                     !- Vertex 4 Z-coordinate {m}
+
+Shading:Building:Detailed,
+    co_shade_s00,            !- Name
+    ,                        !- Transmittance Schedule Name
+    4,                       !- Number of Vertices
+    22.83,                   !- Vertex 1 X-coordinate {m}
+    12.08,                   !- Vertex 1 Y-coordinate {m}
+    8.3,                     !- Vertex 1 Z-coordinate {m}
+    22.83,                   !- Vertex 2 X-coordinate {m}
+    10.88,                   !- Vertex 2 Y-coordinate {m}
+    8.3,                     !- Vertex 2 Z-coordinate {m}
+    34.38,                   !- Vertex 3 X-coordinate {m}
+    10.88,                   !- Vertex 3 Y-coordinate {m}
+    8.3,                     !- Vertex 3 Z-coordinate {m}
+    34.38,                   !- Vertex 4 X-coordinate {m}
+    12.08,                   !- Vertex 4 Y-coordinate {m}
+    8.3;                     !- Vertex 4 Z-coordinate {m}
+
+Shading:Building:Detailed,
+    co_shade_s01,            !- Name
+    ,                        !- Transmittance Schedule Name
+    4,                       !- Number of Vertices
+    11.55,                   !- Vertex 1 X-coordinate {m}
+    13.28,                   !- Vertex 1 Y-coordinate {m}
+    8.3,                     !- Vertex 1 Z-coordinate {m}
+    11.55,                   !- Vertex 2 X-coordinate {m}
+    12.08,                   !- Vertex 2 Y-coordinate {m}
+    8.3,                     !- Vertex 2 Z-coordinate {m}
+    22.83,                   !- Vertex 3 X-coordinate {m}
+    12.08,                   !- Vertex 3 Y-coordinate {m}
+    8.3,                     !- Vertex 3 Z-coordinate {m}
+    22.83,                   !- Vertex 4 X-coordinate {m}
+    13.28,                   !- Vertex 4 Y-coordinate {m}
+    8.3;                     !- Vertex 4 Z-coordinate {m}
+
+Shading:Building:Detailed,
+    co_shade_s02,            !- Name
+    ,                        !- Transmittance Schedule Name
+    4,                       !- Number of Vertices
+    0,                       !- Vertex 1 X-coordinate {m}
+    12.08,                   !- Vertex 1 Y-coordinate {m}
+    8.3,                     !- Vertex 1 Z-coordinate {m}
+    0,                       !- Vertex 2 X-coordinate {m}
+    10.88,                   !- Vertex 2 Y-coordinate {m}
+    8.3,                     !- Vertex 2 Z-coordinate {m}
+    11.55,                   !- Vertex 3 X-coordinate {m}
+    10.88,                   !- Vertex 3 Y-coordinate {m}
+    8.3,                     !- Vertex 3 Z-coordinate {m}
+    11.55,                   !- Vertex 4 X-coordinate {m}
+    12.08,                   !- Vertex 4 Y-coordinate {m}
+    8.3;                     !- Vertex 4 Z-coordinate {m}
+
+Shading:Building:Detailed,
+    co_shade_e00,             !- Name
+    ,                        !- Transmittance Schedule Name
+    4,                       !- Number of Vertices
+    -1.2,                    !- Vertex 1 X-coordinate {m}
+    7.97,                    !- Vertex 1 Y-coordinate {m}
+    8.3,                     !- Vertex 1 Z-coordinate {m}
+    -1.2,                    !- Vertex 2 X-coordinate {m}
+    2.91,                    !- Vertex 2 Y-coordinate {m}
+    8.3,                     !- Vertex 2 Z-coordinate {m}
+    0,                       !- Vertex 3 X-coordinate {m}
+    2.91,                    !- Vertex 3 Y-coordinate {m}
+    8.3,                     !- Vertex 3 Z-coordinate {m}
+    0,                       !- Vertex 4 X-coordinate {m}
+    7.97,                    !- Vertex 4 Y-coordinate {m}
+    8.3;                     !- Vertex 4 Z-coordinate {m}
+
+Shading:Building:Detailed,
+    co_shade_d00,             !- Name
+    ,                        !- Transmittance Schedule Name
+    4,                       !- Number of Vertices
+    34.38,                   !- Vertex 1 X-coordinate {m}
+    7.97,                    !- Vertex 1 Y-coordinate {m}
+    8.3,                     !- Vertex 1 Z-coordinate {m}
+    34.38,                   !- Vertex 2 X-coordinate {m}
+    2.91,                    !- Vertex 2 Y-coordinate {m}
+    8.3,                     !- Vertex 2 Z-coordinate {m}
+    35.58,                   !- Vertex 3 X-coordinate {m}
+    2.91,                    !- Vertex 3 Y-coordinate {m}
+    8.3,                     !- Vertex 3 Z-coordinate {m}
+    35.58,                   !- Vertex 4 X-coordinate {m}
+    7.97,                    !- Vertex 4 Y-coordinate {m}
+    8.3;                     !- Vertex 4 Z-coordinate {m}

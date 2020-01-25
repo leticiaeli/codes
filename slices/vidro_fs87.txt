@@ -1,0 +1,5 @@
+!-   ===========  ALL OBJECTS IN CLASS: CONSTRUCTION ===========
+
+Construction,
+    vidro,                     !- Name
+    vidro_clear_3mm_fs0.87;    !- Outside Layer

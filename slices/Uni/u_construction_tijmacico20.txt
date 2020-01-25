@@ -24,7 +24,3 @@ Construction,
 Construction,
     porta,                   !- Name
     porta_mad_3cm_abs0.5;    !- Outside Layer
-
-Construction,
-    vidro,                   !- Name
-    vid;                     !- Outside Layer

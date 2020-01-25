@@ -1,0 +1,1408 @@
+!-   ===========  ALL OBJECTS IN CLASS: WINDOWMATERIAL:BLIND ===========
+
+WindowMaterial:Blind,
+    veneziana_madeira,       !- Name
+    Horizontal,              !- Slat Orientation
+    0.05,                    !- Slat Width {m}
+    0.03,                    !- Slat Separation {m}
+    0.0042,                  !- Slat Thickness {m}
+    45,                      !- Slat Angle {deg}
+    0.29,                    !- Slat Conductivity {W/m-K}
+    0.14,                    !- Slat Beam Solar Transmittance
+    0.04,                    !- Front Side Slat Beam Solar Reflectance
+    0.04,                    !- Back Side Slat Beam Solar Reflectance
+    0.14,                    !- Slat Diffuse Solar Transmittance
+    0.04,                    !- Front Side Slat Diffuse Solar Reflectance
+    0.04,                    !- Back Side Slat Diffuse Solar Reflectance
+    0.14,                    !- Slat Beam Visible Transmittance
+    0.04,                    !- Front Side Slat Beam Visible Reflectance
+    0.04,                    !- Back Side Slat Beam Visible Reflectance
+    0.14,                    !- Slat Diffuse Visible Transmittance
+    0.04,                    !- Front Side Slat Diffuse Visible Reflectance
+    0.04,                    !- Back Side Slat Diffuse Visible Reflectance
+    0,                       !- Slat Infrared Hemispherical Transmittance
+    0.9,                     !- Front Side Slat Infrared Hemispherical Emissivity
+    0.9,                     !- Back Side Slat Infrared Hemispherical Emissivity
+    0.05,                    !- Blind to Glass Distance {m}
+    0,                       !- Blind Top Opening Multiplier
+    0,                       !- Blind Bottom Opening Multiplier
+    0,                       !- Blind Left Side Opening Multiplier
+    0,                       !- Blind Right Side Opening Multiplier
+    0,                       !- Minimum Slat Angle {deg}
+    0;                       !- Maximum Slat Angle {deg}
+
+
+!-   ===========  ALL OBJECTS IN CLASS: WINDOWSHADINGCONTROL ===========
+
+! Pvto terreo
+WindowShadingControl,
+    te_canto_11_sala_ven_0_00i,  !- Name
+    te_canto_11_sala,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    te_canto_11_sala_jan_0_00i;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    te_canto_11_dorm1_ven_0_00i,  !- Name
+    te_canto_11_dorm1,       !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    te_canto_11_dorm1_jan_0_00i;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    te_canto_11_dorm2_ven_0_00e,  !- Name
+    te_canto_11_dorm2,       !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    te_canto_11_dorm2_jan_0_00e;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    te_meio_11_sala_ven_0_00i,  !- Name
+    te_meio_11_sala,         !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    te_meio_11_sala_jan_0_00i;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    te_meio_11_dorm1_ven_0_00i,  !- Name
+    te_meio_11_dorm1,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    te_meio_11_dorm1_jan_0_00i;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    te_meio_11_dorm2_ven_0_00i,  !- Name
+    te_meio_11_dorm2,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    te_meio_11_dorm2_jan_0_00i;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    te_meio_21_sala_ven_0_00i,  !- Name
+    te_meio_21_sala,         !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    te_meio_21_sala_jan_0_00i;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    te_meio_21_dorm1_ven_0_00i,  !- Name
+    te_meio_21_dorm1,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    te_meio_21_dorm1_jan_0_00i;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    te_meio_21_dorm2_ven_0_00i,  !- Name
+    te_meio_21_dorm2,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    te_meio_21_dorm2_jan_0_00i;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    te_canto_21_sala_ven_0_00i,  !- Name
+    te_canto_21_sala,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    te_canto_21_sala_jan_0_00i;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    te_canto_21_dorm1_ven_0_00i,  !- Name
+    te_canto_21_dorm1,       !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    te_canto_21_dorm1_jan_0_00i;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    te_canto_21_dorm2_ven_0_00d,  !- Name
+    te_canto_21_dorm2,       !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    te_canto_21_dorm2_jan_0_00d;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    te_canto_22_sala_ven_0_00s,  !- Name
+    te_canto_22_sala,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    te_canto_22_sala_jan_0_00s;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    te_canto_22_dorm1_ven_0_00s,  !- Name
+    te_canto_22_dorm1,       !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    te_canto_22_dorm1_jan_0_00s;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    te_canto_22_dorm2_ven_0_00d,  !- Name
+    te_canto_22_dorm2,       !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    te_canto_22_dorm2_jan_0_00d;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    te_meio_22_sala_ven_0_00s,  !- Name
+    te_meio_22_sala,         !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    te_meio_22_sala_jan_0_00s;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    te_meio_22_dorm1_ven_0_00s,  !- Name
+    te_meio_22_dorm1,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    te_meio_22_dorm1_jan_0_00s;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    te_meio_22_dorm2_ven_0_00s,  !- Name
+    te_meio_22_dorm2,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    te_meio_22_dorm2_jan_0_00s;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    te_meio_12_sala_ven_0_00s,  !- Name
+    te_meio_12_sala,         !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    te_meio_12_sala_jan_0_00s;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    te_meio_12_dorm1_ven_0_00s,  !- Name
+    te_meio_12_dorm1,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    te_meio_12_dorm1_jan_0_00s;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    te_meio_12_dorm2_ven_0_00s,  !- Name
+    te_meio_12_dorm2,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    te_meio_12_dorm2_jan_0_00s;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    te_canto_12_sala_ven_0_00s,  !- Name
+    te_canto_12_sala,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    te_canto_12_sala_jan_0_00s;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    te_canto_12_dorm1_ven_0_00s,  !- Name
+    te_canto_12_dorm1,       !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    te_canto_12_dorm1_jan_0_00s;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    te_canto_12_dorm2_ven_0_00e,  !- Name
+    te_canto_12_dorm2,       !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    te_canto_12_dorm2_jan_0_00e;  !- Fenestration Surface 1 Name
+
+
+! Pvto tipo 0
+WindowShadingControl,
+    tp0_canto_11_sala_ven_0_00i,  !- Name
+    tp0_canto_11_sala,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    tp0_canto_11_sala_jan_0_00i;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    tp0_canto_11_dorm1_ven_0_00i,  !- Name
+    tp0_canto_11_dorm1,       !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    tp0_canto_11_dorm1_jan_0_00i;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    tp0_canto_11_dorm2_ven_0_00e,  !- Name
+    tp0_canto_11_dorm2,       !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    tp0_canto_11_dorm2_jan_0_00e;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    tp0_meio_11_sala_ven_0_00i,  !- Name
+    tp0_meio_11_sala,         !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    tp0_meio_11_sala_jan_0_00i;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    tp0_meio_11_dorm1_ven_0_00i,  !- Name
+    tp0_meio_11_dorm1,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    tp0_meio_11_dorm1_jan_0_00i;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    tp0_meio_11_dorm2_ven_0_00i,  !- Name
+    tp0_meio_11_dorm2,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    tp0_meio_11_dorm2_jan_0_00i;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    tp0_meio_21_sala_ven_0_00i,  !- Name
+    tp0_meio_21_sala,         !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    tp0_meio_21_sala_jan_0_00i;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    tp0_meio_21_dorm1_ven_0_00i,  !- Name
+    tp0_meio_21_dorm1,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    tp0_meio_21_dorm1_jan_0_00i;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    tp0_meio_21_dorm2_ven_0_00i,  !- Name
+    tp0_meio_21_dorm2,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    tp0_meio_21_dorm2_jan_0_00i;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    tp0_canto_21_sala_ven_0_00i,  !- Name
+    tp0_canto_21_sala,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    tp0_canto_21_sala_jan_0_00i;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    tp0_canto_21_dorm1_ven_0_00i,  !- Name
+    tp0_canto_21_dorm1,       !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    tp0_canto_21_dorm1_jan_0_00i;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    tp0_canto_21_dorm2_ven_0_00d,  !- Name
+    tp0_canto_21_dorm2,       !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    tp0_canto_21_dorm2_jan_0_00d;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    tp0_canto_22_sala_ven_0_00s,  !- Name
+    tp0_canto_22_sala,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    tp0_canto_22_sala_jan_0_00s;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    tp0_canto_22_dorm1_ven_0_00s,  !- Name
+    tp0_canto_22_dorm1,       !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    tp0_canto_22_dorm1_jan_0_00s;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    tp0_canto_22_dorm2_ven_0_00d,  !- Name
+    tp0_canto_22_dorm2,       !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    tp0_canto_22_dorm2_jan_0_00d;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    tp0_meio_22_sala_ven_0_00s,  !- Name
+    tp0_meio_22_sala,         !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    tp0_meio_22_sala_jan_0_00s;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    tp0_meio_22_dorm1_ven_0_00s,  !- Name
+    tp0_meio_22_dorm1,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    tp0_meio_22_dorm1_jan_0_00s;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    tp0_meio_22_dorm2_ven_0_00s,  !- Name
+    tp0_meio_22_dorm2,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    tp0_meio_22_dorm2_jan_0_00s;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    tp0_meio_12_sala_ven_0_00s,  !- Name
+    tp0_meio_12_sala,         !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    tp0_meio_12_sala_jan_0_00s;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    tp0_meio_12_dorm1_ven_0_00s,  !- Name
+    tp0_meio_12_dorm1,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    tp0_meio_12_dorm1_jan_0_00s;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    tp0_meio_12_dorm2_ven_0_00s,  !- Name
+    tp0_meio_12_dorm2,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    tp0_meio_12_dorm2_jan_0_00s;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    tp0_canto_12_sala_ven_0_00s,  !- Name
+    tp0_canto_12_sala,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    tp0_canto_12_sala_jan_0_00s;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    tp0_canto_12_dorm1_ven_0_00s,  !- Name
+    tp0_canto_12_dorm1,       !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    tp0_canto_12_dorm1_jan_0_00s;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    tp0_canto_12_dorm2_ven_0_00e,  !- Name
+    tp0_canto_12_dorm2,       !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    tp0_canto_12_dorm2_jan_0_00e;  !- Fenestration Surface 1 Name
+
+
+! Pvto cobertura
+WindowShadingControl,
+    co_canto_11_sala_ven_0_00i,  !- Name
+    co_canto_11_sala,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    co_canto_11_sala_jan_0_00i;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    co_canto_11_dorm1_ven_0_00i,  !- Name
+    co_canto_11_dorm1,       !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    co_canto_11_dorm1_jan_0_00i;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    co_canto_11_dorm2_ven_0_00e,  !- Name
+    co_canto_11_dorm2,       !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    co_canto_11_dorm2_jan_0_00e;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    co_meio_11_sala_ven_0_00i,  !- Name
+    co_meio_11_sala,         !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    co_meio_11_sala_jan_0_00i;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    co_meio_11_dorm1_ven_0_00i,  !- Name
+    co_meio_11_dorm1,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    co_meio_11_dorm1_jan_0_00i;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    co_meio_11_dorm2_ven_0_00i,  !- Name
+    co_meio_11_dorm2,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    co_meio_11_dorm2_jan_0_00i;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    co_meio_21_sala_ven_0_00i,  !- Name
+    co_meio_21_sala,         !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    co_meio_21_sala_jan_0_00i;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    co_meio_21_dorm1_ven_0_00i,  !- Name
+    co_meio_21_dorm1,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    co_meio_21_dorm1_jan_0_00i;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    co_meio_21_dorm2_ven_0_00i,  !- Name
+    co_meio_21_dorm2,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    co_meio_21_dorm2_jan_0_00i;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    co_canto_21_sala_ven_0_00i,  !- Name
+    co_canto_21_sala,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    co_canto_21_sala_jan_0_00i;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    co_canto_21_dorm1_ven_0_00i,  !- Name
+    co_canto_21_dorm1,       !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    co_canto_21_dorm1_jan_0_00i;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    co_canto_21_dorm2_ven_0_00d,  !- Name
+    co_canto_21_dorm2,       !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    co_canto_21_dorm2_jan_0_00d;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    co_canto_22_sala_ven_0_00s,  !- Name
+    co_canto_22_sala,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    co_canto_22_sala_jan_0_00s;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    co_canto_22_dorm1_ven_0_00s,  !- Name
+    co_canto_22_dorm1,       !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    co_canto_22_dorm1_jan_0_00s;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    co_canto_22_dorm2_ven_0_00d,  !- Name
+    co_canto_22_dorm2,       !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    co_canto_22_dorm2_jan_0_00d;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    co_meio_22_sala_ven_0_00s,  !- Name
+    co_meio_22_sala,         !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    co_meio_22_sala_jan_0_00s;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    co_meio_22_dorm1_ven_0_00s,  !- Name
+    co_meio_22_dorm1,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    co_meio_22_dorm1_jan_0_00s;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    co_meio_22_dorm2_ven_0_00s,  !- Name
+    co_meio_22_dorm2,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    co_meio_22_dorm2_jan_0_00s;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    co_meio_12_sala_ven_0_00s,  !- Name
+    co_meio_12_sala,         !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    co_meio_12_sala_jan_0_00s;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    co_meio_12_dorm1_ven_0_00s,  !- Name
+    co_meio_12_dorm1,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    co_meio_12_dorm1_jan_0_00s;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    co_meio_12_dorm2_ven_0_00s,  !- Name
+    co_meio_12_dorm2,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    co_meio_12_dorm2_jan_0_00s;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    co_canto_12_sala_ven_0_00s,  !- Name
+    co_canto_12_sala,        !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    co_canto_12_sala_jan_0_00s;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    co_canto_12_dorm1_ven_0_00s,  !- Name
+    co_canto_12_dorm1,       !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    co_canto_12_dorm1_jan_0_00s;  !- Fenestration Surface 1 Name
+
+WindowShadingControl,
+    co_canto_12_dorm2_ven_0_00e,  !- Name
+    co_canto_12_dorm2,       !- Zone Name
+    1,                       !- Shading Control Sequence Number
+    ExteriorBlind,           !- Shading Type
+    ,                        !- Construction with Shading Name
+    OnIfHighOutdoorAirTemperature,  !- Shading Control Type
+    ,                        !- Schedule Name
+    26,                      !- Setpoint {W/m2, W or deg C}
+    No,                      !- Shading Control Is Scheduled
+    No,                      !- Glare Control Is Active
+    veneziana_madeira,       !- Shading Device Material Name
+    FixedSlatAngle,          !- Type of Slat Angle Control for Blinds
+    ,                        !- Slat Angle Schedule Name
+    ,                        !- Setpoint 2 {W/m2 or deg C}
+    ,                        !- Daylighting Control Object Name
+    Sequential,              !- Multiple Surface Control Type
+    co_canto_12_dorm2_jan_0_00e;  !- Fenestration Surface 1 Name

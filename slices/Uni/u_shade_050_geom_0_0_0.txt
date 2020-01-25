@@ -1,3 +1,5 @@
+!-   ===========  ALL OBJECTS IN CLASS: SHADING:BUILDING:DETAILED ===========
+
 Shading:Building:Detailed,
   shade_i01,
   ,
