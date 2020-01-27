@@ -1,5 +1,6 @@
 
 import datetime
+import glob
 import json
 import os
 import pandas as pd
@@ -7,11 +8,9 @@ import pandas as pd
 import dict_update
 from idf_bundler import idf_bundler
 import sample_gen
-# import idf_creator_floor as whole_gen
-# import singlezone_diss
 import runep_subprocess
 import output_processing
-# import other_crack_fac
+from unique import unique
 
 update = dict_update.update
         
@@ -30,11 +29,18 @@ EPW_NAMES = ['PA.epw', 'RJ.epw', 'SM.epw', 'SP.epw']  #
     # 'BRA_RJ_Duque.de.Caxias-Xerem.868770_INMET.epw','BRA_RS_Santa.Maria.839360_INMET.epw','BRA_SC_Florianopolis.838970_INMET.epw',
     # 'BRA_MA_Sao.Luis.817150_INMET.epw','BRA_TO_Palmas.866070_INMET.epw'
 # ]
-SUP_LIMITS = 'sup_limits.csv'
+SUP_LIMITS = 'sup_limits.json'
 OUTPUT_PROCESSED = 'outputs_'+FOLDER
 SOBOL = True  # False  # 
 
+# To choose what to run in the code
+GEN_MODELS = True
+RUN_MODELS = True
+PROCESSESS_OUTPUT = True
+RUN_ALL = True  # defines GEN_MODELS, RUN_MODELS, PROCESSESS_OUTPUT = True
+
 SLICE = 'slices/'
+
 MAIN = ['slices/main_materials_fixed.txt', 'slices/main.txt']
 VN_FILE = ['slices/Uni/u_afn.txt']
 AC_FILE = ['slices/Uni/u_idealloads.txt']
@@ -49,12 +55,15 @@ PARAMETERS = {
     'vidro':[SLICE+'vidro_simples.txt']#,  # simples/duplo e FS
     # 'open_fac':[]
 }
-
 # Dependents
+
+if RUN_ALL:
+    GEN_MODELS = True
+    RUN_MODELS = True
+    PROCESSESS_OUTPUT = True
+
 col_names = list(PARAMETERS)
-# samples_x_cluster = SIZE/NUM_CLUSTERS
 name_length = '{:0'+str(len(str(SIZE)))+'.0f}'
-# name_length_cluster = '{:0'+str(len(str(NUM_CLUSTERS)))+'.0f}'
 
 def parameter_file(key, i):
     n_files = len(PARAMETERS[key])
@@ -95,11 +104,12 @@ for i in range(len(sample)):
     df = df.append(pd.DataFrame([sample_line+[case]],columns=col_names+['case']))  # 'cluster'+name_length_cluster.format(cluster_n),  # 'folder',
     print(output)
 
-    # AC
-    # idf_bundler([model_values[param] for param in model_values.keys()]+MAIN+AC_FILE, output_name = FOLDER+'/'+output+'_ac.'+EXTENSION)
-        
-    # VN
-    # idf_bundler([model_values[param] for param in model_values.keys()]+MAIN+VN_FILE, output_name = FOLDER+'/'+output+'_vn.'+EXTENSION)
+    if GEN_MODELS:
+        # AC
+        idf_bundler([model_values[param] for param in model_values.keys()]+MAIN+AC_FILE, output_name = FOLDER+'/'+output+'_ac.'+EXTENSION)
+            
+        # VN
+        idf_bundler([model_values[param] for param in model_values.keys()]+MAIN+VN_FILE, output_name = FOLDER+'/'+output+'_vn.'+EXTENSION)
         
     line += 1
 
@@ -110,11 +120,12 @@ for epw in EPW_NAMES:
 
 os.chdir(FOLDER)
 print('\nRUNNING SIMULATIONS\n')
-# list_epjson_names = runep_subprocess.gen_list_epjson_names(NUM_CLUSTERS, EXTENSION)
-# runep_subprocess.main(NUM_CLUSTERS, EXTENSION, REMOVE_ALL_BUT, epw_names=EPW_NAMES)  # list_epjson_names,
+if RUN_MODELS:
+    runep_subprocess.main(NUM_CLUSTERS, EXTENSION, REMOVE_ALL_BUT, epw_names=EPW_NAMES)  # list_epjson_names,
 
 print('\nPROCESSING OUTPUT\n')
-output_processing.main(df_base, SUP_LIMITS, OUTPUT_PROCESSED,NUM_CLUSTERS,NAME_STDRD)
+if PROCESSESS_OUTPUT:
+    output_processing.main(df_base, SUP_LIMITS, OUTPUT_PROCESSED,NUM_CLUSTERS,NAME_STDRD)
 
 end_time = datetime.datetime.now()
 total_time = (end_time - start_time)

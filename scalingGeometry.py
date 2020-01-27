@@ -24,7 +24,7 @@ def constant_vertex(vertex, vertex_list, scale):
     
     return(new_vertex)  
 
-def scaling(scales={'scalex':2, 'scaley':2,'scalez':2}, ref=False, refscale=.17, window_scale=True,
+def scaling(scales={'scalex':1, 'scaley':1,'scalez':1}, ref=(False,.17), wwr = (True,.5), window_scale=True,
     shading_scale=True, input_file='model.epJSON',output_name='scaled_model.epJSON'):
     # This function multiplies the vertices of the EnergyPlus model by a
     # determined value, and returns the scaled model (.idf and .epJSON)
@@ -33,6 +33,8 @@ def scaling(scales={'scalex':2, 'scaley':2,'scalez':2}, ref=False, refscale=.17,
     # scalez - Scale factor to be multiplied by the z vertices.
     # ref - Determines the size of windows based on the reference,
     ## and erases shading surfaces.
+    ## Firts element of tuple defines if reference will be considered,
+    ## second element defines the window to floor area ratio.
     # ratio_of_building_afn - New ratio of building value for AFN.
     # window_scale - Condition to change geometry of windows too.
     # shading_scale - Condition to change geometry of shading too.
@@ -142,7 +144,7 @@ def scaling(scales={'scalex':2, 'scaley':2,'scalez':2}, ref=False, refscale=.17,
     ##### RV - ends
 
     # Defines opening areas according to reference
-    if ref:
+    if ref[0]:
 
         # erase shading devices
         if 'Shading:Building:Detailed' in list(content.keys()):
@@ -215,7 +217,7 @@ def scaling(scales={'scalex':2, 'scaley':2,'scalez':2}, ref=False, refscale=.17,
     ## FenestrationSurface:Detailed
         # defines windows sizes and scale factor to create ref openings
         for zone in zones.keys():
-            zones[zone]['ref_window_area'] = zones[zone]['area']*refscale
+            zones[zone]['ref_window_area'] = zones[zone]['area']*ref[1]
 
             real_window_area = 0
             for fenestration in zones[zone]['fenestrations'].keys():
@@ -320,6 +322,133 @@ def scaling(scales={'scalex':2, 'scaley':2,'scalez':2}, ref=False, refscale=.17,
                 content["FenestrationSurface:Detailed"][i]["vertex_3_y_coordinate"] = constant_vertex(content["FenestrationSurface:Detailed"][i]["vertex_3_y_coordinate"],vertex_dict['y_vertex'],scales['scaley'])
                 content["FenestrationSurface:Detailed"][i]["vertex_4_y_coordinate"] = constant_vertex(content["FenestrationSurface:Detailed"][i]["vertex_4_y_coordinate"],vertex_dict['y_vertex'],scales['scaley'])
 
+    elif wwr[0]:
+
+        # changes values of windows' vertices
+        for i in list(content["FenestrationSurface:Detailed"].keys()):
+                
+            # ref_vertex(content["FenestrationSurface:Detailed"][i], walls_vertices[content["FenestrationSurface:Detailed"][i]['building_surface_name']])
+            
+            vertex_dict ={
+            'x_vertex': [],
+            'y_vertex': [],
+            'z_vertex': []
+            }
+
+            for vertex in list(content["FenestrationSurface:Detailed"][i].keys()):
+
+                if '_x_' in vertex:
+                    vertex_dict['x_vertex'].append(content["FenestrationSurface:Detailed"][i][vertex])
+                elif '_y_' in vertex:
+                    vertex_dict['y_vertex'].append(content["FenestrationSurface:Detailed"][i][vertex])
+                elif '_z_' in vertex:
+                    vertex_dict['z_vertex'].append(content["FenestrationSurface:Detailed"][i][vertex])
+
+            if content["FenestrationSurface:Detailed"][i]['surface_type'] == 'Window':
+                
+                if 'BWC' in i or 'bwc' in i:
+                
+                    for letter in ['x','y','z']:
+                        for number in range(1,5):
+                            
+                            content["FenestrationSurface:Detailed"][i]["vertex_"+str(number)+"_"+letter+"_coordinate"] = constant_vertex(content["FenestrationSurface:Detailed"][i]["vertex_"+str(number)+"_"+letter+"_coordinate"],vertex_dict[letter+'_vertex'],scales['scale'+letter])
+
+                else:  #     zones[zone]['ref_real_ratio'] = zones[zone]['ref_window_area']/zones[zone]['real_window_area']
+                    
+                    wall = content["FenestrationSurface:Detailed"][i]['building_surface_name']
+
+                    wall_vertex_dict ={
+                        'x_vertex': [],
+                        'y_vertex': [],
+                        'z_vertex': []
+                    }
+
+                    for vertex in range(4):
+                        for letter in ['x','y','z']:
+                             wall_vertex_dict[letter+'_vertex'].append(content["BuildingSurface:Detailed"][wall]["vertices"][vertex]["vertex_"+letter+"_coordinate"])
+
+                    # defines if which is constant (x or y)
+                    if max(wall_vertex_dict['x_vertex']) == min(wall_vertex_dict['x_vertex']):
+                        wall_w_list = wall_vertex_dict['y_vertex']
+                    elif max(wall_vertex_dict['y_vertex']) == min(wall_vertex_dict['y_vertex']):
+                        wall_w_list = wall_vertex_dict['x_vertex']
+                    
+                    # creates the input list for the polygon area function
+                    wall_vertices = [(wall_w_list[i],wall_vertex_dict['z_vertex'][i]) for i in range(len(wall_vertex_dict['z_vertex']))]
+
+                    wall_area = polygon_area(wall_vertices)
+
+                    # defines if which is constant (x or y)
+                    if max(vertex_dict['x_vertex']) == min(vertex_dict['x_vertex']):
+                        w_list = vertex_dict['y_vertex']
+                    elif max(vertex_dict['y_vertex']) == min(vertex_dict['y_vertex']):
+                        w_list = vertex_dict['x_vertex']
+                    
+                    # creates the input list for the polygon area function
+                    window_vertices = [(w_list[i],vertex_dict['z_vertex'][i]) for i in range(len(vertex_dict['z_vertex']))]
+
+                    window_area = polygon_area(window_vertices)
+
+                    ref_scale = wwr[1]*wall_area/window_area
+
+                    same_z = True  # to verify if z vertices will change
+                    
+                    for letter in ['x','y']:
+                        
+                        if min(vertex_dict[letter+'_vertex']) == max(vertex_dict[letter+'_vertex']):
+                            for number in range(1,5):
+                                content["FenestrationSurface:Detailed"][i]["vertex_"+str(number)+"_"+letter+"_coordinate"] = content["FenestrationSurface:Detailed"][i]["vertex_"+str(number)+"_"+letter+"_coordinate"]*scales['scale'+letter]
+                        
+                        elif ref_scale*(max(vertex_dict[letter+'_vertex'])-min(vertex_dict[letter+'_vertex'])) < walls_vertices[wall]['wall_'+letter+'_max']-walls_vertices[wall]['wall_'+letter+'_min']:
+
+                            for number in range(1,5):
+                            
+                                if content["FenestrationSurface:Detailed"][i]["vertex_"+str(number)+"_"+letter+"_coordinate"] == min(vertex_dict[letter+'_vertex']):
+                                    content["FenestrationSurface:Detailed"][i]["vertex_"+str(number)+"_"+letter+"_coordinate"] = ((walls_vertices[wall]['wall_'+letter+'_max']+walls_vertices[wall]['wall_'+letter+'_min'])-ref_scale*(max(vertex_dict[letter+'_vertex'])-min(vertex_dict[letter+'_vertex'])))*.5
+                                else:
+                                    content["FenestrationSurface:Detailed"][i]["vertex_"+str(number)+"_"+letter+"_coordinate"] = ((walls_vertices[wall]['wall_'+letter+'_max']+walls_vertices[wall]['wall_'+letter+'_min'])+ref_scale*(max(vertex_dict[letter+'_vertex'])-min(vertex_dict[letter+'_vertex'])))*.5
+                        else:
+
+                            for number in range(1,5):
+                            
+                                if content["FenestrationSurface:Detailed"][i]["vertex_"+str(number)+"_"+letter+"_coordinate"] == min(vertex_dict[letter+'_vertex']):
+                                    content["FenestrationSurface:Detailed"][i]["vertex_"+str(number)+"_"+letter+"_coordinate"] = walls_vertices[wall]['wall_'+letter+'_min']+.01
+                                else:
+                                    content["FenestrationSurface:Detailed"][i]["vertex_"+str(number)+"_"+letter+"_coordinate"] = walls_vertices[wall]['wall_'+letter+'_min']+(walls_vertices[wall]['wall_'+letter+'_max']-walls_vertices[wall]['wall_'+letter+'_min'])-.01
+                            
+                            delta_L = max(vertex_dict[letter+'_vertex'])-min(vertex_dict[letter+'_vertex'])        
+                            z_refscale = (ref_scale*delta_L)/((walls_vertices[wall]['wall_'+letter+'_max']+walls_vertices[wall]['wall_'+letter+'_min'])-.02)
+                            same_z = False
+                            
+                    if not same_z:
+                        if  min(vertex_dict['z_vertex'])+(z_refscale*(max(vertex_dict['z_vertex'])-min(vertex_dict['z_vertex']))) < walls_vertices[wall]['wall_z_max']:
+                            
+                            for number in range(1,5):
+                                
+                                if content["FenestrationSurface:Detailed"][i]["vertex_"+str(number)+"_z_coordinate"] == max(vertex_dict['z_vertex']):
+                                    content["FenestrationSurface:Detailed"][i]["vertex_"+str(number)+"_z_coordinate"] = min(vertex_dict['z_vertex'])+(z_refscale*(max(vertex_dict['z_vertex'])-min(vertex_dict['z_vertex'])))
+                        else:
+                            delta_z = min(vertex_dict['z_vertex'])+(z_refscale*(max(vertex_dict['z_vertex'])-min(vertex_dict['z_vertex'])))-walls_vertices[wall]['wall_z_max']+.01
+                            for number in range(1,5):
+                                
+                                if content["FenestrationSurface:Detailed"][i]["vertex_"+str(number)+"_z_coordinate"] == max(vertex_dict['z_vertex']):
+                                    content["FenestrationSurface:Detailed"][i]["vertex_"+str(number)+"_z_coordinate"] = walls_vertices[wall]['wall_z_max']-.01
+                                else:
+                                    content["FenestrationSurface:Detailed"][i]["vertex_"+str(number)+"_z_coordinate"] = content["FenestrationSurface:Detailed"][i]["vertex_"+str(number)+"_z_coordinate"]-delta_z
+                
+            else:
+                
+                content["FenestrationSurface:Detailed"][i]["vertex_1_x_coordinate"] = constant_vertex(content["FenestrationSurface:Detailed"][i]["vertex_1_x_coordinate"],vertex_dict['x_vertex'],scales['scalex'])
+                content["FenestrationSurface:Detailed"][i]["vertex_2_x_coordinate"] = constant_vertex(content["FenestrationSurface:Detailed"][i]["vertex_2_x_coordinate"],vertex_dict['x_vertex'],scales['scalex'])
+                content["FenestrationSurface:Detailed"][i]["vertex_3_x_coordinate"] = constant_vertex(content["FenestrationSurface:Detailed"][i]["vertex_3_x_coordinate"],vertex_dict['x_vertex'],scales['scalex'])
+                content["FenestrationSurface:Detailed"][i]["vertex_4_x_coordinate"] = constant_vertex(content["FenestrationSurface:Detailed"][i]["vertex_4_x_coordinate"],vertex_dict['x_vertex'],scales['scalex'])
+                    
+                content["FenestrationSurface:Detailed"][i]["vertex_1_y_coordinate"] = constant_vertex(content["FenestrationSurface:Detailed"][i]["vertex_1_y_coordinate"],vertex_dict['y_vertex'],scales['scaley'])
+                content["FenestrationSurface:Detailed"][i]["vertex_2_y_coordinate"] = constant_vertex(content["FenestrationSurface:Detailed"][i]["vertex_2_y_coordinate"],vertex_dict['y_vertex'],scales['scaley'])
+                content["FenestrationSurface:Detailed"][i]["vertex_3_y_coordinate"] = constant_vertex(content["FenestrationSurface:Detailed"][i]["vertex_3_y_coordinate"],vertex_dict['y_vertex'],scales['scaley'])
+                content["FenestrationSurface:Detailed"][i]["vertex_4_y_coordinate"] = constant_vertex(content["FenestrationSurface:Detailed"][i]["vertex_4_y_coordinate"],vertex_dict['y_vertex'],scales['scaley'])
+
+
     # window area changes according to geometry scales
     elif window_scale:
         for i in list(content["FenestrationSurface:Detailed"].keys()):
@@ -399,7 +528,7 @@ def scaling(scales={'scalex':2, 'scaley':2,'scalez':2}, ref=False, refscale=.17,
 
     ## Shading:Building:Detailed
 
-    if not ref:
+    if not ref[0]:
         if shading_scale == False:
             if 'Shading:Building:Detailed' in list(content.keys()):
                 for i in list(content['Shading:Building:Detailed'].keys()):
@@ -504,33 +633,10 @@ def scaling(scales={'scalex':2, 'scaley':2,'scalez':2}, ref=False, refscale=.17,
 # FILE_NAME = 'vn_Caso2.idf'
 # scales={'scalex':4, 'scaley':4,'scalez':1}
 
-# scaling(scales, ref=True, refscale=REF_WINDOW_TO_FLOOR_RATIO,
+# scaling(scales, ref=(True,REF_WINDOW_TO_FLOOR_RATIO),
 #     window_scale=False, shading_scale=False,
 #     input_file= FILE_NAME, output_name='teste_newref4.epJSON')
 
-# scaling(scales, ref=True, refscale=.3,
-#     window_scale=False, shading_scale=False,
-#     input_file= FILE_NAME, output_name='teste_newref5.epJSON')
-
-# scaling(scales, ref=True, refscale=.8,
-#     window_scale=False, shading_scale=False,
-#     input_file= FILE_NAME, output_name='teste_newref6.epJSON')
-
-# scaling(scalex=2, scaley=2,scalez=2, ref=False, 
-    # window_scale=True, shading_scale=False,
-    # input_file= FILE_NAME, output_name='teste2b.epJSON')
-
-# scaling(scalex=2, scaley=2,scalez=2, ref=False, 
-    # window_scale=False, shading_scale=True,
-    # input_file= FILE_NAME, output_name='teste3b.epJSON')
-
-# scaling(scalex=2, scaley=1,scalez=1, ref=True, 
-    # window_scale=False, shading_scale=True,
-    # input_file= FILE_NAME, output_name='teste4b.epJSON')
-
-# scaling(scalex = 4, scaley = 2, scalez = 1.5, ref = False, 
-#         window_scale = False, shading_scale = False,
-#         input_file = 'vn_caso2_rv_shading_surf_corner.idf', output_name = 'vn_caso2_rv_new.epJSON')
 
 '''
 O que pode ser melhorado:

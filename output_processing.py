@@ -6,25 +6,12 @@ from multiprocessing import Pool  # possibilita processos multithread
 import numpy as np
 import os  # possibilita comandos no sistema operacional
 import pandas as pd  # facilita trabalhar com dataframes
-# from dict_update import update  # atualiza dicionários
+from unique import unique
 
 OCCUP = ':Schedule Value [](Hourly)'  # ':People Occupant Count [](Hourly)'  #
 # SCH_OCUP_DORM:Schedule Value [](Hourly) 
 # ZONES = ['SALA','DORM1','DORM2']
 INF_LIM = 18
-
-def unique(list1): 
-  
-    # intilize a null list 
-    unique_list = [] 
-      
-    # traverse for all elements 
-    for x in list1: 
-        # check if exists in unique_list or not 
-        if x not in unique_list: 
-            unique_list.append(x) 
-    # print list 
-    return(unique_list)
 
 def schedule_name(zone, occup):
     return('SCH_OCUP_'+zone+occup)
