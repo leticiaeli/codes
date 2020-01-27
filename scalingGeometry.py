@@ -24,7 +24,7 @@ def constant_vertex(vertex, vertex_list, scale):
     
     return(new_vertex)  
 
-def scaling(scales={'scalex':2, 'scaley':2,'scalez':2}, ref=False, refscale=.17, window_scale=True,
+def scaling(scales={'scalex':1, 'scaley':1,'scalez':1}, ref=(False,.17), window_scale=True,
     shading_scale=True, input_file='model.epJSON',output_name='scaled_model.epJSON'):
     # This function multiplies the vertices of the EnergyPlus model by a
     # determined value, and returns the scaled model (.idf and .epJSON)
@@ -33,6 +33,8 @@ def scaling(scales={'scalex':2, 'scaley':2,'scalez':2}, ref=False, refscale=.17,
     # scalez - Scale factor to be multiplied by the z vertices.
     # ref - Determines the size of windows based on the reference,
     ## and erases shading surfaces.
+    ## Firts element of tuple defines if reference will be considered,
+    ## second element defines the window to floor area ratio.
     # ratio_of_building_afn - New ratio of building value for AFN.
     # window_scale - Condition to change geometry of windows too.
     # shading_scale - Condition to change geometry of shading too.
@@ -142,7 +144,7 @@ def scaling(scales={'scalex':2, 'scaley':2,'scalez':2}, ref=False, refscale=.17,
     ##### RV - ends
 
     # Defines opening areas according to reference
-    if ref:
+    if ref[0]:
 
         # erase shading devices
         if 'Shading:Building:Detailed' in list(content.keys()):
@@ -215,7 +217,7 @@ def scaling(scales={'scalex':2, 'scaley':2,'scalez':2}, ref=False, refscale=.17,
     ## FenestrationSurface:Detailed
         # defines windows sizes and scale factor to create ref openings
         for zone in zones.keys():
-            zones[zone]['ref_window_area'] = zones[zone]['area']*refscale
+            zones[zone]['ref_window_area'] = zones[zone]['area']*ref[1]
 
             real_window_area = 0
             for fenestration in zones[zone]['fenestrations'].keys():
@@ -399,7 +401,7 @@ def scaling(scales={'scalex':2, 'scaley':2,'scalez':2}, ref=False, refscale=.17,
 
     ## Shading:Building:Detailed
 
-    if not ref:
+    if not ref[0]:
         if shading_scale == False:
             if 'Shading:Building:Detailed' in list(content.keys()):
                 for i in list(content['Shading:Building:Detailed'].keys()):
@@ -504,33 +506,10 @@ def scaling(scales={'scalex':2, 'scaley':2,'scalez':2}, ref=False, refscale=.17,
 # FILE_NAME = 'vn_Caso2.idf'
 # scales={'scalex':4, 'scaley':4,'scalez':1}
 
-# scaling(scales, ref=True, refscale=REF_WINDOW_TO_FLOOR_RATIO,
+# scaling(scales, ref=(True,REF_WINDOW_TO_FLOOR_RATIO),
 #     window_scale=False, shading_scale=False,
 #     input_file= FILE_NAME, output_name='teste_newref4.epJSON')
 
-# scaling(scales, ref=True, refscale=.3,
-#     window_scale=False, shading_scale=False,
-#     input_file= FILE_NAME, output_name='teste_newref5.epJSON')
-
-# scaling(scales, ref=True, refscale=.8,
-#     window_scale=False, shading_scale=False,
-#     input_file= FILE_NAME, output_name='teste_newref6.epJSON')
-
-# scaling(scalex=2, scaley=2,scalez=2, ref=False, 
-    # window_scale=True, shading_scale=False,
-    # input_file= FILE_NAME, output_name='teste2b.epJSON')
-
-# scaling(scalex=2, scaley=2,scalez=2, ref=False, 
-    # window_scale=False, shading_scale=True,
-    # input_file= FILE_NAME, output_name='teste3b.epJSON')
-
-# scaling(scalex=2, scaley=1,scalez=1, ref=True, 
-    # window_scale=False, shading_scale=True,
-    # input_file= FILE_NAME, output_name='teste4b.epJSON')
-
-# scaling(scalex = 4, scaley = 2, scalez = 1.5, ref = False, 
-#         window_scale = False, shading_scale = False,
-#         input_file = 'vn_caso2_rv_shading_surf_corner.idf', output_name = 'vn_caso2_rv_new.epJSON')
 
 '''
 O que pode ser melhorado:
