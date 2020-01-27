@@ -33,7 +33,7 @@ def schedule_name(zone, occup):
 def name_file(case,pattern,mode,epw):
     # Define o nome do arquivo.
 
-    file_name =  pattern+'_'+case+'_'+mode+'.idfout.csv'  # '_'+epw+
+    file_name =  pattern+'_'+case+'_'+mode+'out.csv'  # '_'+epw+
     # file_name =  mode+'_'+epw+'.csv'
     return(file_name)
 
@@ -120,17 +120,18 @@ def process_outputs(line, sup_lim, pattern):
         df_vn['sup_lim'] = 0
         df_vn.loc[df_vn[zn+':Zone Operative Temperature [C](Hourly)'] >= sup_lim, 'sup_lim'] = 1
         df_temp['ph_sup'].append(df_vn['sup_lim'][df_vn[zn_occup] > 0].mean())
-        print(sum(df_vn['sup_lim'][df_vn[zn_occup] > 0]))
 
         df_temp['phft'].append(1 - df_temp['ph_inf'][-1] - df_temp['ph_sup'][-1])
 
 
         try:
-            df_temp['cgtr_cooling'].append(df_ac[zn+' IDEAL LOADS AIR SYSTEM:Zone Ideal Loads Zone Total Cooling Energy [J](Hourly)'][df_vn['sup_lim'] > 0].sum())
             df_temp['cgtr_heating'].append(df_ac[zn+' IDEAL LOADS AIR SYSTEM:Zone Ideal Loads Zone Total Heating Energy [J](Hourly)'][df_vn['sup_lim'] > 0].sum())
         except:
-            df_temp['cgtr_cooling'].append(df_ac[zn+' IDEAL LOADS AIR SYSTEM:Zone Ideal Loads Zone Total Cooling Energy [J](Hourly) '][df_vn['sup_lim'] > 0].sum())
             df_temp['cgtr_heating'].append(df_ac[zn+' IDEAL LOADS AIR SYSTEM:Zone Ideal Loads Zone Total Heating Energy [J](Hourly) '][df_vn['sup_lim'] > 0].sum())
+        try:
+            df_temp['cgtr_cooling'].append(df_ac[zn+' IDEAL LOADS AIR SYSTEM:Zone Ideal Loads Zone Total Cooling Energy [J](Hourly) '][df_vn['sup_lim'] > 0].sum())
+        except:
+            df_temp['cgtr_cooling'].append(df_ac[zn+' IDEAL LOADS AIR SYSTEM:Zone Ideal Loads Zone Total Cooling Energy [J](Hourly)'][df_vn['sup_lim'] > 0].sum())
             
     return(df_temp)
 

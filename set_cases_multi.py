@@ -18,14 +18,14 @@ update = dict_update.update
 start_time = datetime.datetime.now()
 
 # Globals
-FOLDER = 'uni_test'  # 
+FOLDER = 'multi_test'  # 
 SIZE =  10  # 
 SAMPLE_NAME = 'sample_'+FOLDER  # 
-NUM_CLUSTERS = int(os.cpu_count()/2)
-NAME_STDRD = 'U'
+NUM_CLUSTERS = int(os.cpu_count())  # /2
+NAME_STDRD = 'M'
 EXTENSION = 'idf'
 REMOVE_ALL_BUT = [EXTENSION, 'csv', 'err']
-EPW_NAMES = ['PA.epw', 'RJ.epw', 'SM.epw', 'SP.epw']  # 
+EPW_NAMES = ['PA.epw']  # , 'RJ.epw', 'SM.epw', 'SP.epw']  # 
     # 'BRA_GO_Itumbiara.867740_INMET.epw','BRA_MG_Uberlandia.867760_INMET.epw','BRA_PR_Curitiba.838420_INMET.epw',  # 
     # 'BRA_RJ_Duque.de.Caxias-Xerem.868770_INMET.epw','BRA_RS_Santa.Maria.839360_INMET.epw','BRA_SC_Florianopolis.838970_INMET.epw',
     # 'BRA_MA_Sao.Luis.817150_INMET.epw','BRA_TO_Palmas.866070_INMET.epw'
@@ -36,17 +36,32 @@ SOBOL = True  # False  #
 
 SLICE = 'slices/'
 MAIN = ['slices/main_materials_fixed.txt', 'slices/main.txt']
-VN_FILE = ['slices/Uni/u_afn.txt']
-AC_FILE = ['slices/Uni/u_idealloads.txt']
+VN_FILE = ['slices/Multi/m_afn.txt']
+AC_FILE = ['slices/Multi/m_idealloads.txt']
+
+# m_shade_000_geom_0_0_0.txt
+# m_shade_000_geom_0_0_1.txt
+# m_shade_000_geom_1_0_0.txt
+# m_shade_000_geom_1_0_1.txt
+# m_shade_000_geom_2_0_0.txt
+# m_shade_000_geom_2_0_2.txt
+# m_shade_120_geom_0_0_0.txt
+# m_shade_120_geom_0_0_1.txt
+# m_shade_120_geom_1_0_0.txt
+# m_shade_120_geom_1_0_1.txt
+# m_shade_120_geom_2_0_0.txt
+# m_shade_120_geom_2_0_2.txt
 
 PARAMETERS = {
-    'geometria':[SLICE+'Uni/u_geom_0_0_0.txt'],  # area, ratio, pe-direito, janelas
-    'azimute':[SLICE+'rotation_000.txt',SLICE+'rotation_180.txt'],
-    'sombreamento':[SLICE+'Uni/u_shade_050_geom_0_0_0.txt',SLICE+'Uni/u_shade_120_geom_0_0_0.txt'],
-    'veneziana':[SLICE+'Uni/u_blind_off.txt',SLICE+'Uni/u_blind_on.txt'],
-    'componente':[SLICE+'Uni/u_construction_ref.txt',SLICE+'Uni/u_construction_sfiso.txt',SLICE+'Uni/u_construction_tijmacico20.txt',SLICE+'Uni/u_construction_tv.txt'],  # paredes, piso e coertura
+    'geometria':[SLICE+'Multi/m_geom_0_0_0.txt',SLICE+'Multi/m_geom_0_0_1.txt',SLICE+'Multi/m_geom_1_0_0.txt',
+    SLICE+'Multi/m_geom_1_0_1.txt',SLICE+'Multi/m_geom_2_0_0.txt'],  # area, ratio, pe-direito, janelas
+    'azimute':[SLICE+'rotation_000.txt',SLICE+'rotation_090.txt',SLICE+'rotation_180.txt',SLICE+'rotation_270.txt'],
+    # 'sombreamento':[SLICE+'Multi/m_shade_050_geom_0_0_0.txt',SLICE+'Multi/m_shade_120_geom_0_0_0.txt'],
+    'veneziana':[SLICE+'Multi/m_blind_off.txt',SLICE+'Multi/m_blind_on.txt'],
+    'componente':[SLICE+'Multi/m_construction_ref.txt',SLICE+'Multi/m_construction_sfiso.txt',SLICE+'Multi/m_construction_tijmacico20.txt',
+    SLICE+'Multi/m_construction_tv.txt'],  # paredes, piso e coertura
     'absortancia':[SLICE+'abs_60.txt',SLICE+'abs_20.txt',SLICE+'abs_80.txt'],  # paredes e cobertura
-    'vidro':[SLICE+'vidro_simples.txt']#,  # simples/duplo e FS
+    'vidro':[SLICE+'vidro_fs39.txt',SLICE+'vidro_fs87.txt',SLICE+'vidro_duplo-fs39-87.txt',SLICE+'vidro_duplo-fs87.txt']#,  # simples/duplo e FS
     # 'open_fac':[]
 }
 
@@ -96,10 +111,10 @@ for i in range(len(sample)):
     print(output)
 
     # AC
-    # idf_bundler([model_values[param] for param in model_values.keys()]+MAIN+AC_FILE, output_name = FOLDER+'/'+output+'_ac.'+EXTENSION)
+    idf_bundler([model_values[param] for param in model_values.keys()]+MAIN+AC_FILE, output_name = FOLDER+'/'+output+'_ac.'+EXTENSION)
         
     # VN
-    # idf_bundler([model_values[param] for param in model_values.keys()]+MAIN+VN_FILE, output_name = FOLDER+'/'+output+'_vn.'+EXTENSION)
+    idf_bundler([model_values[param] for param in model_values.keys()]+MAIN+VN_FILE, output_name = FOLDER+'/'+output+'_vn.'+EXTENSION)
         
     line += 1
 
@@ -110,8 +125,7 @@ for epw in EPW_NAMES:
 
 os.chdir(FOLDER)
 print('\nRUNNING SIMULATIONS\n')
-# list_epjson_names = runep_subprocess.gen_list_epjson_names(NUM_CLUSTERS, EXTENSION)
-# runep_subprocess.main(NUM_CLUSTERS, EXTENSION, REMOVE_ALL_BUT, epw_names=EPW_NAMES)  # list_epjson_names,
+runep_subprocess.main(NUM_CLUSTERS, EXTENSION, REMOVE_ALL_BUT, epw_names=EPW_NAMES)  # list_epjson_names,
 
 print('\nPROCESSING OUTPUT\n')
 output_processing.main(df_base, SUP_LIMITS, OUTPUT_PROCESSED,NUM_CLUSTERS,NAME_STDRD)
