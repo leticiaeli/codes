@@ -11,40 +11,40 @@ GlobalGeometryRules,
 !-   ===========  ALL OBJECTS IN CLASS: ZONE ===========
 
 Zone,
-    sala,                    !- Name
-    0.0,                     !- Direction of Relative North {deg}
-    0.0,                     !- X Origin {m}
-    0.0,                     !- Y Origin {m}
-    0.0,                     !- Z Origin {m}
-    ,                        !- Type
-    1;                       !- Multiplier
+  bwc,
+  0.0,
+  0.0,
+  8.487048957087497,
+  0.0,
+  ,
+  1.0;
 
 Zone,
-    dorm1,                   !- Name
-    0.0,                     !- Direction of Relative North {deg}
-    3.87,                    !- X Origin {m}
-    1.15,                    !- Y Origin {m}
-    0.0,                     !- Z Origin {m}
-    ,                        !- Type
-    1;                       !- Multiplier
+  dorm1,
+  0.0,
+  3.351518312645777,
+  1.9918584287042083,
+  0.0,
+  ,
+  1.0;
 
 Zone,
-    dorm2,                   !- Name
-    0.0,                     !- Direction of Relative North {deg}
-    3.87,                    !- X Origin {m}
-    4.38,                    !- Y Origin {m}
-    0.0,                     !- Z Origin {m}
-    ,                        !- Type
-    1;                       !- Multiplier
+  dorm2,
+  0.0,
+  3.351518312645777,
+  7.586382537151681,
+  0.0,
+  ,
+  1.0;
 
 Zone,
-    bwc,                     !- Name
-    0.0,                     !- Direction of Relative North {deg}
-    0,                       !- X Origin {m}
-    4.90,                    !- Y Origin {m}
-    0.0,                     !- Z Origin {m}
-    ,                        !- Type
-    1;                       !- Multiplier
+  sala,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  ,
+  1.0;
 
 
 !-   ===========  ALL OBJECTS IN CLASS: ZONELIST ===========

@@ -11,40 +11,40 @@ GlobalGeometryRules,
 !-   ===========  ALL OBJECTS IN CLASS: ZONE ===========
 
 Zone,
-    sala,                    !- Name
-    0.0,                     !- Direction of Relative North {deg}
-    0.0,                     !- X Origin {m}
-    0.0,                     !- Y Origin {m}
-    0.0,                     !- Z Origin {m}
-    ,                        !- Type
-    1;                       !- Multiplier
+  bwc,
+  0.0,
+  0.0,
+  3.7955236792832687,
+  0.0,
+  ,
+  1.0;
 
 Zone,
-    dorm1,                   !- Name
-    0.0,                     !- Direction of Relative North {deg}
-    3.87,                    !- X Origin {m}
-    1.15,                    !- Y Origin {m}
-    0.0,                     !- Z Origin {m}
-    ,                        !- Type
-    1;                       !- Multiplier
+  dorm1,
+  0.0,
+  7.494222774911352,
+  0.8907861696277057,
+  0.0,
+  ,
+  1.0;
 
 Zone,
-    dorm2,                   !- Name
-    0.0,                     !- Direction of Relative North {deg}
-    3.87,                    !- X Origin {m}
-    4.38,                    !- Y Origin {m}
-    0.0,                     !- Z Origin {m}
-    ,                        !- Type
-    1;                       !- Multiplier
+  dorm2,
+  0.0,
+  7.494222774911352,
+  3.3927334112776967,
+  0.0,
+  ,
+  1.0;
 
 Zone,
-    bwc,                     !- Name
-    0.0,                     !- Direction of Relative North {deg}
-    0,                       !- X Origin {m}
-    4.90,                    !- Y Origin {m}
-    0.0,                     !- Z Origin {m}
-    ,                        !- Type
-    1;                       !- Multiplier
+  sala,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  ,
+  1.0;
 
 
 !-   ===========  ALL OBJECTS IN CLASS: ZONELIST ===========
@@ -74,16 +74,16 @@ BuildingSurface:Detailed,
   Autocalculate,
   0.0,
   0.0,
-  2.5,
+  5.0,
   4.899323932952382,
   0.0,
-  2.5,
+  5.0,
   4.899323932952382,
   1.4252578714043294,
-  2.5,
+  5.0,
   0.0,
   1.4252578714043294,
-  2.5;
+  5.0;
 
 BuildingSurface:Detailed,
   bwc_parex_00e,
@@ -104,10 +104,10 @@ BuildingSurface:Detailed,
   0.0,
   0.0,
   0.0,
-  2.5,
+  5.0,
   0.0,
   1.4252578714043294,
-  2.5;
+  5.0;
 
 BuildingSurface:Detailed,
   bwc_parex_00s,
@@ -128,10 +128,10 @@ BuildingSurface:Detailed,
   0.0,
   0.0,
   1.4252578714043294,
-  2.5,
+  5.0,
   4.899323932952382,
   1.4252578714043294,
-  2.5;
+  5.0;
 
 BuildingSurface:Detailed,
   bwc_parin_00d,
@@ -152,10 +152,10 @@ BuildingSurface:Detailed,
   0.0,
   4.899323932952382,
   1.4252578714043294,
-  2.5,
+  5.0,
   4.899323932952382,
   0.0,
-  2.5;
+  5.0;
 
 BuildingSurface:Detailed,
   bwc_parin_00i,
@@ -176,10 +176,10 @@ BuildingSurface:Detailed,
   0.0,
   4.899323932952382,
   0.0,
-  2.5,
+  5.0,
   0.0,
   0.0,
-  2.5;
+  5.0;
 
 BuildingSurface:Detailed,
   bwc_piso,
@@ -218,16 +218,16 @@ BuildingSurface:Detailed,
   Autocalculate,
   0.0,
   0.0,
-  2.5,
+  5.0,
   5.305987184304161,
   0.0,
-  2.5,
+  5.0,
   5.305987184304161,
   2.501947241649991,
-  2.5,
+  5.0,
   0.0,
   2.501947241649991,
-  2.5;
+  5.0;
 
 BuildingSurface:Detailed,
   dorm1_parex_00d,
@@ -248,10 +248,10 @@ BuildingSurface:Detailed,
   0.0,
   5.305987184304161,
   2.501947241649991,
-  2.5,
+  5.0,
   5.305987184304161,
   0.0,
-  2.5;
+  5.0;
 
 BuildingSurface:Detailed,
   dorm1_parex_00i,
@@ -272,10 +272,10 @@ BuildingSurface:Detailed,
   0.0,
   5.305987184304161,
   0.0,
-  2.5,
+  5.0,
   0.0,
   0.0,
-  2.5;
+  5.0;
 
 BuildingSurface:Detailed,
   dorm1_parin_00e,
@@ -296,10 +296,10 @@ BuildingSurface:Detailed,
   0.0,
   0.0,
   0.0,
-  2.5,
+  5.0,
   0.0,
   2.501947241649991,
-  2.5;
+  5.0;
 
 BuildingSurface:Detailed,
   dorm1_parin_00s,
@@ -320,10 +320,10 @@ BuildingSurface:Detailed,
   0.0,
   0.0,
   2.501947241649991,
-  2.5,
+  5.0,
   5.305987184304161,
   2.501947241649991,
-  2.5;
+  5.0;
 
 BuildingSurface:Detailed,
   dorm1_piso,
@@ -362,16 +362,16 @@ BuildingSurface:Detailed,
   Autocalculate,
   0.0,
   0.0,
-  2.5,
+  5.0,
   5.305987184304161,
   0.0,
-  2.5,
+  5.0,
   5.305987184304161,
   2.347027907801694,
-  2.5,
+  5.0,
   0.0,
   2.347027907801694,
-  2.5;
+  5.0;
 
 BuildingSurface:Detailed,
   dorm2_parex_00d,
@@ -392,10 +392,10 @@ BuildingSurface:Detailed,
   0.0,
   5.305987184304161,
   2.347027907801694,
-  2.5,
+  5.0,
   5.305987184304161,
   0.0,
-  2.5;
+  5.0;
 
 BuildingSurface:Detailed,
   dorm2_parex_00e,
@@ -416,10 +416,10 @@ BuildingSurface:Detailed,
   0.0,
   0.0,
   1.8280481394099005,
-  2.5,
+  5.0,
   0.0,
   2.347027907801694,
-  2.5;
+  5.0;
 
 BuildingSurface:Detailed,
   dorm2_parex_00s,
@@ -440,10 +440,10 @@ BuildingSurface:Detailed,
   0.0,
   0.0,
   2.347027907801694,
-  2.5,
+  5.0,
   5.305987184304161,
   2.347027907801694,
-  2.5;
+  5.0;
 
 BuildingSurface:Detailed,
   dorm2_parin_00i,
@@ -464,10 +464,10 @@ BuildingSurface:Detailed,
   0.0,
   5.305987184304161,
   0.0,
-  2.5,
+  5.0,
   0.0,
   0.0,
-  2.5;
+  5.0;
 
 BuildingSurface:Detailed,
   dorm2_parin_01e,
@@ -488,10 +488,10 @@ BuildingSurface:Detailed,
   0.0,
   0.0,
   0.0,
-  2.5,
+  5.0,
   0.0,
   1.8280481394099005,
-  2.5;
+  5.0;
 
 BuildingSurface:Detailed,
   dorm2_piso,
@@ -530,16 +530,16 @@ BuildingSurface:Detailed,
   Autocalculate,
   4.899323932952382,
   3.7955236792832687,
-  2.5,
+  5.0,
   7.494222774911352,
   3.7955236792832687,
-  2.5,
+  5.0,
   7.494222774911352,
   5.220781550687597,
-  2.5,
+  5.0,
   4.899323932952382,
   5.220781550687597,
-  2.5;
+  5.0;
 
 BuildingSurface:Detailed,
   sala_cob_1,
@@ -554,16 +554,16 @@ BuildingSurface:Detailed,
   Autocalculate,
   0.0,
   0.0,
-  2.5,
+  5.0,
   7.494222774911352,
   0.0,
-  2.5,
+  5.0,
   7.494222774911352,
   3.7955236792832687,
-  2.5,
+  5.0,
   0.0,
   3.7955236792832687,
-  2.5;
+  5.0;
 
 BuildingSurface:Detailed,
   sala_parex_00d,
@@ -584,10 +584,10 @@ BuildingSurface:Detailed,
   0.0,
   7.494222774911352,
   0.8907861696277057,
-  2.5,
+  5.0,
   7.494222774911352,
   0.0,
-  2.5;
+  5.0;
 
 BuildingSurface:Detailed,
   sala_parex_00i,
@@ -608,10 +608,10 @@ BuildingSurface:Detailed,
   0.0,
   7.494222774911352,
   0.0,
-  2.5,
+  5.0,
   0.0,
   0.0,
-  2.5;
+  5.0;
 
 BuildingSurface:Detailed,
   sala_parex_00s,
@@ -632,10 +632,10 @@ BuildingSurface:Detailed,
   0.0,
   4.899323932952382,
   5.220781550687597,
-  2.5,
+  5.0,
   7.494222774911352,
   5.220781550687597,
-  2.5;
+  5.0;
 
 BuildingSurface:Detailed,
   sala_parex_01e,
@@ -656,10 +656,10 @@ BuildingSurface:Detailed,
   0.0,
   0.0,
   0.0,
-  2.5,
+  5.0,
   0.0,
   3.7955236792832687,
-  2.5;
+  5.0;
 
 BuildingSurface:Detailed,
   sala_parin_00e,
@@ -680,10 +680,10 @@ BuildingSurface:Detailed,
   0.0,
   4.899323932952382,
   3.7955236792832687,
-  2.5,
+  5.0,
   4.899323932952382,
   5.220781550687597,
-  2.5;
+  5.0;
 
 BuildingSurface:Detailed,
   sala_parin_01d,
@@ -704,10 +704,10 @@ BuildingSurface:Detailed,
   0.0,
   7.494222774911352,
   3.3927334112776967,
-  2.5,
+  5.0,
   7.494222774911352,
   0.8907861696277057,
-  2.5;
+  5.0;
 
 BuildingSurface:Detailed,
   sala_parin_01s,
@@ -728,10 +728,10 @@ BuildingSurface:Detailed,
   0.0,
   0.0,
   3.7955236792832687,
-  2.5,
+  5.0,
   4.899323932952382,
   3.7955236792832687,
-  2.5;
+  5.0;
 
 BuildingSurface:Detailed,
   sala_parin_02d,
@@ -752,10 +752,10 @@ BuildingSurface:Detailed,
   0.0,
   7.494222774911352,
   5.220781550687597,
-  2.5,
+  5.0,
   7.494222774911352,
   3.3927334112776967,
-  2.5;
+  5.0;
 
 BuildingSurface:Detailed,
   sala_piso,
