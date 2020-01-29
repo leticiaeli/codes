@@ -22,11 +22,11 @@ SIZE =  10  #
 SOBOL = False  # True  # 
 SAMPLE_NAME = 'sample_'+FOLDER+'_sobol_'+str(SOBOL)  # 
 GEN_SAMPLE = True  # False  # 
-NUM_CLUSTERS = int(os.cpu_count()/3)
+NUM_CLUSTERS = int(os.cpu_count()/2)
 NAME_STDRD = 'M'
 EXTENSION = 'idf'
 REMOVE_ALL_BUT = [EXTENSION, 'csv', 'err']
-EPW_NAMES = ['BRA_GO_Itumbiara.867740_INMET.epw','BRA_MG_Uberlandia.867760_INMET.epw','BRA_PR_Curitiba.838420_INMET.epw',
+EPW_NAMES = [
     'BRA_GO_Itumbiara.867740_INMET.epw','BRA_MG_Uberlandia.867760_INMET.epw','BRA_PR_Curitiba.838420_INMET.epw',  # 
     'BRA_RJ_Duque.de.Caxias-Xerem.868770_INMET.epw','BRA_RS_Santa.Maria.839360_INMET.epw','BRA_SC_Florianopolis.838970_INMET.epw',
     'BRA_MA_Sao.Luis.817150_INMET.epw','BRA_TO_Palmas.866070_INMET.epw'
@@ -37,8 +37,8 @@ OUTPUT_PROCESSED = 'outputs_'+FOLDER
 # To choose what to run in the code
 GEN_MODELS = False
 RUN_MODELS = False
-PROCESSESS_OUTPUT = False  # True
-RUN_ALL = True  # defines GEN_MODELS, RUN_MODELS, PROCESSESS_OUTPUT = True
+PROCESSESS_OUTPUT = True  # True
+RUN_ALL = False  # defines GEN_MODELS, RUN_MODELS, PROCESSESS_OUTPUT = True
 
 SLICES_FOLDER = 'slices/'
 SUB_SLICES_FOLDER = 'Multi/'
@@ -56,8 +56,16 @@ sombreamento = glob.glob(SLICES_FOLDER+SUB_SLICES_FOLDER+somb_pattern+'*')
 sombreamento = [somb[:len(SLICES_FOLDER+SUB_SLICES_FOLDER+somb_pattern+SOMB_SUFIX)] for somb in sombreamento]
 sombreamento = unique(sombreamento)
 
+FENES_PATTERN = 'fenes'
+FENES_SUFIX = '_17'
+
+fenes_pattern = SLICE_PATTERN+FENES_PATTERN
+fenestration = glob.glob(SLICES_FOLDER+SUB_SLICES_FOLDER+fenes_pattern+'*')
+fenestration = [fenes[:len(SLICES_FOLDER+SUB_SLICES_FOLDER+fenes_pattern+FENES_SUFIX)] for fenes in fenestration]
+fenestration = unique(fenestration)
+
 PARAMETERS = {
-    'geometria': glob.glob(SLICES_FOLDER+SUB_SLICES_FOLDER+SLICE_PATTERN+'geom*'),  # [SLICE+'Multi/m_geom_0_0_0.txt',SLICE+'Multi/m_geom_0_0_1.txt',SLICE+'Multi/m_geom_1_0_0.txt', SLICE+'Multi/m_geom_1_0_1.txt',SLICE+'Multi/m_geom_2_0_0.txt'],  # area, ratio, pe-direito, janelas
+    'geometria': glob.glob(SLICES_FOLDER+SUB_SLICES_FOLDER+SLICE_PATTERN+'?_geom*'),  # [SLICE+'Multi/m_geom_0_0_0.txt',SLICE+'Multi/m_geom_0_0_1.txt',SLICE+'Multi/m_geom_1_0_0.txt', SLICE+'Multi/m_geom_1_0_1.txt',SLICE+'Multi/m_geom_2_0_0.txt'],  # area, ratio, pe-direito, janelas
 
     'azimute': glob.glob(SLICES_FOLDER+'rotation*'),  # [SLICE+'rotation_000.txt',SLICE+'rotation_090.txt',SLICE+'rotation_180.txt',SLICE+'rotation_270.txt'],
 
@@ -67,13 +75,13 @@ PARAMETERS = {
 
     'absortancia': glob.glob(SLICES_FOLDER+'abs*'),  # [SLICE+'abs_60.txt',SLICE+'abs_20.txt',SLICE+'abs_80.txt'],  # paredes e cobertura
 
-    'vidro': glob.glob(SLICES_FOLDER+'vidro*'),  # [SLICE+'vidro_fs39.txt',SLICE+'vidro_fs87.txt',SLICE+'vidro_duplo-fs39-87.txt',SLICE+'vidro_duplo-fs87.txt']#,  # simples/duplo e FS
+    'vidro': glob.glob(SLICES_FOLDER+'glass*'),  # [SLICE+'vidro_fs39.txt',SLICE+'vidro_fs87.txt',SLICE+'vidro_duplo-fs39-87.txt',SLICE+'vidro_duplo-fs87.txt']#,  # simples/duplo e FS
     
     'open_fac': glob.glob(SLICES_FOLDER+'afn_openingfactor*'),
 
-    'sombreamento': sombreamento #,  # [SLICE+'Multi/m_shade_050_geom_0_0_0.txt',SLICE+'Multi/m_shade_120_geom_0_0_0.txt'],
+    'sombreamento': sombreamento,  # [SLICE+'Multi/m_shade_050_geom_0_0_0.txt',SLICE+'Multi/m_shade_120_geom_0_0_0.txt'],
 
-    # 'paf': []
+    'paf': fenestration  # []
 }
 
 # Dependents
@@ -90,7 +98,9 @@ def parameter_file(key, i):
     n_files = len(PARAMETERS[key])
     file_name = PARAMETERS[key][int(n_files*i)]
     if key == 'sombreamento':
-        file_name = file_name+parameter_file('geometria', i).split('/')[-1][1:]
+        file_name = file_name+parameter_file('geometria', i).split('/')[-1][3:]
+    elif key == 'paf':
+        file_name = file_name+parameter_file('geometria', i).split('/')[-1][3:]
         
     return file_name
 

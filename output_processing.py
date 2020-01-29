@@ -39,12 +39,11 @@ def process_outputs(line, sup_lim, pattern):
     # dicioniario (dataframe) criado para adicinar as informacoes
     df_temp = {
         # 'folder': [],
-        'case': [],
+        # 'case': [],
         # 'file_pattern': [],
         'floor': [],
         'zone': [],
-        'zone': [],
-        'epw': [],
+        # 'epw': [],
         'ph_inf': [],
         'phft': [],
         'ph_sup': [],
@@ -53,72 +52,114 @@ def process_outputs(line, sup_lim, pattern):
         'cgtr_cooling': [],
         'cgtr_heating': []
     }
-        
-    # printa o nome do arquivo para podermos acompanhar o processo
-    print(line['case'],' ',line['epw'])  # , end='\r')
     
+    for col in df_temp.keys():
+        del(line[col])
+    for col in line.index:
+        df_temp[col] = []
+        
     # define o nome do output do energyplus a partir do nome do idf
     vn_csv_file = name_file(line['case'],pattern,'vn',line['epw'])  # '{:03.0f}'.format(
     ac_csv_file = name_file(line['case'],pattern,'ac',line['epw'])
     
     # le o output como um dataframe, utilizando o pandas
-    df_vn = pd.read_csv(line['epw']+'/'+vn_csv_file)
-    df_ac = pd.read_csv(line['epw']+'/'+ac_csv_file)
-
-    cols = df_ac.columns
-
-    zones = []
-
-    for col in cols:
-        if not OCCUP in col:
-            if 'DORM' in col or 'SALA' in col:
-                zones.append(col.split(' ')[0])
+    try:
+        df_vn = pd.read_csv(line['epw']+'/'+vn_csv_file)
+        df_ac = pd.read_csv(line['epw']+'/'+ac_csv_file)
         
-    zones = unique(zones)
+        # printa o nome do arquivo para podermos acompanhar o processo
+        print('case: ',line['case'],'    ',line['epw'])  # , end='\r')
 
-    for zn in zones:
+        cols = df_ac.columns
 
-        if len(zn.split('_')) > 1:
-            df_temp['floor'].append(zn.split('_')[0])
-        else:
-            df_temp['floor'].append('unique')
+        zones = []
 
-        if 'SALA' in zn:
-            zn_occup = schedule_name('SALA',OCCUP)
-        elif 'DORM' in zn:
-            zn_occup = schedule_name('DORM',OCCUP)
+        for col in cols:
+            if not OCCUP in col:
+                if 'DORM' in col or 'SALA' in col:
+                    zones.append(col.split(' ')[0])
+            
+        zones = unique(zones)
 
-        # df_temp['folder'].append(line['folder'])
-        df_temp['case'].append(line['case'])
-        df_temp['zone'].append(zn) 
-        df_temp['epw'].append(line['epw'])
+        for zn in zones:
 
+            if len(zn.split('_')) > 1:
+                df_temp['floor'].append(zn.split('_')[0])
+            else:
+                df_temp['floor'].append('unique')
+
+            if 'SALA' in zn:
+                zn_occup = schedule_name('SALA',OCCUP)
+            elif 'DORM' in zn:
+                zn_occup = schedule_name('DORM',OCCUP)
+
+            # df_temp['folder'].append(line['folder'])
+            # df_temp['case'].append(line['case'])  
+            # df_temp['epw'].append(line['epw']) 
+             
+            for col in line.index:
+                df_temp[col].append(line[col])
+                
+            df_temp['zone'].append(zn) 
+
+            try:
+                df_temp['t_min'].append((df_vn[zn+':Zone Operative Temperature [C](Hourly)'][df_vn[zn_occup] > 0]).min())
+            except:
+                zn_occup = zn_occup+' '
+                df_temp['t_min'].append((df_vn[zn+':Zone Operative Temperature [C](Hourly)'][df_vn[zn_occup] > 0]).min())
+            df_temp['t_max'].append((df_vn[zn+':Zone Operative Temperature [C](Hourly)'][df_vn[zn_occup] > 0]).max())
+
+            df_vn['inf_lim'] = 0
+            df_vn.loc[df_vn[zn+':Zone Operative Temperature [C](Hourly)'] < INF_LIM, 'inf_lim'] = 1
+            df_temp['ph_inf'].append(df_vn['inf_lim'][df_vn[zn_occup] > 0].mean())
+
+            df_vn['sup_lim'] = 0
+            df_vn.loc[df_vn[zn+':Zone Operative Temperature [C](Hourly)'] >= sup_lim, 'sup_lim'] = 1
+            df_temp['ph_sup'].append(df_vn['sup_lim'][df_vn[zn_occup] > 0].mean())
+
+            df_temp['phft'].append(1 - df_temp['ph_inf'][-1] - df_temp['ph_sup'][-1])
+
+
+            try:
+                df_temp['cgtr_heating'].append(df_ac[zn+' IDEAL LOADS AIR SYSTEM:Zone Ideal Loads Zone Total Heating Energy [J](Hourly)'][df_vn['sup_lim'] > 0].sum())
+            except:
+                df_temp['cgtr_heating'].append(df_ac[zn+' IDEAL LOADS AIR SYSTEM:Zone Ideal Loads Zone Total Heating Energy [J](Hourly) '][df_vn['sup_lim'] > 0].sum())
+            try:
+                df_temp['cgtr_cooling'].append(df_ac[zn+' IDEAL LOADS AIR SYSTEM:Zone Ideal Loads Zone Total Cooling Energy [J](Hourly) '][df_vn['sup_lim'] > 0].sum())
+            except:
+                df_temp['cgtr_cooling'].append(df_ac[zn+' IDEAL LOADS AIR SYSTEM:Zone Ideal Loads Zone Total Cooling Energy [J](Hourly)'][df_vn['sup_lim'] > 0].sum())
+                
+    except:
         try:
-            df_temp['t_min'].append((df_vn[zn+':Zone Operative Temperature [C](Hourly)'][df_vn[zn_occup] > 0]).min())
+            df_vn = pd.read_csv(line['epw']+'/'+vn_csv_file)          
+        
+            # printa o nome do arquivo para podermos acompanhar o processo
+            print('ERROR!!!    mode: AC    case: ',line['case'],' ',line['epw'])  # , end='\r')
+            error = 'AC ERROR' 
+                  
         except:
-            zn_occup = zn_occup+' '
-            df_temp['t_min'].append((df_vn[zn+':Zone Operative Temperature [C](Hourly)'][df_vn[zn_occup] > 0]).min())
-        df_temp['t_max'].append((df_vn[zn+':Zone Operative Temperature [C](Hourly)'][df_vn[zn_occup] > 0]).max())
-
-        df_vn['inf_lim'] = 0
-        df_vn.loc[df_vn[zn+':Zone Operative Temperature [C](Hourly)'] < INF_LIM, 'inf_lim'] = 1
-        df_temp['ph_inf'].append(df_vn['inf_lim'][df_vn[zn_occup] > 0].mean())
-
-        df_vn['sup_lim'] = 0
-        df_vn.loc[df_vn[zn+':Zone Operative Temperature [C](Hourly)'] >= sup_lim, 'sup_lim'] = 1
-        df_temp['ph_sup'].append(df_vn['sup_lim'][df_vn[zn_occup] > 0].mean())
-
-        df_temp['phft'].append(1 - df_temp['ph_inf'][-1] - df_temp['ph_sup'][-1])
-
-
-        try:
-            df_temp['cgtr_heating'].append(df_ac[zn+' IDEAL LOADS AIR SYSTEM:Zone Ideal Loads Zone Total Heating Energy [J](Hourly)'][df_vn['sup_lim'] > 0].sum())
-        except:
-            df_temp['cgtr_heating'].append(df_ac[zn+' IDEAL LOADS AIR SYSTEM:Zone Ideal Loads Zone Total Heating Energy [J](Hourly) '][df_vn['sup_lim'] > 0].sum())
-        try:
-            df_temp['cgtr_cooling'].append(df_ac[zn+' IDEAL LOADS AIR SYSTEM:Zone Ideal Loads Zone Total Cooling Energy [J](Hourly) '][df_vn['sup_lim'] > 0].sum())
-        except:
-            df_temp['cgtr_cooling'].append(df_ac[zn+' IDEAL LOADS AIR SYSTEM:Zone Ideal Loads Zone Total Cooling Energy [J](Hourly)'][df_vn['sup_lim'] > 0].sum())
+            try:
+                df_ac = pd.read_csv(line['epw']+'/'+ac_csv_file) 
+                # printa o nome do arquivo para podermos acompanhar o processo
+                print('ERROR!!!    mode: VN    case: ',line['case'],' ',line['epw'])  # , end='\r') 
+                error = 'VN ERROR' 
+            except:
+                error = 'CSV ERROR'
+                 
+        for col in line.index:
+            df_temp[col].append(line[col])
+        
+        # df_temp['case'].append(line['case'])
+        df_temp['floor'].append(error) 
+        df_temp['zone'].append(error) 
+        # df_temp['epw'].append(line['epw'])
+        df_temp['ph_inf'].append(error) 
+        df_temp['phft'].append(error) 
+        df_temp['ph_sup'].append(error) 
+        df_temp['t_min'].append(error) 
+        df_temp['t_max'].append(error) 
+        df_temp['cgtr_cooling'].append(error) 
+        df_temp['cgtr_heating'].append(error) 
             
     return(df_temp)
 
@@ -133,11 +174,11 @@ def main(df_base, sup_limits, output_name, num_cluster, pattern):
     # dicioniario (dataframe) criado para adicinar as informacoes
     df_final = {
         # 'folder': [],
-        'case': [],
+        # 'case': [],
         # 'file_pattern': [],
         'floor': [],
         'zone': [],
-        'epw': [],
+        # 'epw': [],
         'ph_inf': [],
         'phft': [],
         'ph_sup': [],
@@ -146,6 +187,9 @@ def main(df_base, sup_limits, output_name, num_cluster, pattern):
         'cgtr_cooling': [],
         'cgtr_heating': []
     }
+    
+    for col in df_base.columns:
+        df_final[col] = []
     
     # Month means ja foi calculado e eh lido como um dataframe, utilizando pandas (neste caso o clima eh sempre o mesmo)
     with open('../'+sup_limits, 'r') as file:            
