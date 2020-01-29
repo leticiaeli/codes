@@ -21,7 +21,8 @@ FOLDER = 'test_uni'  #
 SIZE =  10  # 
 SOBOL = False  # True  # 
 SAMPLE_NAME = 'sample_'+FOLDER+'_sobol_'+str(SOBOL)  # 
-GEN_SAMPLE = True  # False  # 
+GEN_SAMPLE = False  # True  # 
+SAMPLE_PARTS = (1,1)
 NUM_CLUSTERS = 3  # int(os.cpu_count()/2)
 NAME_STDRD = 'U'
 EXTENSION = 'idf'
@@ -38,7 +39,7 @@ OUTPUT_PROCESSED = 'outputs_'+FOLDER
 GEN_MODELS = False
 RUN_MODELS = False
 PROCESSESS_OUTPUT = True  # True
-RUN_ALL = True  # defines GEN_MODELS, RUN_MODELS, PROCESSESS_OUTPUT = True
+RUN_ALL = False  # defines GEN_MODELS, RUN_MODELS, PROCESSESS_OUTPUT = True
 
 SLICES_FOLDER = 'slices/'
 SUB_SLICES_FOLDER = 'Uni/'
@@ -117,7 +118,15 @@ if GEN_SAMPLE:
 else:
     print('\nREADING SAMPLE\n')
     sample = pd.read_csv(SAMPLE_NAME+'.csv')
-
+    
+    n = len(sample)//SAMPLE_PARTS[1]
+    sample_chuncks = [sample.iloc[i:i + n] for i in range(0, len(sample), n)]
+    if SAMPLE_PARTS[0] == SAMPLE_PARTS[1] and len(sample)%SAMPLE_PARTS[1] != 0:
+        sample = sample_chuncks[SAMPLE_PARTS[0]-1].append(sample_chuncks[SAMPLE_PARTS[0]], ignore_index = True).reset_index(drop=True)
+    else:
+        sample = sample_chuncks[SAMPLE_PARTS[0]-1].reset_index(drop=True)
+        
+print(sample)
 if SOBOL:
     sample = (sample+1)/2
 
@@ -126,6 +135,7 @@ print('\nGENERATING MODELS\n')
 
 df = pd.DataFrame(columns=col_names+['case'])  # 'folder',
 line = 0
+
 for i in range(len(sample)):
     
     sample_line = list(sample.iloc[i])

@@ -22,6 +22,7 @@ SIZE =  10  #
 SOBOL = False  # True  # 
 SAMPLE_NAME = 'sample_'+FOLDER+'_sobol_'+str(SOBOL)  # 
 GEN_SAMPLE = True  # False  # 
+SAMPLE_PARTS = (1,1)
 NUM_CLUSTERS = int(os.cpu_count()/2)
 NAME_STDRD = 'M'
 EXTENSION = 'idf'
@@ -117,6 +118,13 @@ if GEN_SAMPLE:
 else:
     print('\nREADING SAMPLE\n')
     sample = pd.read_csv(SAMPLE_NAME+'.csv')
+    
+    n = len(sample)//SAMPLE_PARTS[1]
+    sample_chuncks = [sample.iloc[i:i + n] for i in range(0, len(sample), n)]
+    if SAMPLE_PARTS[0] == SAMPLE_PARTS[1] and len(sample)%SAMPLE_PARTS[1] != 0:
+        sample = sample_chuncks[SAMPLE_PARTS[0]-1].append(sample_chuncks[SAMPLE_PARTS[0]], ignore_index = True).reset_index(drop=True)
+    else:
+        sample = sample_chuncks[SAMPLE_PARTS[0]-1].reset_index(drop=True)
 
 if SOBOL:
     sample = (sample+1)/2

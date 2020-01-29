@@ -54,7 +54,10 @@ def process_outputs(line, sup_lim, pattern):
     }
     
     for col in df_temp.keys():
-        del(line[col])
+        try:
+            del(line[col])
+        except:
+            pass    
     for col in line.index:
         df_temp[col] = []
         
@@ -220,6 +223,7 @@ def main(df_base, sup_limits, output_name, num_cluster, pattern):
     df_output = pd.DataFrame(df_final)
     df_output.to_csv(output_name+'.csv', index=False)
     print('\tDone processing!')
+
 '''
 phft = np.mean((l <26)*l/l)
 

@@ -191,7 +191,6 @@ AirflowNetwork:MultiZone:Component:DetailedOpening,
     1,                       !- Height Factor for Opening Factor 2 {dimensionless}
     0;                       !- Start Height Factor for Opening Factor 2 {dimensionless}
 
-
 !-   ===========  ALL OBJECTS IN CLASS: OUTPUT:VARIABLE ===========
 
 Output:Variable,
