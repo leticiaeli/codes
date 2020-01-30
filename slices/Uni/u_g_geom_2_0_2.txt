@@ -59,7 +59,7 @@ GlobalGeometryRules,
 
 !-   ===========  ALL OBJECTS IN CLASS: ZONE ===========
 
-,
+Zone,
   bwc,
   0.0,
   0.0,
