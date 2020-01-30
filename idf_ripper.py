@@ -1,5 +1,5 @@
 
-def idf_ripper(input_file_name, slices):
+def idf_ripper(input_file_name, slices, left='main'):
     # Creates new idf files only with the objects defined on a dictioinary.
     # 
     # INPUTS:
@@ -8,9 +8,9 @@ def idf_ripper(input_file_name, slices):
     # in each generated file
 
     outputs = {
-        'main': open(input_file_name.split('.')[0]+'_'+'main.idf', 'w')
+        left: open(input_file_name.split('.')[0]+'_'+left+'.idf', 'w')
     }
-    writeon = 'main'
+    writeon = left
 
     input_file = open(input_file_name, 'r')
 
@@ -21,13 +21,13 @@ def idf_ripper(input_file_name, slices):
         for slc in slices.keys():
             for obj in slices[slc]:
                 
-                if obj in line:
+                if line.startswith(obj):
                     writeon = slc
 
         outputs[writeon].write(line)
                 
         if ';' in line:
-            writeon = 'main'
+            writeon = left
 
 '''
 #### EXAMPLE ####
