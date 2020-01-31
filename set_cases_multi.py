@@ -22,11 +22,11 @@ FOLDER = 'multi'  #
 SIZE =  280  # 
 SOBOL = False  # True  # 
 SAMPLE_NAME = 'sample_'+FOLDER+'_sobol_'+str(SOBOL)+'_'+date  # 
-GEN_SAMPLE = True  # False  # 
+GEN_SAMPLE = False  # True  # 
 if not GEN_SAMPLE:
     SAMPLE_NAME = sorted(glob.glob('sample_'+FOLDER+'_sobol_*'))[-1].split('.')[0]
 # SAMPLE_PARTS = (1,7)  # AQUI VOCE DEVE MUDAR A PARTE (RAYNER = (1,7))
-NUM_CLUSTERS = int(os.cpu_count())  # AQUI EH DEFINIFO O NUMERO DE CORES (RAYNER = 5)
+NUM_CLUSTERS = 5  #int(os.cpu_count())  # AQUI EH DEFINIFO O NUMERO DE CORES
 NAME_STDRD = 'M'
 EXTENSION = 'idf'
 REMOVE_ALL_BUT = [EXTENSION, 'csv', 'err']
@@ -42,7 +42,7 @@ OUTPUT_PROCESSED = 'outputs_'+FOLDER+'_'+date
 GEN_MODELS = False
 RUN_MODELS = False
 PROCESSESS_OUTPUT = False  # True
-RUN_ALL = False  # defines GEN_MODELS, RUN_MODELS, PROCESSESS_OUTPUT = True
+RUN_ALL = True  # defines GEN_MODELS, RUN_MODELS, PROCESSESS_OUTPUT = True
 
 SLICES_FOLDER = 'slices/'
 SUB_SLICES_FOLDER = 'Multi/'
@@ -98,6 +98,11 @@ if RUN_ALL:
 col_names = list(PARAMETERS)
 name_length = '{:0'+str(len(str(SIZE)))+'.0f}'
 
+if os.name == 'posix':
+    sep = '/'
+else:
+    sep = '\\'
+
 def parameter_file(key, sample_line):
     i = sample_line[key]
     n_files = len(PARAMETERS[key])
@@ -113,10 +118,7 @@ print('\nCREATING DIRECTORIES\n')
 
 os.system('mkdir '+FOLDER)
 for epw in EPW_NAMES:
-    if os.name == 'posix':
-        os.system('mkdir '+FOLDER+'/'+epw)
-    else:
-        os.system('mkdir '+FOLDER+'\\'+epw)
+    os.system('mkdir '+FOLDER+sep+epw)
     
 # Generate sample
 if GEN_SAMPLE:
@@ -155,10 +157,10 @@ for i in range(len(sample)):
 
     if GEN_MODELS:
         # AC
-        idf_bundler([model_values[param] for param in model_values.keys()]+MAIN+AC_FILE, output_name = FOLDER+'/'+output+'_ac.'+EXTENSION)
+        idf_bundler([model_values[param] for param in model_values.keys()]+MAIN+AC_FILE, output_name = FOLDER+sep+output+'_ac.'+EXTENSION)
             
         # VN
-        idf_bundler([model_values[param] for param in model_values.keys()]+MAIN+VN_FILE, output_name = FOLDER+'/'+output+'_vn.'+EXTENSION)
+        idf_bundler([model_values[param] for param in model_values.keys()]+MAIN+VN_FILE, output_name = FOLDER+sep+output+'_vn.'+EXTENSION)
         
     line += 1
 
