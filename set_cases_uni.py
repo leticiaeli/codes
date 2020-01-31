@@ -109,9 +109,9 @@ def parameter_file(key, sample_line):
     n_files = len(PARAMETERS[key])
     file_name = PARAMETERS[key][int(n_files*i)]
     if key == 'sombreamento':
-        file_name = file_name+parameter_file('geometria', sample_line).split('/')[-1][3:]
+        file_name = file_name+parameter_file('geometria', sample_line).split(sep)[-1][3:]
     elif key == 'paf':
-        file_name = file_name+parameter_file('geometria', sample_line).split('/')[-1][3:]
+        file_name = file_name+parameter_file('geometria', sample_line).split(sep)[-1][3:]
         
     return file_name
 
