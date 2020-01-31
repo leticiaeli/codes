@@ -13,6 +13,8 @@ OCCUP = ':Schedule Value [](Hourly)'  # ':People Occupant Count [](Hourly)'  #
 # ZONES = ['SALA','DORM1','DORM2']
 INF_LIM = 18
 
+# n_errors = 0
+
 def schedule_name(zone, occup):
     return('SCH_OCUP_'+zone+occup)
  # 'SCH_OCUPACAO:Schedule Value [](Hourly)'
@@ -70,68 +72,87 @@ def process_outputs(line, sup_lim, pattern):
         df_vn = pd.read_csv(line['epw']+'/'+vn_csv_file)
         df_ac = pd.read_csv(line['epw']+'/'+ac_csv_file)
         
-        # printa o nome do arquivo para podermos acompanhar o processo
-        print('case: ',line['case'],'    ',line['epw'])  # , end='\r')
+        if len(df_ac) == len(df_vn):
+            # printa o nome do arquivo para podermos acompanhar o processo
+            print('case: ',line['case'],'    ',line['epw'])  # , end='\r')
 
-        cols = df_ac.columns
+            cols = df_ac.columns
 
-        zones = []
+            zones = []
 
-        for col in cols:
-            if not OCCUP in col:
-                if 'DORM' in col or 'SALA' in col:
-                    zones.append(col.split(' ')[0])
-            
-        zones = unique(zones)
+            for col in cols:
+                if not OCCUP in col:
+                    if 'DORM' in col or 'SALA' in col:
+                        zones.append(col.split(' ')[0])
+                
+            zones = unique(zones)
 
-        for zn in zones:
+            for zn in zones:
 
-            if len(zn.split('_')) > 1:
-                df_temp['floor'].append(zn.split('_')[0])
-            else:
-                df_temp['floor'].append('unique')
+                if len(zn.split('_')) > 1:
+                    df_temp['floor'].append(zn.split('_')[0])
+                else:
+                    df_temp['floor'].append('unique')
 
-            if 'SALA' in zn:
-                zn_occup = schedule_name('SALA',OCCUP)
-            elif 'DORM' in zn:
-                zn_occup = schedule_name('DORM',OCCUP)
+                if 'SALA' in zn:
+                    zn_occup = schedule_name('SALA',OCCUP)
+                elif 'DORM' in zn:
+                    zn_occup = schedule_name('DORM',OCCUP)
 
-            # df_temp['folder'].append(line['folder'])
-            # df_temp['case'].append(line['case'])  
-            # df_temp['epw'].append(line['epw']) 
-             
+                # df_temp['folder'].append(line['folder'])
+                # df_temp['case'].append(line['case'])  
+                # df_temp['epw'].append(line['epw']) 
+                 
+                for col in line.index:
+                    df_temp[col].append(line[col])
+                    
+                df_temp['zone'].append(zn) 
+
+                try:
+                    df_temp['t_min'].append((df_vn[zn+':Zone Operative Temperature [C](Hourly)'][df_vn[zn_occup] > 0]).min())
+                except:
+                    zn_occup = zn_occup+' '
+                    df_temp['t_min'].append((df_vn[zn+':Zone Operative Temperature [C](Hourly)'][df_vn[zn_occup] > 0]).min())
+                df_temp['t_max'].append((df_vn[zn+':Zone Operative Temperature [C](Hourly)'][df_vn[zn_occup] > 0]).max())
+
+                df_vn['inf_lim'] = 0
+                df_vn.loc[df_vn[zn+':Zone Operative Temperature [C](Hourly)'] < INF_LIM, 'inf_lim'] = 1
+                df_temp['ph_inf'].append(df_vn['inf_lim'][df_vn[zn_occup] > 0].mean())
+
+                df_vn['sup_lim'] = 0
+                df_vn.loc[df_vn[zn+':Zone Operative Temperature [C](Hourly)'] >= sup_lim, 'sup_lim'] = 1
+                df_temp['ph_sup'].append(df_vn['sup_lim'][df_vn[zn_occup] > 0].mean())
+
+                df_temp['phft'].append(1 - df_temp['ph_inf'][-1] - df_temp['ph_sup'][-1])
+
+
+                try:
+                    df_temp['cgtr_heating'].append(df_ac[zn+' IDEAL LOADS AIR SYSTEM:Zone Ideal Loads Zone Total Heating Energy [J](Hourly)'][df_vn['sup_lim'] > 0].sum())
+                except:
+                    df_temp['cgtr_heating'].append(df_ac[zn+' IDEAL LOADS AIR SYSTEM:Zone Ideal Loads Zone Total Heating Energy [J](Hourly) '][df_vn['sup_lim'] > 0].sum())
+                try:
+                    df_temp['cgtr_cooling'].append(df_ac[zn+' IDEAL LOADS AIR SYSTEM:Zone Ideal Loads Zone Total Cooling Energy [J](Hourly) '][df_vn['sup_lim'] > 0].sum())
+                except:
+                    df_temp['cgtr_cooling'].append(df_ac[zn+' IDEAL LOADS AIR SYSTEM:Zone Ideal Loads Zone Total Cooling Energy [J](Hourly)'][df_vn['sup_lim'] > 0].sum())
+        else:            
+            print('ERROR!!!    CSV INCOMPLETE!!!    case: ',line['case'],' ',line['epw'])  # , end='\r')
+            error = 'CSV ERROR' 
+                 
             for col in line.index:
                 df_temp[col].append(line[col])
-                
-            df_temp['zone'].append(zn) 
+            
+            # df_temp['case'].append(line['case'])
+            df_temp['floor'].append(error) 
+            df_temp['zone'].append(error) 
+            # df_temp['epw'].append(line['epw'])
+            df_temp['ph_inf'].append(error) 
+            df_temp['phft'].append(error) 
+            df_temp['ph_sup'].append(error) 
+            df_temp['t_min'].append(error) 
+            df_temp['t_max'].append(error) 
+            df_temp['cgtr_cooling'].append(error) 
+            df_temp['cgtr_heating'].append(error) 
 
-            try:
-                df_temp['t_min'].append((df_vn[zn+':Zone Operative Temperature [C](Hourly)'][df_vn[zn_occup] > 0]).min())
-            except:
-                zn_occup = zn_occup+' '
-                df_temp['t_min'].append((df_vn[zn+':Zone Operative Temperature [C](Hourly)'][df_vn[zn_occup] > 0]).min())
-            df_temp['t_max'].append((df_vn[zn+':Zone Operative Temperature [C](Hourly)'][df_vn[zn_occup] > 0]).max())
-
-            df_vn['inf_lim'] = 0
-            df_vn.loc[df_vn[zn+':Zone Operative Temperature [C](Hourly)'] < INF_LIM, 'inf_lim'] = 1
-            df_temp['ph_inf'].append(df_vn['inf_lim'][df_vn[zn_occup] > 0].mean())
-
-            df_vn['sup_lim'] = 0
-            df_vn.loc[df_vn[zn+':Zone Operative Temperature [C](Hourly)'] >= sup_lim, 'sup_lim'] = 1
-            df_temp['ph_sup'].append(df_vn['sup_lim'][df_vn[zn_occup] > 0].mean())
-
-            df_temp['phft'].append(1 - df_temp['ph_inf'][-1] - df_temp['ph_sup'][-1])
-
-
-            try:
-                df_temp['cgtr_heating'].append(df_ac[zn+' IDEAL LOADS AIR SYSTEM:Zone Ideal Loads Zone Total Heating Energy [J](Hourly)'][df_vn['sup_lim'] > 0].sum())
-            except:
-                df_temp['cgtr_heating'].append(df_ac[zn+' IDEAL LOADS AIR SYSTEM:Zone Ideal Loads Zone Total Heating Energy [J](Hourly) '][df_vn['sup_lim'] > 0].sum())
-            try:
-                df_temp['cgtr_cooling'].append(df_ac[zn+' IDEAL LOADS AIR SYSTEM:Zone Ideal Loads Zone Total Cooling Energy [J](Hourly) '][df_vn['sup_lim'] > 0].sum())
-            except:
-                df_temp['cgtr_cooling'].append(df_ac[zn+' IDEAL LOADS AIR SYSTEM:Zone Ideal Loads Zone Total Cooling Energy [J](Hourly)'][df_vn['sup_lim'] > 0].sum())
-                
     except:
         try:
             df_vn = pd.read_csv(line['epw']+'/'+vn_csv_file)          
@@ -147,6 +168,7 @@ def process_outputs(line, sup_lim, pattern):
                 print('ERROR!!!    mode: VN    case: ',line['case'],' ',line['epw'])  # , end='\r') 
                 error = 'VN ERROR' 
             except:
+                # n_errors += 1
                 error = 'CSV ERROR'
                  
         for col in line.index:
@@ -215,11 +237,18 @@ def main(df_base, sup_limits, output_name, num_cluster, pattern):
 
     # passa os resultados dos multi processos para o df_final
     for df_temp in result_map:
+        # if len(df_temp['zone']) != len(df_temp['ph_inf']):
+            # print(df_temp['case'][0],df_temp['epw'][0],len(df_temp['zone']),len(df_temp['ph_inf']))
         for key in df_final.keys():
             for i in range(len(df_temp[key])):
                 df_final[key].append(df_temp[key][i])
     
     # salva o df_final como csv
+    # for col in df_final.keys():
+    #     print(col,len(df_final[col]))
+
+    n_errors = df_final['zone'].count('AC ERROR') + df_final['zone'].count('VN ERROR') + df_final['zone'].count('CSV ERROR')
+    print('\n\tNumber of simulations with errors: '+str(n_errors)+'\n')
     df_output = pd.DataFrame(df_final)
     df_output.to_csv(output_name+'.csv', index=False)
     print('\tDone processing!')

@@ -15,15 +15,18 @@ from unique import unique
 update = dict_update.update
         
 start_time = datetime.datetime.now()
+date = start_time.strftime("%d-%m-%y_%H-%M")
 
 # Globals
-FOLDER = 'test_multi'  # 
-SIZE =  10  # 
+FOLDER = 'multi'  # 
+SIZE =  280  # 
 SOBOL = False  # True  # 
-SAMPLE_NAME = 'sample_'+FOLDER+'_sobol_'+str(SOBOL)  # 
+SAMPLE_NAME = 'sample_'+FOLDER+'_sobol_'+str(SOBOL)+'_'+date  # 
 GEN_SAMPLE = True  # False  # 
-SAMPLE_PARTS = (1,1)
-NUM_CLUSTERS = int(os.cpu_count()/2)
+if not GEN_SAMPLE:
+    SAMPLE_NAME = sorted(glob.glob('sample_'+FOLDER+'_sobol_*'))[-1].split('.')[0]
+# SAMPLE_PARTS = (1,7)  # AQUI VOCE DEVE MUDAR A PARTE (RAYNER = (1,7))
+NUM_CLUSTERS = int(os.cpu_count())  # AQUI EH DEFINIFO O NUMERO DE CORES (RAYNER = 5)
 NAME_STDRD = 'M'
 EXTENSION = 'idf'
 REMOVE_ALL_BUT = [EXTENSION, 'csv', 'err']
@@ -33,19 +36,19 @@ EPW_NAMES = [
     'BRA_MA_Sao.Luis.817150_INMET.epw','BRA_TO_Palmas.866070_INMET.epw'
 ]
 SUP_LIMITS = 'sup_limits.json'
-OUTPUT_PROCESSED = 'outputs_'+FOLDER
+OUTPUT_PROCESSED = 'outputs_'+FOLDER+'_'+date
 
 # To choose what to run in the code
 GEN_MODELS = False
 RUN_MODELS = False
-PROCESSESS_OUTPUT = True  # True
+PROCESSESS_OUTPUT = False  # True
 RUN_ALL = False  # defines GEN_MODELS, RUN_MODELS, PROCESSESS_OUTPUT = True
 
 SLICES_FOLDER = 'slices/'
 SUB_SLICES_FOLDER = 'Multi/'
 SLICE_PATTERN = 'm_'
 
-MAIN = glob.glob(SLICES_FOLDER+'main*')  # ['slices/main_materials_fixed.txt', 'slices/main.txt']
+MAIN = sorted(glob.glob(SLICES_FOLDER+'main*'))  # ['slices/main_materials_fixed.txt', 'slices/main.txt']
 VN_FILE = [SLICES_FOLDER+SUB_SLICES_FOLDER+SLICE_PATTERN+'afn.txt']
 AC_FILE = [SLICES_FOLDER+SUB_SLICES_FOLDER+SLICE_PATTERN+'idealloads.txt']
 
@@ -53,32 +56,32 @@ SOMB_PATTERN = 'shade'
 SOMB_SUFIX = '_000'
 
 somb_pattern = SLICE_PATTERN+SOMB_PATTERN
-sombreamento = glob.glob(SLICES_FOLDER+SUB_SLICES_FOLDER+somb_pattern+'*')
+sombreamento = sorted(glob.glob(SLICES_FOLDER+SUB_SLICES_FOLDER+somb_pattern+'*'))
 sombreamento = [somb[:len(SLICES_FOLDER+SUB_SLICES_FOLDER+somb_pattern+SOMB_SUFIX)] for somb in sombreamento]
 sombreamento = unique(sombreamento)
 
-FENES_PATTERN = 'fenes'
-FENES_SUFIX = '_17'
+FENES_PATTERN = 'wwr'
+FENES_SUFIX = '_30'
 
 fenes_pattern = SLICE_PATTERN+FENES_PATTERN
-fenestration = glob.glob(SLICES_FOLDER+SUB_SLICES_FOLDER+fenes_pattern+'*')
+fenestration = sorted(glob.glob(SLICES_FOLDER+SUB_SLICES_FOLDER+fenes_pattern+'*'))
 fenestration = [fenes[:len(SLICES_FOLDER+SUB_SLICES_FOLDER+fenes_pattern+FENES_SUFIX)] for fenes in fenestration]
 fenestration = unique(fenestration)
 
 PARAMETERS = {
-    'geometria': glob.glob(SLICES_FOLDER+SUB_SLICES_FOLDER+SLICE_PATTERN+'?_geom*'),  # [SLICE+'Multi/m_geom_0_0_0.txt',SLICE+'Multi/m_geom_0_0_1.txt',SLICE+'Multi/m_geom_1_0_0.txt', SLICE+'Multi/m_geom_1_0_1.txt',SLICE+'Multi/m_geom_2_0_0.txt'],  # area, ratio, pe-direito, janelas
+    'geometria': sorted(glob.glob(SLICES_FOLDER+SUB_SLICES_FOLDER+SLICE_PATTERN+'?_geom*')),  # [SLICE+'Multi/m_geom_0_0_0.txt',SLICE+'Multi/m_geom_0_0_1.txt',SLICE+'Multi/m_geom_1_0_0.txt', SLICE+'Multi/m_geom_1_0_1.txt',SLICE+'Multi/m_geom_2_0_0.txt'],  # area, ratio, pe-direito, janelas
 
-    'azimute': glob.glob(SLICES_FOLDER+'rotation*'),  # [SLICE+'rotation_000.txt',SLICE+'rotation_090.txt',SLICE+'rotation_180.txt',SLICE+'rotation_270.txt'],
+    'azimute': sorted(glob.glob(SLICES_FOLDER+'rotation*')),  # [SLICE+'rotation_000.txt',SLICE+'rotation_090.txt',SLICE+'rotation_180.txt',SLICE+'rotation_270.txt'],
 
-    'veneziana': glob.glob(SLICES_FOLDER+SUB_SLICES_FOLDER+SLICE_PATTERN+'blind*'),  # [SLICE+'Multi/m_blind_off.txt',SLICE+'Multi/m_blind_on.txt'],
+    'veneziana': sorted(glob.glob(SLICES_FOLDER+SUB_SLICES_FOLDER+SLICE_PATTERN+'blind*')),  # [SLICE+'Multi/m_blind_off.txt',SLICE+'Multi/m_blind_on.txt'],
 
-    'componente':  glob.glob(SLICES_FOLDER+SUB_SLICES_FOLDER+SLICE_PATTERN+'construction*'),  # [SLICE+'Multi/m_construction_ref.txt',SLICE+'Multi/m_construction_sfiso.txt',SLICE+'Multi/m_construction_tijmacico20.txt',SLICE+'Multi/m_construction_tv.txt'],  # paredes, piso e coertura
+    'componente':  sorted(glob.glob(SLICES_FOLDER+SUB_SLICES_FOLDER+SLICE_PATTERN+'construction*')),  # [SLICE+'Multi/m_construction_ref.txt',SLICE+'Multi/m_construction_sfiso.txt',SLICE+'Multi/m_construction_tijmacico20.txt',SLICE+'Multi/m_construction_tv.txt'],  # paredes, piso e coertura
 
-    'absortancia': glob.glob(SLICES_FOLDER+'abs*'),  # [SLICE+'abs_60.txt',SLICE+'abs_20.txt',SLICE+'abs_80.txt'],  # paredes e cobertura
+    'absortancia': sorted(glob.glob(SLICES_FOLDER+'abs*')),  # [SLICE+'abs_60.txt',SLICE+'abs_20.txt',SLICE+'abs_80.txt'],  # paredes e cobertura
 
-    'vidro': glob.glob(SLICES_FOLDER+'glass*'),  # [SLICE+'vidro_fs39.txt',SLICE+'vidro_fs87.txt',SLICE+'vidro_duplo-fs39-87.txt',SLICE+'vidro_duplo-fs87.txt']#,  # simples/duplo e FS
+    'vidro': sorted(glob.glob(SLICES_FOLDER+'glass*')),  # [SLICE+'vidro_fs39.txt',SLICE+'vidro_fs87.txt',SLICE+'vidro_duplo-fs39-87.txt',SLICE+'vidro_duplo-fs87.txt']#,  # simples/duplo e FS
     
-    'open_fac': glob.glob(SLICES_FOLDER+'afn_openingfactor*'),
+    'open_fac': sorted(glob.glob(SLICES_FOLDER+'afn_openingfactor*')),
 
     'sombreamento': sombreamento,  # [SLICE+'Multi/m_shade_050_geom_0_0_0.txt',SLICE+'Multi/m_shade_120_geom_0_0_0.txt'],
 
@@ -95,13 +98,14 @@ if RUN_ALL:
 col_names = list(PARAMETERS)
 name_length = '{:0'+str(len(str(SIZE)))+'.0f}'
 
-def parameter_file(key, i):
+def parameter_file(key, sample_line):
+    i = sample_line[key]
     n_files = len(PARAMETERS[key])
     file_name = PARAMETERS[key][int(n_files*i)]
     if key == 'sombreamento':
-        file_name = file_name+parameter_file('geometria', i).split('/')[-1][3:]
+        file_name = file_name+parameter_file('geometria', sample_line).split('/')[-1][3:]
     elif key == 'paf':
-        file_name = file_name+parameter_file('geometria', i).split('/')[-1][3:]
+        file_name = file_name+parameter_file('geometria', sample_line).split('/')[-1][3:]
         
     return file_name
 
@@ -109,7 +113,10 @@ print('\nCREATING DIRECTORIES\n')
 
 os.system('mkdir '+FOLDER)
 for epw in EPW_NAMES:
-    os.system('mkdir '+FOLDER+'/'+epw)
+    if os.name == 'posix':
+        os.system('mkdir '+FOLDER+'/'+epw)
+    else:
+        os.system('mkdir '+FOLDER+'\\'+epw)
     
 # Generate sample
 if GEN_SAMPLE:
@@ -125,25 +132,25 @@ else:
         sample = sample_chuncks[SAMPLE_PARTS[0]-1].append(sample_chuncks[SAMPLE_PARTS[0]], ignore_index = True).reset_index(drop=True)
     else:
         sample = sample_chuncks[SAMPLE_PARTS[0]-1].reset_index(drop=True)
-
+        
 if SOBOL:
     sample = (sample+1)/2
 
 # Set cases
-print('\nGENERATING MODELS\n')
+if GEN_MODELS:
+    print('\nGENERATING MODELS\n')
 
 df = pd.DataFrame(columns=col_names+['case'])  # 'folder',
 line = 0
+
 for i in range(len(sample)):
     
-    sample_line = list(sample.iloc[i])
-    
-    model_values = dict((param,parameter_file(param, sample.loc[i, param])) for param in col_names)
+    model_values = dict((param,parameter_file(param, sample.iloc[i])) for param in col_names)  # sample.loc[i, param]
     
     case = name_length.format(line)
     
     output = (NAME_STDRD+'_{}'.format(case))
-    df = df.append(pd.DataFrame([sample_line+[case]],columns=col_names+['case']))  # 'cluster'+name_length_cluster.format(cluster_n),  # 'folder',
+    df = df.append(pd.DataFrame([[model_values[param].split('/')[-1] for param in model_values.keys()]+[case]],columns=col_names+['case']))  # 'cluster'+name_length_cluster.format(cluster_n),  # 'folder',
     # print(output)
 
     if GEN_MODELS:

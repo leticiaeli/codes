@@ -53,7 +53,10 @@ def simulate(epjson_name, cluster, extension='epJSON', version_EnergyPlus='energ
 
     # os.chdir(folder_name)
     processing = subprocess.Popen(stringcluster, stdout = open(os.devnull, 'w'), stderr = subprocess.STDOUT, shell=True)
+    # processing = subprocess.Popen(stringcluster, stdout = subprocess.PIPE, stderr = subprocess.PIPE, shell=True)
     # os.chdir('..')
+
+    # processing.communicate()
 
     return [processing, cluster, epjson_name, epw_name]
 
@@ -117,6 +120,22 @@ def main(num_clusters,extension = 'epJSON',remove_all_but = ['.epJSON', '.csv'],
                     check_execute[simulation[1]] = 0
                     remove_rest(list_execute[i][2],list_execute[i][3],remove_all_but)  # ,num_clusters
                     del list_execute[i]
+                else:
+                    try:
+                        fatalerror = False
+                        f = open(simulation[3]+'/'+simulation[2].split('.')[0]+'out.err', 'r').readlines()
+                        for line in f:
+                            if '************* EnergyPlus Terminated--Fatal Error Detected.' in line:
+                                fatalerror = True
+                        if fatalerror:
+                            print('FATAL ERROR!!!    '+simulation[3]+'/'+simulation[2])
+                            check_available_clusters += 1
+                            check_execute[simulation[1]] = 0
+                            remove_rest(list_execute[i][2],list_execute[i][3],remove_all_but)  # ,num_clusters
+                            del list_execute[i]
+                    except:
+                        pass
+
 
         # if sum([len(i) for i in list_epjson_names]) <= num_clusters:
         if len(list_epjson_names) <= num_clusters:

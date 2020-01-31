@@ -25,7 +25,7 @@ def constant_vertex(vertex, vertex_list, scale):
     return(new_vertex)  
 
 def scaling(scales={'scalex':1, 'scaley':1,'scalez':1}, ref=(False,.17), wwr = (True,.5), window_scale=True,
-    shading_scale=True, input_file='model.epJSON',output_name='scaled_model'):
+    shading_scale=True, input_file='model.epJSON',output_name='scaled_model.epJSON'):
     # This function multiplies the vertices of the EnergyPlus model by a
     # determined value, and returns the scaled model (.idf and .epJSON)
     # scalex - Scale factor to be multiplied by the x vertices.
@@ -633,7 +633,7 @@ def scaling(scales={'scalex':1, 'scaley':1,'scalez':1}, ref=(False,.17), wwr = (
 # FILE_NAME = 'vn_Caso2.idf'
 # scales={'scalex':4, 'scaley':4,'scalez':1}
 
-# scaling(scales, ref=(True,REF_WINDOW_TO_FLOOR_RATIO),
+# scaling(scales, ref=(False,REF_WINDOW_TO_FLOOR_RATIO), wwr=(True,.5),
 #     window_scale=False, shading_scale=False,
 #     input_file= FILE_NAME, output_name='teste_newref4.epJSON')
 

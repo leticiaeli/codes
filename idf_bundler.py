@@ -6,11 +6,12 @@ def idf_bundler(input_files, output_name):
     print(output_name)
     
     for i in range(len(input_files)):
-        input_files[i] = open(input_files[i], 'rb')
+        input_files[i] = open(input_files[i], 'r')
     
-    with open(output_name, 'wb') as model:
+    with open(output_name, 'w') as model:
         
         for i in range(len(input_files)):
             for line in input_files[i]:
                 
                 model.write(line)
+            model.write('\n')
