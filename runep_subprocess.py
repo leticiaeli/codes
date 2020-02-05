@@ -118,6 +118,7 @@ def main(num_clusters,extension = 'epJSON',remove_all_but = ['.epJSON', '.csv'],
                 if simulation[0].poll() == 0:
                     check_available_clusters += 1
                     check_execute[simulation[1]] = 0
+                    time.sleep(1)
                     remove_rest(list_execute[i][2],list_execute[i][3],remove_all_but)  # ,num_clusters
                     del list_execute[i]
                 else:
@@ -129,10 +130,14 @@ def main(num_clusters,extension = 'epJSON',remove_all_but = ['.epJSON', '.csv'],
                                 fatalerror = True
                         if fatalerror:
                             print('FATAL ERROR!!!    '+simulation[3]+'/'+simulation[2])
-                            check_available_clusters += 1
-                            check_execute[simulation[1]] = 0
-                            remove_rest(list_execute[i][2],list_execute[i][3],remove_all_but)  # ,num_clusters
-                            del list_execute[i]
+                            try:
+                                check_available_clusters += 1
+                                check_execute[simulation[1]] = 0
+                                time.sleep(1)
+                                remove_rest(list_execute[i][2],list_execute[i][3],remove_all_but)  # ,num_clusters
+                                del list_execute[i]
+                            except:
+                                time.sleep(1)
                     except:
                         pass
 
