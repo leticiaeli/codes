@@ -1,14 +1,13 @@
 from multiprocessing import Pool  # possibilita processos multithread
 import os
 import pandas as pd
-
 import output_processing
 
-FOLDER = 'test_multi'
-OUTPUT_PROCESSED = 'outputs_'+FOLDER
+FOLDER = 'multi1'
+OUTPUT_PROCESSED = 'outputs_multi1_03-02-20_13-45' # 'outputs_multi3_31-01-20_18-45'  # 'outputs_'+FOLDER
 SUP_LIMITS = 'sup_limits.json'
-NUM_CLUSTERS = int(os.cpu_count()/2)
-SIZE =  10  # 
+NUM_CLUSTERS = int(os.cpu_count()/3)
+SIZE =  280  # 
 NAME_STDRD = 'M'
 EXTENSION = 'idf'
 
@@ -16,7 +15,7 @@ name_length = '{:0'+str(len(str(SIZE)))+'.0f}'
 
 def runep(line):
     epw = line['epw']
-    case = name_length.format(line['case'])
+    case = line['case']  # name_length.format()
     
     if line['zone'] == 'AC ERROR':
         mode = 'ac'
@@ -40,14 +39,14 @@ if len(df_csv) > 0:
 df_base = df_vn.append(df_ac, ignore_index = True)
 df_base['case'] = df_base['case'].apply(name_length.format)
 
-# print('\nRUNNING SIMULATIONS\n')
+print('\nRUNNING SIMULATIONS\n')
 
-# p = Pool(NUM_CLUSTERS)  # abre os multi processos
+p = Pool(NUM_CLUSTERS)  # abre os multi processos
 
-## manda rodar a funcao process_outputs para os multiprocessos
-# result_map = p.starmap(runep, zip(
-    # [df_base.iloc[i] for i in range(len(df_base))]
-# ))
+# manda rodar a funcao process_outputs para os multiprocessos
+result_map = p.starmap(runep, zip(
+    [df_base.iloc[i] for i in range(len(df_base))]
+))
 
 os.chdir(FOLDER)
 
