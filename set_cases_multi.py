@@ -18,16 +18,16 @@ start_time = datetime.datetime.now()
 date = start_time.strftime("%d-%m-%y_%H-%M")
 
 # Globals
-FOLDER = 'multi7'  #
-FOLDERold = 'multi'  # 
+FOLDER = 'multi4'  # 
+FOLDERold = 'multi'  #
 SIZE =  280  # 
 SOBOL = False  # True  # 
 SAMPLE_NAME = 'sample_'+FOLDERold+'_sobol_'+str(SOBOL)+'_'+date  # 
 GEN_SAMPLE = False  # True  # 
 if not GEN_SAMPLE:
     SAMPLE_NAME = sorted(glob.glob('sample_'+FOLDERold+'_sobol_*'))[-1].split('.')[0]
-SAMPLE_PARTS = (7,7)  # AQUI VOCE DEVE MUDAR A PARTE (RAYNER = (1,7))
-NUM_CLUSTERS = int(os.cpu_count()/3)  # AQUI EH DEFINIFO O NUMERO DE CORES
+SAMPLE_PARTS = (4,7)  # AQUI VOCE DEVE MUDAR A PARTE (RAYNER = (1,7))
+NUM_CLUSTERS = 5  #int(os.cpu_count())  # DAQUI EH DEFINIFO O NUMERO E CORES
 NAME_STDRD = 'M'
 EXTENSION = 'idf'
 REMOVE_ALL_BUT = [EXTENSION, 'csv', 'err']

@@ -18,6 +18,9 @@
 *.idf
 *.epJSON
 
+*.swo
+*.swp
+
 *.zip
 *.7z
 
