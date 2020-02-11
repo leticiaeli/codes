@@ -20,12 +20,12 @@ Construction,
     concreto_10cm_abs0.5;    !- Layer 3
 
 Construction,
-    cob,                     !- Name
-    fibro_telha,             !- Outside Layer
+    cob,                         !- Name
+    fibro_telha,                 !- Outside Layer
     aluminio_barreira_radiante,  !- Layer 2
-    camara_cobertura,        !- Layer 3
-    la_vidro_5cm,            !- Layer 4
-    concreto_10cm_abs0.5;    !- Layer 5
+    camara_cobertura_baixaemiss, !- Layer 3
+    la_vidro_5cm,                !- Layer 4
+    concreto_10cm_abs0.5;        !- Layer 5
 
 Construction,
     par_ext,                 !- Name

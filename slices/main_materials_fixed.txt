@@ -152,6 +152,10 @@ Material:AirGap,
     0.21;                    !- Thermal Resistance {m2-K/W}
 
 Material:AirGap,
+    camara_cobertura_baixaemiss,        !- Name
+    0.61;                    !- Thermal Resistance {m2-K/W}
+
+Material:AirGap,
     camara_parede,           !- Name
     0.17;                    !- Thermal Resistance {m2-K/W}
 
