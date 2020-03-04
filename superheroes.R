@@ -34,12 +34,24 @@ for(uf in unique(df$estado)){
   # 
 }
 
-df$ratio = strsplit(as.character(df$geometria),'_')[4]
-df$height = strsplit(as.character(df$geometria),'_')[[1]][5]
-df$area = strsplit(as.character(df$geometria),'_')[[1]][6]
+strip = function(string, position=4){
+  as.character(strsplit(as.character(string),'_')[[1]][position])
+}
+strip2 = function(line, column = 'geometria', position=4){
+  as.character(strsplit(as.character(line[column]),'_')[[1]][position])
+}
 
-df$somb = strsplit(as.character(df$sombreamento),'_')[[1]][3]
-df$wwr = strsplit(as.character(df$paf),'_')[[1]][3]
+strip(df$geometria[2])
+strip2(as.character(df[3,]['wwr']))
+
+area = sapply(df$geometria, strip)
+
+df$ratio = sapply(df$geometria, strip, position = 4)  # strsplit(as.character(df$geometria),'_')[4]
+df$height = sapply(df$geometria, strip, position = 5)  # strsplit(as.character(df$geometria),'_')[[1]][5]
+df$area = sapply(df$geometria, strip, position = 6)  # strsplit(as.character(df$geometria),'_')[[1]][6]
+
+df$somb = sapply(df$sombreamento, strip, position = 3)  # strsplit(as.character(df$sombreamento),'_')[[1]][3]
+df$wwr = sapply(df$paf, strip, position = 3)  # strsplit(as.character(df$paf),'_')[[1]][3]
 
 slices = c("ratio", "height", "area", "azimute", "veneziana", "componente", "absortancia", "vidro", "open_fac", "somb", "wwr")
 
