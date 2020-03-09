@@ -3,9 +3,9 @@ library(ggplot2)
 setwd('~/codes')
 #
 
-strip = function(string, position=4){
+strip = function(string, split_char='_', position=4){
   # para identificar características de geometria a partir do nome do slice
-  as.character(strsplit(as.character(df$geometria[2]),'_')[[1]][4])
+  as.character(strsplit(as.character(string),split_char)[[1]][position])
 }
 
 df = read.csv('outputs_uni_uh.csv')
@@ -57,6 +57,8 @@ df_base = df
 df_heroes_phft = df_heroes
 # df_heroes_cgtr = df_heroes
 df = df_heroes
+
+ggplot(df, aes(df$wwr, df$somb, color = df$open_fac))
 
 # plota os casos separado por estado
 slices = c("ratio", "height", "area", "azimute", "veneziana", "componente", "absortancia", "vidro", "open_fac", "somb", "wwr")
