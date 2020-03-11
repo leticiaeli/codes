@@ -53,8 +53,8 @@ multi$ratio1 = substr(multi$geometria, 10,10) ## relacao x/y
 multi$ratio[multi$ratio1 == 0] = 1
 multi$ratio[multi$ratio1 == 1] = 2
 multi$ratio[multi$ratio1 == 2] = 0.5
-multi$area_uh = as.character(multi$a) ## ja calculo a area pelo script da lorrany - funciona so para o multi ver para o uni
-multi$area_uh = paste(multi$area_uh, "m²", sep = " ")
+multi$area_uh[multi$a < 40] = "~ 30 m²"
+multi$area_uh[multi$a > 40] = "~ 50 m²" ## ja calculo a area pelo script da lorrany - funciona so para o multi ver para o uni
 multi$orientacao = substr(multi$azimute, 10,12)
 multi$veneziana_graph = substr(multi$veneziana, 9,10)
 multi$veneziana_graph = ifelse(multi$veneziana_graph == "on", "Sim", "Não")
